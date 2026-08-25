@@ -19,10 +19,22 @@ const ibmPlex = IBM_Plex_Sans({
   weight: ["400", "500", "600"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://generays.com";
+const DEFAULT_SITE_URL = "https://generays.com";
+
+function resolveSiteUrl(): URL {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return new URL(DEFAULT_SITE_URL);
+  try {
+    return new URL(raw);
+  } catch {
+    return new URL(DEFAULT_SITE_URL);
+  }
+}
+
+const siteUrl = resolveSiteUrl();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrl,
   title: {
     default: "GeneRays — Brand Engineering, Web Development & Digital Growth",
     template: "%s | GeneRays",
