@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/content/site";

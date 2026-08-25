@@ -1,5 +1,4 @@
 import type { LucideIcon } from "lucide-react";
-import type { StaticImageData } from "next/image";
 import {
   Boxes,
   Compass,
@@ -42,7 +41,7 @@ export type AccentClass =
   | "text-neon-blue";
 
 export type ServiceMedia = {
-  image: StaticImageData;
+  image: string;
   icon: LucideIcon;
   accent: AccentClass;
   alt: string;

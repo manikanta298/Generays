@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -26,12 +25,12 @@ export function ServiceCard({ service, detail }: { service: Service; detail?: st
       className="group relative flex min-h-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[var(--shadow-glow)]"
     >
       <div className="service-card-media scanline relative aspect-[16/10] overflow-hidden">
-        <Image
+        <img
           src={media.image}
           alt={media.alt}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover saturate-[0.65] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-150 group-hover:brightness-100"
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover saturate-[0.65] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-150 group-hover:brightness-100"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-95" />
         <div className="blueprint-grid-fine absolute inset-0 opacity-40" />

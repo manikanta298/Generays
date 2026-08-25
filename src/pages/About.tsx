@@ -1,14 +1,9 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { aboutImage } from "@/content/media";
 import { promises, transformation, whyGeneRays } from "@/content/site";
 
-export const metadata = {
-  title: "About GeneRays — A Brand Engineering Company",
-  description: "GeneRays builds the blueprint first: strategy, identity, digital presence and growth engineered as one connected system.",
-  alternates: { canonical: "/about" },
-};
 
 export default function AboutPage() {
   return (

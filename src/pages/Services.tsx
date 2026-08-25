@@ -5,11 +5,6 @@ import { heroBlueprint } from "@/content/media";
 import { services, technologies } from "@/content/site";
 import LogoLoop from "@/components/LogoLoop";
 
-export const metadata = {
-  title: "Services — Brand, Web, Commerce, Marketing & Automation",
-  description: "Explore GeneRays capabilities across brand foundation, logo design, websites, e-commerce, applications, digital marketing, marketplace growth, communications, maintenance and automation.",
-  alternates: { canonical: "/services" },
-};
 
 export default function ServicesPage() {
   return (

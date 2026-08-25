@@ -1,24 +1,24 @@
 {
-  "name": "generays-nextjs",
+  "name": "generays",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "16.1.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-router-dom": "^7.9.5",
     "lucide-react": "^0.575.0",
     "ogl": "^1.0.11",
     "razorpay": "^2.9.6",
     "tailwindcss": "^4.2.1",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.1",
     "tw-animate-css": "^1.3.4",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.5.0",
@@ -28,8 +28,13 @@
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.7",
     "typescript": "^5.8.3",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.1.1"
+    "@eslint/js": "^9.39.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^16.0.0"
   }
 }

@@ -1,79 +1,50 @@
-# GeneRays — Next.js App Router
+# GeneRays — React + Vite
 
-Production-oriented migration of the GeneRays TanStack Start frontend to Next.js App Router.
-
-## Stack
-
-- Next.js App Router
-- React 19
-- TypeScript
-- Tailwind CSS v4
-- `next/image`
-- `next/font/google`
-- OGL / WebGL CircularGallery
-- Razorpay Node SDK
-- Zod
-
-## Structure
-
-```text
-src/
-├── app/
-│   ├── api/razorpay/order/route.ts
-│   ├── api/razorpay/verify/route.ts
-│   ├── about/page.tsx
-│   ├── contact/page.tsx
-│   ├── process/page.tsx
-│   ├── services/page.tsx
-│   ├── services/[slug]/page.tsx
-│   ├── error.tsx
-│   ├── loading.tsx
-│   ├── not-found.tsx
-│   ├── robots.ts
-│   ├── sitemap.ts
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-├── content/
-├── services/
-├── assets/
-└── styles.css
-```
-
-## Install
-
-```bash
-npm install
-```
+This project is migrated from Next.js App Router to React + Vite + React Router.
 
 ## Development
 
 ```bash
+npm install
 npm run dev
 ```
 
-## Production verification
+## Production
 
 ```bash
 npm run typecheck
 npm run build
-npm start
+npm run preview
 ```
 
-## Environment
+## Routing
 
-Copy `.env.example` to `.env.local`.
+React Router handles:
 
-`RAZORPAY_KEY_SECRET` is server-only and must never be prefixed with `NEXT_PUBLIC_`.
+- `/`
+- `/about`
+- `/process`
+- `/services`
+- `/services/:slug`
+- `/contact`
+
+Vercel uses `vercel.json` to serve `index.html` for browser-side routes while leaving `/api/*` serverless functions available.
 
 ## Razorpay
 
-The checkout component creates an order through:
+The browser uses `/api/razorpay/order` and `/api/razorpay/verify`.
 
-`POST /api/razorpay/order`
+Server-only environment variables:
 
-and verifies the returned payment signature through:
+```env
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+```
 
-`POST /api/razorpay/verify`
+Public configuration:
 
-The implementation does not persist orders or leads yet. Database/Supabase integration is intentionally left behind service boundaries for a later phase.
+```env
+VITE_SITE_URL=
+```
+
+Never expose `RAZORPAY_KEY_SECRET` with a `VITE_` prefix.

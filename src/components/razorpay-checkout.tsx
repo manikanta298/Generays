@@ -1,7 +1,5 @@
-"use client";
 
-import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, CreditCard, Loader2 } from "lucide-react";
 
 declare global {
@@ -27,6 +25,15 @@ type RazorpayInstance = { open: () => void };
 type RazorpayResponse = { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string };
 
 export function RazorpayCheckout() {
+  useEffect(() => {
+    if (window.Razorpay || document.querySelector("script[data-razorpay]")) return;
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.dataset.razorpay = "true";
+    document.body.appendChild(script);
+    return () => { /* Keep SDK loaded for route changes. */ };
+  }, []);
   const [amount, setAmount] = useState("5000");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -90,7 +97,6 @@ export function RazorpayCheckout() {
 
   return (
     <div className="rounded-2xl border border-border bg-primary-soft p-7">
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
       <div className="flex items-start gap-3">
         <span className="icon-chip text-neon-cyan"><CreditCard className="h-5 w-5" /></span>
         <div>

@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type Key, type ReactNode } from 'react';
 import './LogoLoop.css';
 
@@ -132,7 +129,7 @@ function LogoLoop({
     const content = item.node ? (
       <span className="logoloop__node" aria-hidden={Boolean(item.href && !item.ariaLabel)}>{item.node}</span>
     ) : (
-      <Image src={item.src ?? ""} sizes={item.sizes ?? "auto"} width={item.width ?? 36} height={item.height ?? 36} alt={item.alt ?? ""} title={item.title} loading="lazy" unoptimized draggable={false} />
+      <img src={item.src ?? ""} width={item.width ?? 36} height={item.height ?? 36} alt={item.alt ?? ""} title={item.title} loading="lazy" decoding="async" draggable={false} />
     );
     return (
       <li className="logoloop__item" key={key}>

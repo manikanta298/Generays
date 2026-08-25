@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight, Check, Rocket, Search, Sparkles, Code2, Megaphone, Cloud, Database, Smartphone, Cpu, Palette } from "lucide-react";
 import { ecosystem, framework, promises, services, technologies, transformation, whyGeneRays } from "@/content/site";
 import { SectionHeading } from "@/components/page-hero";
@@ -7,18 +7,6 @@ import LogoLoop from "@/components/LogoLoop";
 import { galleryImages } from "@/content/gallery";
 import CircularGallery from "@/components/CircularGallery";
 
-export const metadata = {
-  title: "Brand Engineering, Web Development & Digital Growth",
-  description:
-    "GeneRays engineers complete brand ecosystems: identity, logo, websites, e-commerce, apps, marketing and automation. Become the brand everyone remembers.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "GeneRays — Brand Engineering, Web Development & Digital Growth",
-    description:
-      "Identity, websites, commerce, applications, marketing and automation built from one connected blueprint.",
-    type: "website" as const,
-  },
-};
 
 export default function HomePage() {
   return (
@@ -172,15 +160,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden">
-        <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-70" />
-        <div className="relative mx-auto max-w-3xl px-5 py-24 text-center md:py-28">
-          <p className="eyebrow">Final call</p>
-          <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground md:text-5xl">Your business already exists. Now it&apos;s time to build a brand.</h2>
-          <p className="mt-6 text-base text-muted-foreground">Thousands of businesses compete every day. Only a handful become unforgettable. Let&apos;s create the one people remember.</p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">Start Your Brand Journey <ArrowRight className="h-4 w-4" /></Link>
-            <Link href="/contact" className="inline-flex items-center rounded-sm border border-primary/30 px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary-soft">Schedule a Free Brand Consultation</Link>
+      
+
+
+        {/* Transformation story */}
+      
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <SectionHeading eyebrow="Transformation story" title="Before GeneRays. After GeneRays." />
+          <div className="mt-12 overflow-hidden rounded-sm border border-border">
+            <div className="grid grid-cols-2 bg-muted">
+              <div className="border-r border-border px-6 py-4 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Before</div>
+              <div className="px-6 py-4 font-display text-xs font-semibold uppercase tracking-[0.16em] text-primary">After</div>
+            </div>
+            {transformation.map((row) => (
+              <div key={row.before} className="grid grid-cols-2 border-t border-border">
+                <div className="border-r border-border px-6 py-4 text-sm text-muted-foreground">{row.before}</div>
+                <div className="px-6 py-4 text-sm font-medium text-foreground">{row.after}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -206,23 +204,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <SectionHeading eyebrow="Transformation story" title="Before GeneRays. After GeneRays." />
-          <div className="mt-12 overflow-hidden rounded-sm border border-border">
-            <div className="grid grid-cols-2 bg-muted">
-              <div className="border-r border-border px-6 py-4 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Before</div>
-              <div className="px-6 py-4 font-display text-xs font-semibold uppercase tracking-[0.16em] text-primary">After</div>
-            </div>
-            {transformation.map((row) => (
-              <div key={row.before} className="grid grid-cols-2 border-t border-border">
-                <div className="border-r border-border px-6 py-4 text-sm text-muted-foreground">{row.before}</div>
-                <div className="px-6 py-4 text-sm font-medium text-foreground">{row.after}</div>
-              </div>
-            ))}
+      {/* Final call */}
+      
+      <section className="relative overflow-hidden">
+        <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-70" />
+        <div className="relative mx-auto max-w-3xl px-5 py-24 text-center md:py-28">
+          <p className="eyebrow">Final call</p>
+          <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground md:text-5xl">Your business already exists. Now it&apos;s time to build a brand.</h2>
+          <p className="mt-6 text-base text-muted-foreground">Thousands of businesses compete every day. Only a handful become unforgettable. Let&apos;s create the one people remember.</p>
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">Start Your Brand Journey <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/contact" className="inline-flex items-center rounded-sm border border-primary/30 px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary-soft">Schedule a Free Brand Consultation</Link>
           </div>
         </div>
       </section>
+      
+    
     </>
   );
 }

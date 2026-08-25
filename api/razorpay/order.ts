@@ -1,8 +1,5 @@
-import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { z } from "zod";
-
-export const runtime = "nodejs";
 
 const requestSchema = z.object({
   amount: z.number().int().positive().max(100_000_000),
@@ -10,17 +7,29 @@ const requestSchema = z.object({
   receipt: z.string().max(40).optional(),
 });
 
-export async function POST(request: Request) {
+export default async function handler(req: any, res: any) {
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed." });
+    return;
+  }
+
   const keyId = process.env.RAZORPAY_KEY_ID;
   const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
   if (!keyId || !keySecret) {
-    return NextResponse.json({ error: "Razorpay is not configured on the server." }, { status: 503 });
+    res.status(503).json({ error: "Razorpay is not configured on the server." });
+    return;
   }
 
   try {
-    const parsed = requestSchema.parse(await request.json());
-    const razorpay = new Razorpay({ key_id: keyId, key_secret: keySecret });
+    const parsed = requestSchema.parse(
+      typeof req.body === "string" ? JSON.parse(req.body) : req.body,
+    );
+
+    const razorpay = new Razorpay({
+      key_id: keyId,
+      key_secret: keySecret,
+    });
 
     const order = await razorpay.orders.create({
       amount: parsed.amount,
@@ -28,7 +37,7 @@ export async function POST(request: Request) {
       receipt: parsed.receipt ?? `gr-${Date.now()}`,
     });
 
-    return NextResponse.json({
+    res.status(200).json({
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
@@ -36,6 +45,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Razorpay order creation failed:", error);
-    return NextResponse.json({ error: "Unable to create Razorpay order." }, { status: 400 });
+    res.status(400).json({ error: "Unable to create Razorpay order." });
   }
 }

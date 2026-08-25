@@ -1,0 +1,15 @@
+/* Application-level CSS kept framework-agnostic during the Vite migration. */
+.site-shell {
+  min-height: 100vh;
+}
+
+.service-card-media img,
+.scanline img {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

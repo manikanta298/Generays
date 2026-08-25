@@ -1,31 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
 import { framework, services } from "@/content/site";
 import { getServiceMedia } from "@/content/media";
 import { IconChip } from "@/components/futuristic";
+import NotFoundPage from "@/pages/NotFound";
 
-export function generateStaticParams() {
-  return services.map((service) => ({ slug: service.slug }));
-}
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+
+export default function ServiceDetailPage() {
+  const { slug = "" } = useParams<{ slug: string }>();
   const service = services.find((item) => item.slug === slug);
-  if (!service) return { title: "Service not found — GeneRays", robots: { index: false, follow: false } };
-  return {
-    title: `${service.title} — GeneRays`,
-    description: service.intro,
-    alternates: { canonical: `/services/${service.slug}` },
-    openGraph: { title: `${service.title} — GeneRays`, description: service.intro, type: "website" as const },
-  };
-}
 
-export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const service = services.find((item) => item.slug === slug);
-  if (!service) notFound();
+  if (!service) {
+    return <NotFoundPage />;
+  }
 
   const media = getServiceMedia(service.slug);
   const others = services.filter((item) => item.slug !== service.slug).slice(0, 3);
@@ -46,7 +36,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <p className="rise-in mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{service.intro}</p>
           </div>
           <div className="scanline group relative overflow-hidden rounded-2xl border border-primary/25 shadow-[var(--shadow-glow)]">
-            <Image src={media.image} alt={media.alt} width={1024} height={768} sizes="(min-width: 768px) 45vw, 100vw" className="aspect-[4/3] w-full object-cover saturate-[0.75] transition-all duration-700 group-hover:scale-105 group-hover:saturate-150" />
+            <img src={media.image} alt={media.alt} loading="eager" fetchPriority="high" className="aspect-[4/3] w-full object-cover saturate-[0.75] transition-all duration-700 group-hover:scale-105 group-hover:saturate-150" />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/35 via-transparent to-neon-violet/20 mix-blend-screen" />
             <div className="blueprint-grid-fine absolute inset-0 opacity-30" />
           </div>

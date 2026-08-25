@@ -1,4 +1,3 @@
-import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
 
 export function PageHero({
@@ -12,7 +11,7 @@ export function PageHero({
   eyebrow: string;
   title: ReactNode;
   subtitle?: string;
-  image?: StaticImageData;
+  image?: string;
   imageAlt?: string;
   children?: ReactNode;
 }) {
@@ -30,14 +29,12 @@ export function PageHero({
 
         {image ? (
           <div className="scanline group relative hidden overflow-hidden rounded-2xl border border-primary/25 bg-card shadow-[var(--shadow-glow)] md:block">
-            <Image
+            <img
               src={image}
               alt={imageAlt ?? ""}
-              width={1280}
-              height={960}
-              priority
-              sizes="(min-width: 768px) 45vw, 100vw"
-              className="h-full w-full object-cover saturate-[0.7] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.02] group-hover:saturate-150 group-hover:brightness-100"
+              loading="eager"
+              fetchPriority="high"
+              className="aspect-[4/3] h-full w-full object-cover saturate-[0.7] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.02] group-hover:saturate-150 group-hover:brightness-100"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/45 via-transparent to-neon-violet/25 mix-blend-screen transition-opacity duration-700 group-hover:opacity-70" />
             <div className="blueprint-grid-fine absolute inset-0 opacity-40" />

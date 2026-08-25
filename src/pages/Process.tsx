@@ -1,14 +1,9 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { processImage } from "@/content/media";
 import { ecosystem, framework } from "@/content/site";
 
-export const metadata = {
-  title: "Our Brand Engineering Process — GeneRays",
-  description: "Discover, Design, Build, Launch, Grow. The five-stage GeneRays framework that turns a strategic brand blueprint into identity, websites, marketing and measurable growth.",
-  alternates: { canonical: "/process" },
-};
 
 export default function ProcessPage() {
   return (
