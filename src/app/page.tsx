@@ -159,7 +159,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl gap-14 px-5 py-20 md:grid-cols-2 md:py-24">
           <div>
             <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent">Why GeneRays</p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">We don't believe in templates. We believe in originality.</h2>
+            <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">We don&apos;t believe in templates. We believe in originality.</h2>
             <ul className="mt-8 space-y-3.5">
               {whyGeneRays.map((point) => <li key={point} className="flex gap-3 text-sm text-primary-foreground/85"><Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />{point}</li>)}
             </ul>
@@ -167,7 +167,7 @@ export default function HomePage() {
           <div className="border-t border-primary-foreground/15 pt-10 md:border-l md:border-t-0 md:pl-14 md:pt-0">
             <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-highlight">Our promise</p>
             <ul className="mt-8 space-y-5">{promises.map((item) => <li key={item} className="font-display text-lg font-semibold">{item}</li>)}</ul>
-            <p className="mt-10 text-sm text-primary-foreground/70">Success isn't delivering files. Success is building businesses.</p>
+            <p className="mt-10 text-sm text-primary-foreground/70">Success isn&apos;t delivering files. Success is building businesses.</p>
           </div>
         </div>
       </section>
@@ -176,8 +176,8 @@ export default function HomePage() {
         <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center md:py-28">
           <p className="eyebrow">Final call</p>
-          <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground md:text-5xl">Your business already exists. Now it's time to build a brand.</h2>
-          <p className="mt-6 text-base text-muted-foreground">Thousands of businesses compete every day. Only a handful become unforgettable. Let's create the one people remember.</p>
+          <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground md:text-5xl">Your business already exists. Now it&apos;s time to build a brand.</h2>
+          <p className="mt-6 text-base text-muted-foreground">Thousands of businesses compete every day. Only a handful become unforgettable. Let&apos;s create the one people remember.</p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Link href="/contact" className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">Start Your Brand Journey <ArrowRight className="h-4 w-4" /></Link>
             <Link href="/contact" className="inline-flex items-center rounded-sm border border-primary/30 px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary-soft">Schedule a Free Brand Consultation</Link>

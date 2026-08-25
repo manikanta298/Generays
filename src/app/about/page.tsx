@@ -36,7 +36,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-5 py-20">
           <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-highlight">Our promise</p>
           <div className="mt-10 grid gap-8 md:grid-cols-4">{promises.map((item) => <p key={item} className="font-display text-lg font-semibold leading-snug">{item}</p>)}</div>
-          <p className="mt-12 border-t border-primary-foreground/15 pt-8 text-sm text-primary-foreground/70">Success isn't delivering files. Success is building businesses.</p>
+          <p className="mt-12 border-t border-primary-foreground/15 pt-8 text-sm text-primary-foreground/70">Success isn&apos;t delivering files. Success is building businesses.</p>
         </div>
       </section>
       <section className="border-b border-border">

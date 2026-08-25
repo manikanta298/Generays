@@ -11,7 +11,7 @@ export function SiteFooter() {
             Building Brands. Engineering Growth. Creating Digital Impact.
           </p>
           <p className="mt-6 text-sm text-primary-foreground/60">
-            We don't market businesses. We build brands that people remember.
+            We don&apos;t market businesses. We build brands that people remember.
           </p>
         </div>
 

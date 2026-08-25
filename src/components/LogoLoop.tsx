@@ -37,7 +37,8 @@ type LogoLoopProps = {
 };
 
 const ANIMATION_CONFIG = { SMOOTH_TAU: 0.25, MIN_COPIES: 2, COPY_HEADROOM: 2 };
-const toCssLength = (value) => (typeof value === 'number' ? `${value}px` : value ?? undefined);
+const toCssLength = (value: number | string | undefined) =>
+  typeof value === 'number' ? `${value}px` : value ?? undefined;
 
 function LogoLoop({
   logos,

@@ -24,7 +24,7 @@ export default function ContactPageContent() {
               <div className="rounded-sm border border-primary/25 bg-primary-soft p-10">
                 <Check className="h-8 w-8 text-primary" />
                 <h2 className="mt-5 font-display text-2xl font-bold text-foreground">Thanks — your enquiry is noted.</h2>
-                <p className="mt-3 text-sm text-muted-foreground">We'll review your details and reply with next steps for your brand blueprint.</p>
+                <p className="mt-3 text-sm text-muted-foreground">We&apos;ll review your details and reply with next steps for your brand blueprint.</p>
                 <button type="button" onClick={() => setSent(false)} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary">Send another enquiry <ArrowRight className="h-4 w-4" /></button>
               </div>
             ) : (
@@ -46,7 +46,7 @@ export default function ContactPageContent() {
 
           <aside className="space-y-8 border-t border-border pt-10 md:border-l md:border-t-0 md:pl-14 md:pt-0">
             <div><p className="eyebrow">What happens next</p><ol className="mt-5 space-y-4 text-sm text-muted-foreground"><li>1. We read your enquiry and study your market.</li><li>2. A free consultation call to map the gaps.</li><li>3. A written brand blueprint with priorities and scope.</li></ol></div>
-            <div className="rounded-sm border border-border p-6"><p className="font-display text-base font-semibold text-foreground">We won't sell you what you don't need.</p><p className="mt-2 text-sm text-muted-foreground">If the answer is one landing page instead of a full rebuild, that's what we'll tell you.</p></div>
+            <div className="rounded-sm border border-border p-6"><p className="font-display text-base font-semibold text-foreground">We won&apos;t sell you what you don&apos;t need.</p><p className="mt-2 text-sm text-muted-foreground">If the answer is one landing page instead of a full rebuild, that&apos;s what we&apos;ll tell you.</p></div>
             <RazorpayCheckout />
           </aside>
         </div>

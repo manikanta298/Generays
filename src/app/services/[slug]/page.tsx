@@ -55,7 +55,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-5 py-20">
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">What's included</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">What&apos;s included</h2>
           <div className="mt-4 h-px w-16 bg-primary" />
           <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {service.items.map((item) => <li key={item} className="flex items-start gap-3 bg-background px-6 py-4 text-sm text-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />{item}</li>)}
