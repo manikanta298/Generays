@@ -324,8 +324,8 @@ class CircularGalleryApp {
   private pointerDown = false;
   private dragStartX = 0;
   private dragStartScroll = 0;
-  private screen!: ScreenSize = { width: 1, height: 1 };
-  private viewport!: Viewport = { width: 1, height: 1 };
+  private screen: ScreenSize = { width: 1, height: 1 };
+  private viewport: Viewport = { width: 1, height: 1 };
 
   constructor(
     container: HTMLElement,
