@@ -183,10 +183,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-primary text-primary-foreground">
+      <section className="border-b border-border text-primary-foreground">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <SectionHeading eyebrow="Visual gallery" title="Ideas, systems and experiences in motion." subtitle="Explore a curated visual layer of GeneRays work. Drag, scroll, or use the arrow keys to move through the gallery." />
-          <div className="mt-10 overflow-hidden rounded-2xl border border-primary-foreground/10 bg-black/20 shadow-[var(--shadow-glow)]">
+          <div className="mt-10 overflow-hidden rounded-2xl border border-primary-foreground/10 ">
             <div className="h-[520px] w-full md:h-[620px]">
               <CircularGallery
                 items={galleryImages.map((item) => ({ image: item.src, text: item.text }))}
