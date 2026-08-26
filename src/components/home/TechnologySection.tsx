@@ -7,7 +7,7 @@ export function TechnologySection() {
     <section className="overflow-hidden border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <SectionHeading eyebrow="Technology expertise" title="We choose technology around the business — not the other way around." subtitle="A flexible stack spanning product engineering, cloud, commerce, data and automation." />
-        <div className="mt-12 rounded-2xl border border-border bg-primary-soft/40 py-8 shadow-[var(--shadow-glow)]">
+        <div className="mt-12 rounded-2xl ">
           <TechMarquee />
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-2.5">
