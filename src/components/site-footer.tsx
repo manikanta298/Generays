@@ -20,7 +20,7 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2.5">
             {services.slice(0, 6).map((service) => (
               <li key={service.slug}>
-                <Link href={`/services/${service.slug}`} className="text-sm text-primary-foreground/85 transition-opacity hover:opacity-70">
+                <Link to={`/services/${service.slug}`} className="text-sm text-primary-foreground/85 transition-opacity hover:opacity-70">
                   {service.title}
                 </Link>
               </li>
@@ -38,7 +38,7 @@ export function SiteFooter() {
               { href: "/contact", label: "Contact" },
             ].map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-primary-foreground/85 transition-opacity hover:opacity-70">{item.label}</Link>
+                <Link to={item.href} className="text-sm text-primary-foreground/85 transition-opacity hover:opacity-70">{item.label}</Link>
               </li>
             ))}
           </ul>

@@ -29,7 +29,7 @@ export default function ProcessPage() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             {ecosystem.map((node, i) => <span key={node} className="flex items-center gap-3"><span className="rounded-sm border border-primary/25 bg-background px-3.5 py-2 font-display text-sm font-semibold text-primary">{node}</span>{i < ecosystem.length - 1 ? <ArrowRight className="h-4 w-4 text-muted-foreground" /> : null}</span>)}
           </div>
-          <Link href="/services" className="mt-12 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground">See what we build <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/services" className="mt-12 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground">See what we build <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
     </>

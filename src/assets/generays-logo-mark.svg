@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">GeneRays</title>
+  <desc id="desc">GeneRays G logo mark</desc>
+  <rect width="64" height="64" rx="14" fill="#16378e"/>
+  <path d="M39.6 18.2h-8.8c-7.1 0-12.4 5.3-12.4 13.7 0 8.3 5.1 13.9 13 13.9 3.3 0 6.6-.8 9.4-2.3V32.1H30.1v6.5h3.8v.9c-.8.3-1.6.5-2.6.5-3.9 0-6.3-2.8-6.3-8 0-5 2.6-7.6 7.1-7.6h7.5z" fill="#fff"/>
+</svg>

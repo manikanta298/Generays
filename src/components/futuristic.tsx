@@ -20,7 +20,7 @@ export function ServiceCard({ service, detail }: { service: Service; detail?: st
 
   return (
     <Link
-      href={`/services/${service.slug}`}
+      to={`/services/${service.slug}`}
       aria-label={`Explore ${service.title}`}
       className="group relative flex min-h-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[var(--shadow-glow)]"
     >

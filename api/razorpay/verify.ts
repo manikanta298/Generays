@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const payloadSchema = z.object({
   razorpay_order_id: z.string().min(1),
@@ -7,7 +8,7 @@ const payloadSchema = z.object({
   razorpay_signature: z.string().min(1),
 });
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed." });
     return;

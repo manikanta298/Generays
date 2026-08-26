@@ -41,7 +41,7 @@ export default function AboutPage() {
             <div className="bg-background p-7"><p className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Before</p><ul className="mt-5 space-y-3 text-sm text-muted-foreground">{transformation.map((row) => <li key={row.before}>{row.before}</li>)}</ul></div>
             <div className="bg-background p-7"><p className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-primary">After</p><ul className="mt-5 space-y-3 text-sm font-medium text-foreground">{transformation.map((row) => <li key={row.after}>{row.after}</li>)}</ul></div>
           </div>
-          <Link href="/contact" className="mt-12 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground">Start Your Brand Journey <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/contact" className="mt-12 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground">Start Your Brand Journey <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
     </>
