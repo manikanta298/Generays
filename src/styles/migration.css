@@ -521,3 +521,73 @@
     transition: none;
   }
 }
+
+/* Technology marquee: two rows of brand icons scrolling in opposite directions */
+.tech-marquee {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.tech-marquee__track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+}
+
+.tech-marquee__track--left {
+  animation: tech-marquee-left 32s linear infinite;
+}
+
+.tech-marquee__track--right {
+  animation: tech-marquee-right 32s linear infinite;
+}
+
+.tech-marquee__badge {
+  display: grid;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 8px 20px rgba(23, 45, 110, .1);
+}
+
+.tech-marquee__fade {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 90px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tech-marquee__fade--left {
+  left: 0;
+  background: linear-gradient(90deg, var(--primary-soft) 0%, transparent 100%);
+}
+
+.tech-marquee__fade--right {
+  right: 0;
+  background: linear-gradient(270deg, var(--primary-soft) 0%, transparent 100%);
+}
+
+@keyframes tech-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes tech-marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee__track--left,
+  .tech-marquee__track--right {
+    animation: none;
+  }
+}
