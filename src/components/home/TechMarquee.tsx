@@ -44,8 +44,8 @@ export function TechMarquee() {
     <div className="tech-marquee" aria-label="Marketing and growth tools GeneRays works with">
       <MarqueeRow slugs={ROW_ONE} direction="left" />
       <MarqueeRow slugs={ROW_TWO} direction="right" />
-      <div className="tech-marquee__fade tech-marquee__fade--left" aria-hidden="true" />
-      <div className="tech-marquee__fade tech-marquee__fade--right" aria-hidden="true" />
+      <div className="" aria-hidden="true" />
+      <div className="" aria-hidden="true" />
     </div>
   );
 }
