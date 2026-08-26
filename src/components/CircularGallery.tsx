@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 type GL = Renderer["gl"];
 
-export type CircularGalleryItem = {
+type CircularGalleryItem = {
   image: string;
   text: string;
 };
@@ -17,6 +17,7 @@ export interface CircularGalleryProps {
   fontUrl?: string;
   scrollSpeed?: number;
   scrollEase?: number;
+  autoRotateSpeed?: number;
 }
 
 type Viewport = { width: number; height: number };
@@ -318,6 +319,7 @@ class CircularGalleryApp {
   private scroll = { current: 0, target: 0, last: 0 };
   private scrollSpeed: number;
   private scrollEase: number;
+  private autoRotateSpeed: number;
   private raf = 0;
   private pointerDown = false;
   private dragStartX = 0;
@@ -335,13 +337,15 @@ class CircularGalleryApp {
       font,
       scrollSpeed,
       scrollEase,
-    }: Required<Pick<CircularGalleryProps, "bend" | "textColor" | "borderRadius" | "font" | "scrollSpeed" | "scrollEase">> & {
+      autoRotateSpeed,
+    }: Required<Pick<CircularGalleryProps, "bend" | "textColor" | "borderRadius" | "font" | "scrollSpeed" | "scrollEase" | "autoRotateSpeed">> & {
       items: CircularGalleryItem[];
     }
   ) {
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scrollEase = scrollEase;
+    this.autoRotateSpeed = autoRotateSpeed;
 
     this.renderer = new Renderer({
       alpha: true,
@@ -412,6 +416,10 @@ class CircularGalleryApp {
   };
 
   private animate = () => {
+    if (!this.pointerDown && this.autoRotateSpeed) {
+      this.scroll.target += this.autoRotateSpeed;
+    }
+
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
@@ -539,6 +547,7 @@ export default function CircularGallery({
   fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05,
+  autoRotateSpeed = 0,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -567,6 +576,7 @@ export default function CircularGallery({
           font,
           scrollSpeed,
           scrollEase,
+          autoRotateSpeed,
         });
       } catch (error) {
         console.error("CircularGallery: WebGL initialization failed.", error);
@@ -579,7 +589,7 @@ export default function CircularGallery({
       cancelled = true;
       app?.destroy();
     };
-  }, [safeItems, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
+  }, [safeItems, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoRotateSpeed]);
 
   return (
     <div
@@ -587,7 +597,7 @@ export default function CircularGallery({
       className="h-full w-full cursor-grab overflow-hidden rounded-2xl active:cursor-grabbing"
       tabIndex={0}
       role="region"
-      aria-label="Circular image gallery. Use mouse wheel, drag, or Left and Right Arrow keys to navigate."
+      aria-label="Circular image gallery. Automatically rotating. Use mouse wheel, drag, or Left and Right Arrow keys to navigate."
       style={{ touchAction: "pan-y" }}
     />
   );

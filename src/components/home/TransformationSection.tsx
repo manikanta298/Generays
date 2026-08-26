@@ -1,8 +1,21 @@
-import { ArrowRight, Award, BarChart3, EyeOff, Globe2, Palette, ShieldCheck, Sparkles, Target, TrendingUp, Users, Waypoints } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  EyeOff,
+  Globe2,
+  Palette,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Users,
+  Waypoints,
+} from "lucide-react";
 import { transformation } from "@/content/site";
 import { SectionHeading } from "@/components/page-hero";
+import "./TransformationSection.css";
 
-const icons = [Palette, Globe2, Users, Sparkles, Waypoints, Target, BarChart3, EyeOff];
+const beforeIcons = [Palette, Globe2, Users, Sparkles, Waypoints, Target, BarChart3, EyeOff];
 const afterIcons = [Sparkles, ShieldCheck, Globe2, Palette, TrendingUp, ShieldCheck, BarChart3, Globe2];
 
 export function TransformationSection() {
@@ -10,47 +23,52 @@ export function TransformationSection() {
     <section className="home-transform" aria-labelledby="transformation-title">
       <div className="home-transform__inner">
         <SectionHeading eyebrow="Transformation story" title="Before GeneRays. After GeneRays." />
+
         <div id="transformation-title" className="home-transform__grid">
-          <div className="home-transform__panel home-transform__panel--before">
-            <div className="home-transform__panel-head">
-              <span className="home-transform__badge home-transform__badge--muted">Before</span>
-              <h3>The starting point</h3>
-            </div>
-            {transformation.map((row, index) => {
-              const Icon = icons[index] ?? Sparkles;
-              return (
-                <article className="home-transform__row" key={row.before}>
-                  <span className="home-transform__icon home-transform__icon--muted"><Icon aria-hidden="true" /></span>
-                  <span>{row.before}</span>
-                </article>
-              );
-            })}
+          <div className="home-transform__column-label home-transform__column-label--before">
+            <span>Before</span>
+            <p>The starting point</p>
+          </div>
+          <div className="home-transform__column-label home-transform__column-label--after">
+            <span>After</span>
+            <p>The transformation</p>
           </div>
 
-          <div className="home-transform__connector" aria-hidden="true">
-            {transformation.map((row) => (
-              <span key={row.before} className="home-transform__arrow">
-                <ArrowRight />
-              </span>
-            ))}
-          </div>
+          {transformation.map((row, index) => {
+            const BeforeIcon = beforeIcons[index] ?? Sparkles;
+            const AfterIcon = afterIcons[index] ?? Sparkles;
 
-          <div className="home-transform__panel home-transform__panel--after">
-            <div className="home-transform__panel-head">
-              <span className="home-transform__badge home-transform__badge--active">After</span>
-              <h3>The transformation</h3>
-            </div>
-            {transformation.map((row, index) => {
-              const Icon = afterIcons[index] ?? Sparkles;
-              return (
-                <article className="home-transform__row home-transform__row--after" key={row.after}>
-                  <span className="home-transform__icon home-transform__icon--active"><Icon aria-hidden="true" /></span>
-                  <span>{row.after}</span>
-                  <span className="home-transform__chevron">›</span>
+            return (
+              <div className="home-transform__pair" key={row.before}>
+                <article className="home-transform__card home-transform__card--before">
+                  <span className="home-transform__icon home-transform__icon--muted" aria-hidden="true">
+                    <BeforeIcon />
+                  </span>
+                  <div>
+                    <span className="home-transform__micro-label">Before</span>
+                    <h3>{row.before}</h3>
+                  </div>
                 </article>
-              );
-            })}
-          </div>
+
+                <div className="home-transform__arrow" aria-hidden="true">
+                  <ArrowRight />
+                </div>
+
+                <article className="home-transform__card home-transform__card--after">
+                  <span className="home-transform__icon home-transform__icon--active" aria-hidden="true">
+                    <AfterIcon />
+                  </span>
+                  <div>
+                    <span className="home-transform__micro-label">After</span>
+                    <h3>{row.after}</h3>
+                  </div>
+                  <span className="home-transform__status" aria-hidden="true">
+                    <span />
+                  </span>
+                </article>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
