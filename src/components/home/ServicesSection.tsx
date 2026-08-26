@@ -1,16 +1,13 @@
 import { services } from "@/content/site";
-import { SectionHeading } from "@/components/page-hero";
-import { ServiceCard } from "@/components/futuristic";
+import { ServiceBento } from "@/components/ServiceBento";
 
 export function ServicesSection() {
   return (
-    <section className="border-b border-border bg-primary-soft">
-      <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-        <SectionHeading eyebrow="Services architecture" title="Everything your brand needs. Under one roof." />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => <ServiceCard key={service.slug} service={service} />)}
-        </div>
-      </div>
-    </section>
+    <ServiceBento
+      services={services}
+      eyebrow="Services architecture"
+      heading="Everything your brand needs. Under one roof."
+      description="Eleven connected capabilities, designed to work together instead of becoming isolated deliverables."
+    />
   );
 }
