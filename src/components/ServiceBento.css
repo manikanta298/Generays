@@ -19,11 +19,11 @@
 }
 
 .service-bento__intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-  gap: 48px;
-  align-items: end;
-  margin-bottom: 42px;
+  margin-bottom: 34px;
+}
+
+.service-bento__intro-copy {
+  max-width: 820px;
 }
 
 .service-bento__eyebrow {
@@ -43,8 +43,8 @@
 }
 
 .service-bento__description {
-  max-width: 420px;
-  margin: 0;
+  max-width: 680px;
+  margin: 16px 0 0;
   color: var(--sb-muted);
   font: 400 15px/1.7 var(--font-ibm-plex), sans-serif;
 }
@@ -238,11 +238,6 @@
 @media (max-width: 1024px) {
   .service-bento__inner {
     padding: 76px 0 84px;
-  }
-
-  .service-bento__intro {
-    grid-template-columns: 1fr;
-    gap: 18px;
   }
 
   .service-bento__grid {
