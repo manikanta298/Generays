@@ -60,13 +60,13 @@ export function ServiceBento({
     <section className="service-bento" aria-labelledby="service-bento-heading">
       <div className="service-bento__inner">
         <div className="service-bento__intro">
-          <div>
+          <div className="service-bento__intro-copy">
             <p className="service-bento__eyebrow">{eyebrow}</p>
             <h2 id="service-bento-heading" className="service-bento__heading">
               {heading}
             </h2>
+            <p className="service-bento__description">{description}</p>
           </div>
-          <p className="service-bento__description">{description}</p>
         </div>
 
         <div className="service-bento__grid">
