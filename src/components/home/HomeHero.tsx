@@ -1,113 +1,77 @@
-import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, Play, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ecosystem } from "@/content/site";
-import heroBlueprint from "@/assets/hero-blueprint.jpg";
-import geneRaysLogoMark from "@/assets/generays-logo-mark.svg";
+import heroOffice from "@/assets/hero-office.png";
+
+const heroStats = [
+  { value: "250+", label: "Projects delivered" },
+  { value: "98%", label: "Client satisfaction" },
+];
+
+const serviceStack = ["Strategy", "Design", "Development", "Growth"];
 
 export function HomeHero() {
   return (
     <section className="home-hero" aria-labelledby="home-hero-title">
-      <div className="home-hero__grid" aria-hidden="true" />
-      <div className="home-hero__glow home-hero__glow--one" aria-hidden="true" />
-      <div className="home-hero__glow home-hero__glow--two" aria-hidden="true" />
+      <Plus className="home-hero__mark home-hero__mark--plus" aria-hidden="true" />
+      <span className="home-hero__mark home-hero__mark--copyright" aria-hidden="true">
+        &copy;
+      </span>
 
       <div className="home-hero__inner">
-        <div className="home-hero__watermark" aria-hidden="true">
-          GENE
+        <h2 className="home-hero__wordmark" aria-hidden="true">
+          GENERAYS
+        </h2>
+
+        <div className="home-hero__frame">
+          <img
+            className="home-hero__image"
+            src={heroOffice}
+            alt="GeneRays studio: strategists and engineers building a client's digital brand"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+
+          <div className="home-hero__panel" aria-label="GeneRays engagement stages">
+            <ul>
+              {serviceStack.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <Link to="/services" className="home-hero__showreel">
+              <span className="home-hero__showreel-icon">
+                <Play aria-hidden="true" />
+              </span>
+              View Our Work
+            </Link>
+          </div>
         </div>
 
-        <div className="home-hero__topline">
-          <img className="home-hero__brandmark" src={geneRaysLogoMark} alt="GeneRays" />
-          <span className="home-hero__brandname">GeneRays</span>
-          <span className="home-hero__separator" />
-          <span className="home-hero__eyebrow">Brand Engineering Company</span>
-        </div>
-
-        <div className="home-hero__content">
+        <div className="home-hero__bottom">
           <div className="home-hero__copy">
-            <p className="home-hero__kicker">
-              <Sparkles aria-hidden="true" />
-              Strategy first. Identity next. Growth always.
-            </p>
             <h1 id="home-hero-title" className="home-hero__title">
-              Stop looking like every other business.
-              <span>Become the brand everyone remembers.</span>
+              Ideas<span>.</span> Identity<span>.</span> Impact<span>.</span>
             </h1>
             <p className="home-hero__description">
-              Most businesses sell products. The unforgettable ones build brands. At GeneRays we engineer your entire digital identity — from your very first logo to the last customer click.
+              A brand engineering company crafting bold identities and digital experiences that turn businesses into brands people remember.
             </p>
-            <div className="home-hero__actions">
-              <Link to="/contact" className="home-hero__primary">
-                Build My Brand <ArrowRight aria-hidden="true" />
-              </Link>
-              <Link to="/services" className="home-hero__secondary">
-                View Our Work
-              </Link>
-            </div>
-
-            <div className="home-hero__scroll" aria-hidden="true">
-              <span>Scroll to explore</span>
-              <ArrowDown />
-            </div>
+            <button type="button" className="home-hero__scroll" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}>
+              Scroll to explore <ArrowDown aria-hidden="true" />
+            </button>
           </div>
 
-          <div className="home-hero__visual">
-            <div className="home-hero__image-shell">
-              <img
-                className="home-hero__image"
-                src={heroBlueprint}
-                alt="Futuristic digital blueprint representing GeneRays brand engineering"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
-
-              <div className="home-hero__image-label">
-                <span className="home-hero__image-label-dot" />
-                Digital experience blueprint
-              </div>
-
-              <div className="home-hero__service-stack" aria-label="GeneRays service system">
-                {[
-                  "Strategy",
-                  "Design",
-                  "Development",
-                  "Growth",
-                ].map((item, index) => (
-                  <div key={item} className="home-hero__stack-row">
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{item}</strong>
-                  </div>
-                ))}
-              </div>
+          <div className="home-hero__side">
+            <div className="home-hero__stats">
+              {heroStats.map((stat) => (
+                <div key={stat.label}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                </div>
+              ))}
             </div>
-
-            <div className="home-hero__blueprint-panel">
-              <span className="home-hero__panel-title">Brand ecosystem</span>
-              <ol>
-                {ecosystem.slice(0, 5).map((node, index) => (
-                  <li key={node}>
-                    <span>{index + 1}</span>
-                    {node}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <div className="home-hero__stats" aria-label="GeneRays capabilities">
-          <div>
-            <strong>01</strong>
-            <span>Plan before building</span>
-          </div>
-          <div>
-            <strong>05</strong>
-            <span>Connected brand stages</span>
-          </div>
-          <div>
-            <strong>∞</strong>
-            <span>Room to scale</span>
+            <Link to="/contact" className="home-hero__cta">
+              Build My Brand <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </div>
