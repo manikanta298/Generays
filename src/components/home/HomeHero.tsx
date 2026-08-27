@@ -1,61 +1,143 @@
-import { lazy, Suspense } from "react";
-import { ArrowRight, BarChart3, Facebook, Instagram, Linkedin, Palette, Play, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Palette,
+  Play,
+  Plus,
+  Target,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useCallback, useRef } from "react";
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { Link } from "react-router-dom";
-
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import { SplineScene } from "@/components/SplineScene";
+import "./HomeHero.css";
+import "./HomeHeroUnified.css";
+import "./HomeHeroNoFrame.css";
 
 const SPLINE_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
-const orbitIcons = [
-  { Icon: Instagram, position: "top-left", label: "Social content" },
-  { Icon: BarChart3, position: "top-right", label: "Performance analytics" },
-  { Icon: Palette, position: "mid-left", label: "Brand design" },
-  { Icon: Target, position: "mid-right", label: "Targeted growth" },
-  { Icon: Linkedin, position: "bottom-left", label: "LinkedIn marketing" },
-  { Icon: Facebook, position: "bottom-right", label: "Facebook marketing" },
+type HeroIcon = {
+  icon: LucideIcon;
+  label: string;
+  x: string;
+  y: string;
+  delay: string;
+};
+
+const heroIcons: HeroIcon[] = [
+  { icon: Instagram, label: "Instagram", x: "36%", y: "35%", delay: "0s" },
+  { icon: BarChart3, label: "Analytics", x: "66%", y: "35%", delay: "0.55s" },
+  { icon: Target, label: "Digital strategy", x: "75%", y: "54%", delay: "1.1s" },
+  { icon: Facebook, label: "Facebook", x: "67%", y: "76%", delay: "1.65s" },
+  { icon: Linkedin, label: "LinkedIn", x: "34%", y: "76%", delay: "2.2s" },
+  { icon: Palette, label: "Brand design", x: "25%", y: "54%", delay: "2.75s" },
 ];
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}
+
 export function HomeHero() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const iconRefs = useRef<Array<HTMLSpanElement | null>>([]);
+
+  const updateSpotlight = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const rect = stage.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const radius = Math.max(150, Math.min(270, rect.width * 0.18));
+
+    stage.style.setProperty("--spotlight-x", `${(x / rect.width) * 100}%`);
+    stage.style.setProperty("--spotlight-y", `${(y / rect.height) * 100}%`);
+    stage.style.setProperty("--spotlight-opacity", "1");
+
+    heroIcons.forEach((item, index) => {
+      const icon = iconRefs.current[index];
+      if (!icon) return;
+      const iconX = (parseFloat(item.x) / 100) * rect.width;
+      const iconY = (parseFloat(item.y) / 100) * rect.height;
+      const distance = Math.hypot(x - iconX, y - iconY);
+      icon.style.setProperty("--reveal", clamp(1 - distance / radius, 0, 1).toFixed(3));
+    });
+  }, []);
+
+  const hideSpotlight = useCallback(() => {
+    stageRef.current?.style.setProperty("--spotlight-opacity", "0");
+    iconRefs.current.forEach((icon) => icon?.style.setProperty("--reveal", "0.35"));
+  }, []);
+
   return (
     <section className="home-hero" aria-labelledby="home-hero-title">
+      <Plus className="home-hero__mark home-hero__mark--plus" aria-hidden="true" />
+      <span className="home-hero__mark home-hero__mark--copyright" aria-hidden="true">&copy;</span>
+
       <div className="home-hero__inner">
-        <h1 id="home-hero-title" className="home-hero__wordmark home-hero__anim home-hero__anim--1">
-          GENERAYS
-        </h1>
+        <div
+          ref={stageRef}
+          className="home-hero__stage"
+          onPointerMove={updateSpotlight}
+          onPointerLeave={hideSpotlight}
+          aria-label="GeneRays interactive 3D hero"
+        >
+          <div className="home-hero__grid" aria-hidden="true" />
+          <div className="home-hero__orbit home-hero__orbit--outer" aria-hidden="true" />
+          <div className="home-hero__orbit home-hero__orbit--middle" aria-hidden="true" />
+          <div className="home-hero__orbit home-hero__orbit--inner" aria-hidden="true" />
+          <div className="home-hero__spotlight" aria-hidden="true" />
 
-        <div className="home-hero__stage">
-          <div className="home-hero__orbit-ring" aria-hidden="true" />
+          <h1 id="home-hero-title" className="home-hero__wordmark" aria-label="GeneRays">
+            {"GENERAYS".split("").map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                className="home-hero__wordmark-letter"
+                style={{ "--letter-index": index } as CSSProperties}
+                aria-hidden="true"
+              >
+                {letter}
+              </span>
+            ))}
+          </h1>
 
-          <Suspense fallback={<div className="home-hero__robot-fallback" aria-hidden="true" />}>
-            <Spline scene={SPLINE_SCENE} className="home-hero__robot" />
-          </Suspense>
+          <div className="home-hero__spline">
+            <SplineScene scene={SPLINE_SCENE} className="home-hero__spline-canvas" />
+          </div>
 
-          {orbitIcons.map(({ Icon, position, label }, index) => (
-            <div
-              key={position}
-              className={`home-hero__orb home-hero__orb--${position} home-hero__anim home-hero__anim--${index + 2}`}
-              aria-label={label}
-            >
-              <Icon aria-hidden="true" />
-            </div>
-          ))}
+          <div className="home-hero__icons" aria-hidden="true">
+            {heroIcons.map(({ icon: Icon, label, x, y, delay }, index) => (
+              <span
+                key={label}
+                ref={(element) => { iconRefs.current[index] = element; }}
+                className="home-hero__icon"
+                style={{ "--icon-x": x, "--icon-y": y, "--icon-delay": delay } as CSSProperties}
+                title={label}
+              >
+                <Icon />
+              </span>
+            ))}
+          </div>
+
+          <div className="home-hero__actions" aria-label="Hero actions">
+            <Link to="/services" className="home-hero__work-button">
+              <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
+              View Our Work
+            </Link>
+            <Link to="/contact" className="home-hero__cta">
+              Build My Brand <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+
+          <p className="home-hero__tagline">
+            <strong>Redefine Digital Experience.</strong>{" "}
+            We build digital experiences that inspire trust, drive engagement and deliver measurable growth.
+          </p>
         </div>
-
-        <div className="home-hero__actions home-hero__anim home-hero__anim--8">
-          <Link to="/services" className="home-hero__primary">
-            <span className="home-hero__primary-icon">
-              <Play aria-hidden="true" />
-            </span>
-            View Our Work
-          </Link>
-          <Link to="/contact" className="home-hero__secondary">
-            Build My Brand <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
-
-        <p className="home-hero__description home-hero__anim home-hero__anim--9">
-          <strong>Redefine Digital Experience</strong>, we build digital experiences that inspire trust, drive engagement and deliver measurable growth.
-        </p>
       </div>
     </section>
   );
