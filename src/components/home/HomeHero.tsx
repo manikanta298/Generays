@@ -1,5 +1,4 @@
 import {
-  ArrowDown,
   ArrowRight,
   BarChart3,
   Facebook,
@@ -146,34 +145,18 @@ export function HomeHero() {
           </div>
         </div>
 
-        <div className="home-hero__bottom">
-          <div className="home-hero__copy">
-            <h2 className="home-hero__title">Ideas. Identity. Impact<span>.</span></h2>
-            <p className="home-hero__description">
-              A brand engineering company crafting bold identities and digital experiences that turn businesses into brands people remember.
-            </p>
-            <button
-              type="button"
-              className="home-hero__scroll"
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-            >
-              Scroll to explore <ArrowDown aria-hidden="true" />
-            </button>
+        <div className="home-hero__bottom home-hero__bottom--stats-only">
+          <div className="home-hero__stats">
+            {heroStats.map((stat) => (
+              <div key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="home-hero__side">
-            <div className="home-hero__stats">
-              {heroStats.map((stat) => (
-                <div key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
-            </div>
-            <Link to="/contact" className="home-hero__cta">
-              Build My Brand <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
+          <Link to="/contact" className="home-hero__cta">
+            Build My Brand <ArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>
