@@ -128,20 +128,23 @@ export function HomeHero() {
           </div>
 
           <div className="home-hero__content">
-            <p className="home-hero__eyebrow">Redefine digital</p>
+            {/* <p className="home-hero__eyebrow">Redefine digital</p>
             <h1 id="home-hero-title" className="home-hero__headline">
               Experience<span>.</span>
             </h1>
             <p className="home-hero__lead">
               We build digital experiences that inspire trust, drive engagement and deliver measurable growth.
-            </p>
+            </p> */}
             <Link to="/services" className="home-hero__work-button">
               <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
               View Our Work
             </Link>
             <Link to="/contact" className="home-hero__arrow-button" aria-label="Build your brand">
-              <ArrowRight aria-hidden="true" />
+              {/* <ArrowRight aria-hidden="true" /> */}
             </Link>
+              <Link to="/contact" className="home-hero__cta">
+            Build My Brand <ArrowRight aria-hidden="true" />
+          </Link>
           </div>
         </div>
 
@@ -154,9 +157,9 @@ export function HomeHero() {
               </div>
             ))}
           </div>
-          <Link to="/contact" className="home-hero__cta">
+          {/* <Link to="/contact" className="home-hero__cta">
             Build My Brand <ArrowRight aria-hidden="true" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>
