@@ -1,79 +1,61 @@
-import { ArrowDown, ArrowRight, Play, Plus } from "lucide-react";
+import { lazy, Suspense } from "react";
+import { ArrowRight, BarChart3, Facebook, Instagram, Linkedin, Palette, Play, Target } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroOffice from "@/assets/hero-office.png";
 
-const heroStats = [
-  { value: "250+", label: "Projects delivered" },
-  { value: "98%", label: "Client satisfaction" },
+const Spline = lazy(() => import("@splinetool/react-spline"));
+
+const SPLINE_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
+
+const orbitIcons = [
+  { Icon: Instagram, position: "top-left", label: "Social content" },
+  { Icon: BarChart3, position: "top-right", label: "Performance analytics" },
+  { Icon: Palette, position: "mid-left", label: "Brand design" },
+  { Icon: Target, position: "mid-right", label: "Targeted growth" },
+  { Icon: Linkedin, position: "bottom-left", label: "LinkedIn marketing" },
+  { Icon: Facebook, position: "bottom-right", label: "Facebook marketing" },
 ];
-
-const serviceStack = ["Strategy", "Design", "Development", "Growth"];
 
 export function HomeHero() {
   return (
     <section className="home-hero" aria-labelledby="home-hero-title">
-      <Plus className="home-hero__mark home-hero__mark--plus" aria-hidden="true" />
-      <span className="home-hero__mark home-hero__mark--copyright" aria-hidden="true">
-        &copy;
-      </span>
-
       <div className="home-hero__inner">
-        <h2 className="home-hero__wordmark" aria-hidden="true">
+        <h1 id="home-hero-title" className="home-hero__wordmark home-hero__anim home-hero__anim--1">
           GENERAYS
-        </h2>
+        </h1>
 
-        <div className="home-hero__frame">
-          <img
-            className="home-hero__image"
-            src={heroOffice}
-            alt="GeneRays studio: strategists and engineers building a client's digital brand"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
+        <div className="home-hero__stage">
+          <div className="home-hero__orbit-ring" aria-hidden="true" />
 
-          <div className="home-hero__panel" aria-label="GeneRays engagement stages">
-            <ul>
-              {serviceStack.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <Link to="/services" className="home-hero__showreel">
-              <span className="home-hero__showreel-icon">
-                <Play aria-hidden="true" />
-              </span>
-              View Our Work
-            </Link>
-          </div>
-        </div>
+          <Suspense fallback={<div className="home-hero__robot-fallback" aria-hidden="true" />}>
+            <Spline scene={SPLINE_SCENE} className="home-hero__robot" />
+          </Suspense>
 
-        <div className="home-hero__bottom">
-          <div className="home-hero__copy">
-            <h1 id="home-hero-title" className="home-hero__title">
-              Ideas<span>.</span> Identity<span>.</span> Impact<span>.</span>
-            </h1>
-            <p className="home-hero__description">
-              A brand engineering company crafting bold identities and digital experiences that turn businesses into brands people remember.
-            </p>
-            <button type="button" className="home-hero__scroll" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}>
-              Scroll to explore <ArrowDown aria-hidden="true" />
-            </button>
-          </div>
-
-          <div className="home-hero__side">
-            <div className="home-hero__stats">
-              {heroStats.map((stat) => (
-                <div key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
+          {orbitIcons.map(({ Icon, position, label }, index) => (
+            <div
+              key={position}
+              className={`home-hero__orb home-hero__orb--${position} home-hero__anim home-hero__anim--${index + 2}`}
+              aria-label={label}
+            >
+              <Icon aria-hidden="true" />
             </div>
-            <Link to="/contact" className="home-hero__cta">
-              Build My Brand <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
+          ))}
         </div>
+
+        <div className="home-hero__actions home-hero__anim home-hero__anim--8">
+          <Link to="/services" className="home-hero__primary">
+            <span className="home-hero__primary-icon">
+              <Play aria-hidden="true" />
+            </span>
+            View Our Work
+          </Link>
+          <Link to="/contact" className="home-hero__secondary">
+            Build My Brand <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+
+        <p className="home-hero__description home-hero__anim home-hero__anim--9">
+          <strong>Redefine Digital Experience</strong>, we build digital experiences that inspire trust, drive engagement and deliver measurable growth.
+        </p>
       </div>
     </section>
   );
