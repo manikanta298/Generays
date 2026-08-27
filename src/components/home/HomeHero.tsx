@@ -126,7 +126,7 @@ export function HomeHero() {
               <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
               View Our Work
             </Link>
-            <Link to="/contact" className="home-hero__cta">
+            <Link to="/contact" className="home-hero__work-buttona">
               Build My Brand <ArrowRight aria-hidden="true" />
             </Link>
           </div>
