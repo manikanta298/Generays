@@ -37,13 +37,13 @@ export function ServiceBento({ services, heading = "Everything your brand needs.
           </div>
         </div>
 
-        <div className="service-bento__grid">
+        <div className="service-bento__grid" role="list" aria-label="GeneRays services">
           {services.map((service, index) => {
             const media = getServiceMedia(service.slug);
             const image = onlineImages[service.slug] ?? media.image;
             const Icon = media.icon;
             return (
-              <Link key={service.slug} to={`/services/${service.slug}`} className="service-bento__card" aria-label={`Explore ${service.title}`}>
+              <Link key={service.slug} to={`/services/${service.slug}`} className="service-bento__card" aria-label={`Explore ${service.title}`} role="listitem">
                 <img className="service-bento__image" src={image} alt="" loading={index < 3 ? "eager" : "lazy"} decoding="async" onError={(event) => { const target = event.currentTarget; if (target.src !== media.image) target.src = media.image; }} />
                 <div className="service-bento__scrim" />
                 <div className="service-bento__gridline" />
