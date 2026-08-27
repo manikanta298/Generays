@@ -3,6 +3,7 @@ import { PageHero } from "@/components/page-hero";
 import { heroBlueprint } from "@/content/media";
 import { services, technologies } from "@/content/site";
 import LogoLoop from "@/components/LogoLoop";
+import { TechnologySection } from "@/components/home/TechnologySection";
 import { ServiceBento } from "@/components/ServiceBento";
 
 export default function ServicesPage() {
@@ -17,8 +18,10 @@ export default function ServicesPage() {
       />
 
       <ServiceBento services={services} />
+      <TechnologySection/>
+      
 
-      <section className="border-b border-border bg-primary-soft">
+      {/* <section className="border-b border-border bg-primary-soft">
         <div className="mx-auto max-w-6xl px-5 py-16">
           <p className="eyebrow">Technology expertise</p>
           <h2 className="mt-3 max-w-2xl text-2xl font-bold text-foreground md:text-3xl">
@@ -53,7 +56,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
