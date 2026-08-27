@@ -20,11 +20,6 @@ import "./HomeHeroNoFrame.css";
 
 const SPLINE_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
-const heroStats = [
-  { value: "250+", label: "Projects delivered" },
-  { value: "98%", label: "Client satisfaction" },
-];
-
 type HeroIcon = {
   icon: LucideIcon;
   label: string;
@@ -97,17 +92,18 @@ export function HomeHero() {
           <div className="home-hero__orbit home-hero__orbit--inner" aria-hidden="true" />
           <div className="home-hero__spotlight" aria-hidden="true" />
 
-          <h2 className="home-hero__wordmark" aria-hidden="true">
+          <h1 id="home-hero-title" className="home-hero__wordmark" aria-label="GeneRays">
             {"GENERAYS".split("").map((letter, index) => (
               <span
                 key={`${letter}-${index}`}
                 className="home-hero__wordmark-letter"
                 style={{ "--letter-index": index } as CSSProperties}
+                aria-hidden="true"
               >
                 {letter}
               </span>
             ))}
-          </h2>
+          </h1>
 
           <div className="home-hero__spline">
             <SplineScene scene={SPLINE_SCENE} className="home-hero__spline-canvas" />
@@ -127,39 +123,20 @@ export function HomeHero() {
             ))}
           </div>
 
-          <div className="home-hero__content">
-            {/* <p className="home-hero__eyebrow">Redefine digital</p>
-            <h1 id="home-hero-title" className="home-hero__headline">
-              Experience<span>.</span>
-            </h1>
-            <p className="home-hero__lead">
-              We build digital experiences that inspire trust, drive engagement and deliver measurable growth.
-            </p> */}
+          <div className="home-hero__actions" aria-label="Hero actions">
             <Link to="/services" className="home-hero__work-button">
               <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
               View Our Work
             </Link>
-            <Link to="/contact" className="home-hero__arrow-button" aria-label="Build your brand">
-              {/* <ArrowRight aria-hidden="true" /> */}
+            <Link to="/contact" className="home-hero__cta">
+              Build My Brand <ArrowRight aria-hidden="true" />
             </Link>
-              <Link to="/contact" className="home-hero__cta">
-            Build My Brand <ArrowRight aria-hidden="true" />
-          </Link>
           </div>
-        </div>
 
-        <div className="home-hero__metrics-row" aria-label="GeneRays results">
-          <div className="home-hero__stats">
-            {heroStats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-          {/* <Link to="/contact" className="home-hero__cta">
-            Build My Brand <ArrowRight aria-hidden="true" />
-          </Link> */}
+          <p className="home-hero__tagline">
+            <strong>Redefine Digital Experience.</strong>{" "}
+            We build digital experiences that inspire trust, drive engagement and deliver measurable growth.
+          </p>
         </div>
       </div>
     </section>
