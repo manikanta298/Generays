@@ -16,6 +16,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { Link } from "react-router-dom";
 import { SplineScene } from "@/components/SplineScene";
 import "./HomeHero.css";
+import "./HomeHeroUnified.css";
 
 const SPLINE_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
