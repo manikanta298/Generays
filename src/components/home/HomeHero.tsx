@@ -145,7 +145,7 @@ export function HomeHero() {
           </div>
         </div>
 
-        <div className="home-hero__bottom home-hero__bottom--stats-only">
+        <div className="home-hero__metrics-row" aria-label="GeneRays results">
           <div className="home-hero__stats">
             {heroStats.map((stat) => (
               <div key={stat.label}>
