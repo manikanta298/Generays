@@ -17,7 +17,7 @@ export default function HomePage() {
       <ServicesSection />
       <TechnologySection />
       <WhyGeneRaysSection />
-      <TransformationSection />
+      {/* <TransformationSection /> */}
       <GallerySection />
       <FinalCallSection />
     </div>
