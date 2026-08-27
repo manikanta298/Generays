@@ -121,7 +121,13 @@ export function HomeHero() {
             ))}
           </div>
 
-           <div className="home-hero__actions" aria-label="Hero actions">
+           
+
+         
+        </div>
+      </div>
+    </section>
+    <div className="home-hero__actions" aria-label="Hero actions">
             <Link to="/services" className="home-hero__work-button">
               <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
               View Our Work
@@ -129,16 +135,10 @@ export function HomeHero() {
             <Link to="/contact" className="home-hero__work-buttona">
               Build My Brand <ArrowRight aria-hidden="true" />
             </Link>
-          </div>
-
-          <p className="home-hero__tagline">
+          </div>     
+     <p className="home-hero__tagline">
             <strong>Redefine Digital Experience.</strong>{" "}
             We build digital experiences that inspire trust, drive engagement and deliver measurable growth.
           </p>
-        </div>
-      </div>
-    </section>
-         
-    
   );
 }
