@@ -121,7 +121,9 @@ export function HomeHero() {
             ))}
           </div>
 
-          <div className="home-hero__actions" aria-label="Hero actions">
+          
+    </section>
+         <div className="home-hero__actions" aria-label="Hero actions">
             <Link to="/services" className="home-hero__work-button">
               <span className="home-hero__play-icon"><Play aria-hidden="true" /></span>
               View Our Work
@@ -137,6 +139,6 @@ export function HomeHero() {
           </p>
         </div>
       </div>
-    </section>
+    
   );
 }
