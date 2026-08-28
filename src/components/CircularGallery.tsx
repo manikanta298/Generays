@@ -18,6 +18,7 @@ export interface CircularGalleryProps {
   scrollSpeed?: number;
   scrollEase?: number;
   autoRotateSpeed?: number;
+  onSelect?: (item: CircularGalleryItem) => void;
 }
 
 type Viewport = { width: number; height: number };
@@ -249,7 +250,17 @@ class Media {
     mesh.setParent(this.plane);
   }
 
-  update(scroll: { current: number; last: number }, direction: "left" | "right") {
+  getHitDistance(clientX: number, clientY: number, rect: DOMRect) {
+    const worldX = ((clientX - rect.left) / this.screen.width - 0.5) * this.viewport.width;
+    const worldY = (0.5 - (clientY - rect.top) / this.screen.height) * this.viewport.height;
+    const dx = (worldX - this.plane.position.x) / Math.max(this.plane.scale.x / 2, 0.001);
+    const dy = (worldY - this.plane.position.y) / Math.max(this.plane.scale.y / 2, 0.001);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    return distance <= 1.15 ? distance : Infinity;
+  }
+
+  update(scroll: { current: number; last: number }, direction: "left" | "right", deltaSeconds: number) {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
     const x = this.plane.position.x;
@@ -275,7 +286,7 @@ class Media {
     }
 
     const speed = scroll.current - scroll.last;
-    this.program.uniforms.uTime.value += 0.03;
+    this.program.uniforms.uTime.value += deltaSeconds * 1.8;
     this.program.uniforms.uSpeed.value = speed;
 
     const halfPlane = this.plane.scale.x / 2;
@@ -316,6 +327,8 @@ class CircularGalleryApp {
   private scene!: Transform;
   private geometry!: Plane;
   private medias: Media[] = [];
+  private items: CircularGalleryItem[];
+  private onSelect?: (item: CircularGalleryItem) => void;
   private scroll = { current: 0, target: 0, last: 0 };
   private scrollSpeed: number;
   private scrollEase: number;
@@ -323,7 +336,9 @@ class CircularGalleryApp {
   private raf = 0;
   private pointerDown = false;
   private dragStartX = 0;
+  private dragStartY = 0;
   private dragStartScroll = 0;
+  private lastTime = 0;
   private screen: ScreenSize = { width: 1, height: 1 };
   private viewport: Viewport = { width: 1, height: 1 };
 
@@ -338,11 +353,15 @@ class CircularGalleryApp {
       scrollSpeed,
       scrollEase,
       autoRotateSpeed,
+      onSelect,
     }: Required<Pick<CircularGalleryProps, "bend" | "textColor" | "borderRadius" | "font" | "scrollSpeed" | "scrollEase" | "autoRotateSpeed">> & {
       items: CircularGalleryItem[];
+      onSelect?: (item: CircularGalleryItem) => void;
     }
   ) {
     this.container = container;
+    this.items = items;
+    this.onSelect = onSelect;
     this.scrollSpeed = scrollSpeed;
     this.scrollEase = scrollEase;
     this.autoRotateSpeed = autoRotateSpeed;
@@ -390,7 +409,8 @@ class CircularGalleryApp {
     );
 
     this.bindEvents();
-    this.animate();
+    this.lastTime = performance.now();
+    this.animate(this.lastTime);
   }
 
   private updateSize = () => {
@@ -415,19 +435,19 @@ class CircularGalleryApp {
     this.medias.forEach((media) => media.onResize(this.screen, this.viewport));
   };
 
-  private animate = () => {
+  private animate = (time: number) => {
+    const deltaSeconds = Math.min(0.05, Math.max(0, (time - this.lastTime) / 1000));
+    this.lastTime = time;
+
     if (!this.pointerDown && this.autoRotateSpeed) {
-      this.scroll.target += this.autoRotateSpeed;
+      this.scroll.target += this.autoRotateSpeed * deltaSeconds;
     }
 
-    this.scroll.current = lerp(
-      this.scroll.current,
-      this.scroll.target,
-      this.scrollEase
-    );
+    const easing = 1 - Math.pow(1 - this.scrollEase, deltaSeconds * 60);
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, easing);
 
     const direction = this.scroll.current >= this.scroll.last ? "right" : "left";
-    this.medias.forEach((media) => media.update(this.scroll, direction));
+    this.medias.forEach((media) => media.update(this.scroll, direction, deltaSeconds));
 
     this.renderer.render({
       scene: this.scene,
@@ -447,6 +467,7 @@ class CircularGalleryApp {
   private onPointerDown = (event: PointerEvent) => {
     this.pointerDown = true;
     this.dragStartX = event.clientX;
+    this.dragStartY = event.clientY;
     this.dragStartScroll = this.scroll.target;
     this.container.setPointerCapture?.(event.pointerId);
   };
@@ -457,8 +478,28 @@ class CircularGalleryApp {
     this.scroll.target = this.dragStartScroll - distance * (this.scrollSpeed * 0.025);
   };
 
-  private onPointerUp = () => {
+  private onPointerUp = (event: PointerEvent) => {
+    if (!this.pointerDown) return;
     this.pointerDown = false;
+
+    const moved = Math.hypot(event.clientX - this.dragStartX, event.clientY - this.dragStartY);
+    if (moved > 8 || !this.onSelect) return;
+
+    const rect = this.container.getBoundingClientRect();
+    let bestDistance = Infinity;
+    let bestIndex = -1;
+
+    this.medias.forEach((media, index) => {
+      const distance = media.getHitDistance(event.clientX, event.clientY, rect);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = index % this.items.length;
+      }
+    });
+
+    if (bestIndex >= 0 && Number.isFinite(bestDistance)) {
+      this.onSelect(this.items[bestIndex]);
+    }
   };
 
   private onKeyDown = (event: KeyboardEvent) => {
@@ -538,6 +579,22 @@ async function prepareFont(font: string, fontUrl?: string) {
   }
 }
 
+async function preloadImages(items: CircularGalleryItem[]) {
+  await Promise.allSettled(
+    items.map(
+      (item) =>
+        new Promise<void>((resolve) => {
+          const image = new Image();
+          image.crossOrigin = "anonymous";
+          image.decoding = "async";
+          image.onload = () => resolve();
+          image.onerror = () => resolve();
+          image.src = item.image;
+        })
+    )
+  );
+}
+
 export default function CircularGallery({
   items = DEFAULT_ITEMS,
   bend = 3,
@@ -548,8 +605,14 @@ export default function CircularGallery({
   scrollSpeed = 2,
   scrollEase = 0.05,
   autoRotateSpeed = 0,
+  onSelect,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const onSelectRef = useRef(onSelect);
+
+  useEffect(() => {
+    onSelectRef.current = onSelect;
+  }, [onSelect]);
 
   const safeItems = useMemo(
     () => (items.length ? items : DEFAULT_ITEMS),
@@ -564,7 +627,7 @@ export default function CircularGallery({
     let cancelled = false;
 
     const start = async () => {
-      await prepareFont(font, fontUrl);
+      await Promise.all([prepareFont(font, fontUrl), preloadImages(safeItems)]);
       if (cancelled || !containerRef.current) return;
 
       try {
@@ -577,6 +640,7 @@ export default function CircularGallery({
           scrollSpeed,
           scrollEase,
           autoRotateSpeed,
+          onSelect: (item) => onSelectRef.current?.(item),
         });
       } catch (error) {
         console.error("CircularGallery: WebGL initialization failed.", error);
@@ -598,7 +662,7 @@ export default function CircularGallery({
       tabIndex={0}
       role="region"
       aria-label="Circular image gallery. Automatically rotating. Use mouse wheel, drag, or Left and Right Arrow keys to navigate."
-      style={{ touchAction: "pan-y" }}
+      style={{ touchAction: "pan-y", contain: "layout paint" }}
     />
   );
 }
