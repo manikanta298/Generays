@@ -122,7 +122,7 @@ export function HomeHero() {
             </div>
           </div>
 
-          <div className="hero-copy-section">
+          {/* <div className="hero-copy-section">
             <p className="hero-copy-section__text">
               <strong>Redefine Digital Experience</strong>, we build digital experiences
               <br className="hero-copy-section__break" />
@@ -130,7 +130,7 @@ export function HomeHero() {
               <br className="hero-copy-section__break" />
               measurable growth.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
