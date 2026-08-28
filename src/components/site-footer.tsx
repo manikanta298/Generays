@@ -6,7 +6,17 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <div className="font-display text-2xl font-bold tracking-tight">GeneRays</div>
+          <Link
+            to="/"
+            className="inline-flex w-fit rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary-foreground"
+            aria-label="Generays home"
+          >
+            <img
+              src="/generays-logo.svg"
+              alt="Generays"
+              className="h-auto w-[180px] brightness-0 invert"
+            />
+          </Link>
           <p className="mt-3 max-w-xs text-sm text-primary-foreground/75">
             Building Brands. Engineering Growth. Creating Digital Impact.
           </p>
