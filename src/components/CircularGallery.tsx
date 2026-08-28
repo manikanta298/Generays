@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type GL = Renderer["gl"];
 
@@ -335,6 +335,7 @@ class CircularGalleryApp {
   private autoRotateSpeed: number;
   private raf = 0;
   private pointerDown = false;
+  private suppressNextClick = false;
   private dragStartX = 0;
   private dragStartY = 0;
   private dragStartScroll = 0;
@@ -440,11 +441,16 @@ class CircularGalleryApp {
     this.lastTime = time;
 
     if (!this.pointerDown && this.autoRotateSpeed) {
+      // Automatic motion is intentionally linear: distance travelled is
+      // proportional to elapsed time, so the gallery never speeds up/slows
+      // down because of the easing curve.
       this.scroll.target += this.autoRotateSpeed * deltaSeconds;
+      this.scroll.current = this.scroll.target;
+    } else {
+      // Manual wheel/drag interaction keeps the existing smooth easing.
+      const easing = 1 - Math.pow(1 - this.scrollEase, deltaSeconds * 60);
+      this.scroll.current = lerp(this.scroll.current, this.scroll.target, easing);
     }
-
-    const easing = 1 - Math.pow(1 - this.scrollEase, deltaSeconds * 60);
-    this.scroll.current = lerp(this.scroll.current, this.scroll.target, easing);
 
     const direction = this.scroll.current >= this.scroll.last ? "right" : "left";
     this.medias.forEach((media) => media.update(this.scroll, direction, deltaSeconds));
@@ -466,6 +472,7 @@ class CircularGalleryApp {
 
   private onPointerDown = (event: PointerEvent) => {
     this.pointerDown = true;
+    this.suppressNextClick = false;
     this.dragStartX = event.clientX;
     this.dragStartY = event.clientY;
     this.dragStartScroll = this.scroll.target;
@@ -483,7 +490,15 @@ class CircularGalleryApp {
     this.pointerDown = false;
 
     const moved = Math.hypot(event.clientX - this.dragStartX, event.clientY - this.dragStartY);
-    if (moved > 8 || !this.onSelect) return;
+    // A drag should never also activate the gallery click action.
+    this.suppressNextClick = moved > 8;
+  };
+
+  private onClick = (event: MouseEvent) => {
+    if (this.suppressNextClick) {
+      this.suppressNextClick = false;
+      return;
+    }
 
     const rect = this.container.getBoundingClientRect();
     let bestDistance = Infinity;
@@ -498,7 +513,7 @@ class CircularGalleryApp {
     });
 
     if (bestIndex >= 0 && Number.isFinite(bestDistance)) {
-      this.onSelect(this.items[bestIndex]);
+      this.onSelect?.(this.items[bestIndex]);
     }
   };
 
@@ -520,6 +535,7 @@ class CircularGalleryApp {
     this.container.addEventListener("pointermove", this.onPointerMove);
     this.container.addEventListener("pointerup", this.onPointerUp);
     this.container.addEventListener("pointercancel", this.onPointerUp);
+    this.container.addEventListener("click", this.onClick);
     this.container.addEventListener("keydown", this.onKeyDown);
   }
 
@@ -531,6 +547,7 @@ class CircularGalleryApp {
     this.container.removeEventListener("pointermove", this.onPointerMove);
     this.container.removeEventListener("pointerup", this.onPointerUp);
     this.container.removeEventListener("pointercancel", this.onPointerUp);
+    this.container.removeEventListener("click", this.onClick);
     this.container.removeEventListener("keydown", this.onKeyDown);
 
     if (this.gl.canvas.parentElement === this.container) {
@@ -609,10 +626,22 @@ export default function CircularGallery({
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onSelectRef = useRef(onSelect);
+  const [selectedItem, setSelectedItem] = useState<CircularGalleryItem | null>(null);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
+
+  useEffect(() => {
+    if (!selectedItem) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedItem(null);
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [selectedItem]);
 
   const safeItems = useMemo(
     () => (items.length ? items : DEFAULT_ITEMS),
@@ -640,7 +669,10 @@ export default function CircularGallery({
           scrollSpeed,
           scrollEase,
           autoRotateSpeed,
-          onSelect: (item) => onSelectRef.current?.(item),
+          onSelect: (item) => {
+            setSelectedItem(item);
+            onSelectRef.current?.(item);
+          },
         });
       } catch (error) {
         console.error("CircularGallery: WebGL initialization failed.", error);
@@ -656,13 +688,93 @@ export default function CircularGallery({
   }, [safeItems, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoRotateSpeed]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-full w-full cursor-grab overflow-hidden rounded-2xl active:cursor-grabbing"
-      tabIndex={0}
-      role="region"
-      aria-label="Circular image gallery. Automatically rotating. Use mouse wheel, drag, or Left and Right Arrow keys to navigate."
-      style={{ touchAction: "pan-y", contain: "layout paint" }}
-    />
+    <>
+      <div
+        ref={containerRef}
+        className="h-full w-full cursor-grab overflow-hidden rounded-2xl active:cursor-grabbing"
+        tabIndex={0}
+        role="region"
+        aria-label="Circular image gallery. Automatically rotating. Click an image to view it larger. Use mouse wheel, drag, or Left and Right Arrow keys to navigate."
+        style={{ touchAction: "pan-y", contain: "layout paint" }}
+      />
+
+      {selectedItem && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedItem.text} image preview`}
+          onClick={() => setSelectedItem(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "24px",
+            background: "rgba(0, 0, 0, 0.78)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(92vw, 1100px)",
+              maxHeight: "92vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "14px",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedItem(null)}
+              aria-label="Close image preview"
+              style={{
+                position: "absolute",
+                top: "-12px",
+                right: "-12px",
+                width: "42px",
+                height: "42px",
+                border: "1px solid rgba(255,255,255,.35)",
+                borderRadius: "999px",
+                background: "rgba(15,23,42,.9)",
+                color: "#fff",
+                fontSize: "24px",
+                lineHeight: 1,
+                cursor: "pointer",
+                zIndex: 2,
+              }}
+            >
+              ×
+            </button>
+
+            <img
+              src={selectedItem.image}
+              alt={selectedItem.text}
+              style={{
+                display: "block",
+                width: "100%",
+                maxHeight: "78vh",
+                objectFit: "contain",
+                borderRadius: "12px",
+              }}
+            />
+            <div
+              style={{
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: 600,
+                textAlign: "center",
+              }}
+            >
+              {selectedItem.text}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
