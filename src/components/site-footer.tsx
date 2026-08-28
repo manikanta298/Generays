@@ -12,7 +12,7 @@ export function SiteFooter() {
             aria-label="Generays home"
           >
             <img
-              src="/generays-logo-white.svg"
+              src="/Generays-1.png"
               alt="Generays"
               className="h-auto w-[180px]"
             />
