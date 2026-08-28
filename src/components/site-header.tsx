@@ -23,7 +23,7 @@ export function SiteHeader() {
           aria-label="Generays home"
         >
           <img
-            src="/generays-logo.svg"
+            src="/Generays.png"
             alt="Generays"
             className="h-auto w-[150px] sm:w-[170px]"
           />
