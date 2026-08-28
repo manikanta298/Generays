@@ -12,9 +12,9 @@ export function SiteFooter() {
             aria-label="Generays home"
           >
             <img
-              src="/generays-logo.svg"
+              src="/generays-logo-white.svg"
               alt="Generays"
-              className="h-auto w-[180px] brightness-0 invert"
+              className="h-auto w-[180px]"
             />
           </Link>
           <p className="mt-3 max-w-xs text-sm text-primary-foreground/75">
