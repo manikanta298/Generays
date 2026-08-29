@@ -124,7 +124,6 @@ export default function CorePositioning() {
           Connected strategy creates growth.
         </p>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {cards.map((c, i) => (
             <div
@@ -149,7 +148,6 @@ export default function CorePositioning() {
           ))}
         </div>
 
-        {/* Banner */}
         <div className="rounded-2xl bg-white shadow-sm px-6 py-5 flex items-center gap-4 mb-10">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center shrink-0">
             <HiCheck className="text-white text-lg" />
@@ -162,7 +160,6 @@ export default function CorePositioning() {
           </p>
         </div>
 
-        {/* Timeline */}
         <div className="rounded-2xl bg-white shadow-sm px-6 py-10">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-2">
             {steps.map((s, i) => (
@@ -195,26 +192,3 @@ export default function CorePositioning() {
     </section>
   );
 }
--relaxed text-muted-foreground">{description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-card p-8">
-            <h3 className="font-display text-lg font-bold text-foreground">Built for Impact</h3>
-            <div className="mt-1 h-px w-10 rounded-full bg-primary" />
-            <ul className="mt-6 space-y-4">
-              {impactItems.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-3">
-                  <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
-                  <span className="text-sm font-medium text-foreground">{label}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-                  }
