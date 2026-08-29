@@ -621,7 +621,7 @@ export default function CircularGallery({
   fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05,
-  autoRotateSpeed = 3,
+  autoRotateSpeed = 3.25,
   onSelect,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
