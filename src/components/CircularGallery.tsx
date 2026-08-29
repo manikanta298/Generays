@@ -93,7 +93,7 @@ class Media {
   private widthTotal = 0;
   private plane!: Mesh;
   private program!: Program;
-  private imageCache?: Map<string, HTMLImageElement>;
+  private imageLoader?: ImageLoader;
   private labelCache?: Map<string, TextTexture>;
 
   constructor(args: {
@@ -110,7 +110,7 @@ class Media {
     bend: number;
     index: number;
     count: number;
-    imageCache?: Map<string, HTMLImageElement>;
+    imageLoader?: ImageLoader;
     labelCache?: Map<string, TextTexture>;
   }) {
     Object.assign(this, args);
@@ -205,20 +205,13 @@ class Media {
       this.program.uniforms.uImageSizes.value = [img.naturalWidth || img.width, img.naturalHeight || img.height];
     };
 
-    const cached = this.imageCache?.get(this.image);
-    if (cached) {
-      // Already fetched + decoded by preloadImages — no second network
-      // request or decode, so the texture upload happens immediately.
-      applyImage(cached);
-      return;
-    }
-
-    // Fallback path (cache miss, e.g. items changed after mount): fetch it.
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.decoding = "async";
-    img.src = this.image;
-    img.onload = () => applyImage(img);
+    // Mesh is visible immediately with the transparent placeholder above;
+    // the real image swaps in whenever it's ready. Duplicate items (used
+    // for the infinite-scroll loop) share one in-flight request/decode via
+    // the loader instead of each firing its own network fetch.
+    loadImageOnce(this.image, this.imageLoader).then((img) => {
+      if (img) applyImage(img);
+    });
   }
 
   private createMesh() {
@@ -380,11 +373,9 @@ class CircularGalleryApp {
       scrollEase,
       autoRotateSpeed,
       onSelect,
-      imageCache,
     }: Required<Pick<CircularGalleryProps, "bend" | "textColor" | "borderRadius" | "font" | "scrollSpeed" | "scrollEase" | "autoRotateSpeed">> & {
       items: CircularGalleryItem[];
       onSelect?: (item: CircularGalleryItem) => void;
-      imageCache?: Map<string, HTMLImageElement>;
     }
   ) {
     this.container = container;
@@ -415,10 +406,11 @@ class CircularGalleryApp {
 
     const galleryItems = [...items, ...items];
 
-    // Shared across every Media instance: the two "copies" of each item
-    // (needed for the seamless infinite-scroll loop) reuse the same
-    // decoded image and the same rasterized label texture instead of
-    // paying the decode/canvas cost twice per item.
+    // Shared across every Media instance: duplicate items (the second
+    // copy used for the seamless infinite-scroll loop) reuse the same
+    // in-flight image request and the same rasterized label texture
+    // instead of paying the fetch/decode/canvas cost twice per item.
+    const imageLoader: ImageLoader = new Map();
     const labelCache = new Map<string, TextTexture>();
 
     this.updateSize();
@@ -439,7 +431,7 @@ class CircularGalleryApp {
           bend,
           index,
           count: galleryItems.length,
-          imageCache,
+          imageLoader,
           labelCache,
         })
     );
@@ -631,31 +623,34 @@ async function prepareFont(font: string, fontUrl?: string) {
   }
 }
 
-async function preloadImages(items: CircularGalleryItem[]) {
-  const cache = new Map<string, HTMLImageElement>();
-  const uniqueUrls = Array.from(new Set(items.map((item) => item.image)));
+// A URL -> in-flight/finished decode promise. Shared by every Media
+// instance so the 7 unique images used by the (doubled, for looping)
+// gallery items are each fetched and decoded exactly once, no matter how
+// many meshes reference them, and callers never block on it — each mesh
+// just swaps its texture in whenever its own image resolves.
+type ImageLoader = Map<string, Promise<HTMLImageElement | null>>;
 
-  await Promise.allSettled(
-    uniqueUrls.map(async (url) => {
-      const image = new Image();
-      image.crossOrigin = "anonymous";
-      image.decoding = "async";
-      image.src = url;
-      try {
-        // decode() resolves only once the image is fully decoded, so the
-        // texImage2D upload that happens when Media assigns texture.image
-        // doesn't have to decode on the fly and stall the main thread.
-        await image.decode();
-      } catch {
-        // Decode failed (e.g. broken URL) — Media falls back to its own
-        // fetch, so it's fine to leave this one out of the cache.
-        return;
-      }
-      cache.set(url, image);
-    })
-  );
+function loadImageOnce(url: string, loader?: ImageLoader): Promise<HTMLImageElement | null> {
+  if (!loader) return loadImage(url);
 
-  return cache;
+  const existing = loader.get(url);
+  if (existing) return existing;
+
+  const promise = loadImage(url);
+  loader.set(url, promise);
+  return promise;
+}
+
+function loadImage(url: string): Promise<HTMLImageElement | null> {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.decoding = "async";
+  img.src = url;
+
+  return img
+    .decode()
+    .then(() => img)
+    .catch(() => null); // broken URL etc. — mesh just keeps its placeholder
 }
 
 export default function CircularGallery({
@@ -702,10 +697,14 @@ export default function CircularGallery({
     let cancelled = false;
 
     const start = async () => {
-      const [, imageCache] = await Promise.all([
-        prepareFont(font, fontUrl),
-        preloadImages(safeItems),
-      ]);
+      // Only wait on the font (fast, local-ish) so labels measure/render
+      // correctly from frame one. Images are intentionally NOT awaited
+      // here — the gallery mounts and starts rotating immediately with
+      // transparent placeholders, and each tile's texture swaps in as
+      // its own image finishes loading (see Media/loadImageOnce). This
+      // is what actually fixes the "everything blocks, then pops in
+      // already spinning" lag: there's no barrier before first paint.
+      await prepareFont(font, fontUrl);
       if (cancelled || !containerRef.current) return;
 
       try {
@@ -718,7 +717,6 @@ export default function CircularGallery({
           scrollSpeed,
           scrollEase,
           autoRotateSpeed,
-          imageCache,
           onSelect: (item) => {
             setSelectedItem(item);
             onSelectRef.current?.(item);
