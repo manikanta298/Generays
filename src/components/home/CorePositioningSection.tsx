@@ -1,231 +1,201 @@
-import type { ComponentType } from "react";
+import React from "react";
 import {
-  Target,
-  BarChart3,
-  Users,
-  TrendingUp,
-  Search,
-  Lightbulb,
-  Code2,
-  Rocket,
-  LineChart,
-  MessageSquare,
-  Share2,
-  FileText,
-  Send,
-  PieChart,
-  UsersRound,
-  PenLine,
-  Play,
-  Sliders,
-  Star,
-  CheckCircle2,
-} from "lucide-react";
+  HiSparkles,
+  HiOutlineComputerDesktop,
+  HiOutlineUserGroup,
+  HiOutlineMegaphone,
+  HiCheck,
+} from "react-icons/hi2";
+import {
+  HiOutlineDocumentText,
+  HiOutlineIdentification,
+  HiOutlineDesktopComputer,
+  HiOutlineCog,
+  HiOutlineChartBar,
+} from "react-icons/hi";
 
-type Pillar = {
-  icon: ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-};
-
-const pillars: Pillar[] = [
-  { icon: Target, title: "Strategy First", description: "Purpose-driven planning" },
-  { icon: BarChart3, title: "Data Informed", description: "Insights that guide every move" },
-  { icon: Users, title: "Customer Focused", description: "Built around real audiences" },
-  { icon: TrendingUp, title: "Growth Oriented", description: "Designed to scale and adapt" },
-];
-
-type Stage = {
-  number: string;
-  name: string;
-  subtitle: string;
-  description: string;
-  icon: ComponentType<{ className?: string }>;
-  image: string;
-  accent: string; // Tailwind color token shared by the number chip + icon badge
-};
-
-const stages: Stage[] = [
+const cards = [
   {
-    number: "01",
-    name: "Discover",
-    subtitle: "Understand deeply",
-    description: "We research your market, audience, competitors and goals to uncover opportunities that matter.",
-    icon: Search,
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80",
-    accent: "blue",
+    icon: HiSparkles,
+    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-500",
+    title: "A logo without identity",
+    desc: "is decoration.",
+    art: (
+      <div className="relative w-full h-full flex items-center justify-center">
+        <div className="w-40 h-28 bg-gradient-to-br from-slate-900 to-blue-950 rounded-md shadow-lg absolute rotate-[-8deg] translate-x-3" />
+        <div className="w-44 h-28 bg-white rounded-md shadow-xl flex items-center justify-center gap-2 relative z-10">
+          <div className="w-7 h-7 rounded bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">◆</div>
+          <div className="text-left">
+            <div className="text-[10px] font-bold text-slate-800 leading-tight">YOUR</div>
+            <div className="text-[10px] font-bold text-slate-800 leading-tight">LOGO</div>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    number: "02",
-    name: "Design",
-    subtitle: "Shape the brand",
-    description: "We craft your brand identity, positioning and experience with strategy, creativity and a human-first approach.",
-    icon: Lightbulb,
-    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80",
-    accent: "violet",
+    icon: HiOutlineComputerDesktop,
+    iconBg: "bg-gradient-to-br from-blue-500 to-sky-500",
+    title: "A website without strategy",
+    desc: "is a brochure.",
+    art: (
+      <div className="w-full h-full flex items-center justify-center p-3">
+        <div className="w-full bg-white rounded-md shadow-lg p-2 border border-slate-100">
+          <div className="flex items-center justify-between text-[8px] text-slate-400 font-medium mb-2 px-1">
+            <span className="text-blue-600 font-bold">Logo</span>
+            <span className="flex gap-2">
+              <span>Home</span><span>About</span><span>Services</span><span>Contact</span>
+            </span>
+          </div>
+          <div className="flex gap-2">
+            <div className="w-1/2 h-12 bg-blue-100 rounded flex items-center justify-center">
+              <div className="w-4 h-4 rounded-full bg-blue-300" />
+            </div>
+            <div className="w-1/2 h-12 bg-indigo-100 rounded" />
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    number: "03",
-    name: "Build",
-    subtitle: "Bring it to life",
-    description: "We build fast, scalable digital products and automation on a solid infrastructure that just works.",
-    icon: Code2,
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
-    accent: "blue",
+    icon: HiOutlineUserGroup,
+    iconBg: "bg-gradient-to-br from-teal-400 to-emerald-500",
+    title: "Social media without consistency",
+    desc: "is noise.",
+    art: (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-24 h-40 bg-slate-900 rounded-2xl p-1.5 shadow-xl">
+          <div className="w-full h-full bg-white rounded-xl overflow-hidden relative">
+            <div className="h-8 bg-slate-100 flex items-center gap-1 px-1.5">
+              <div className="w-3 h-3 rounded-full bg-blue-400" />
+              <div className="w-6 h-1.5 bg-slate-300 rounded" />
+            </div>
+            <div className="h-16 bg-slate-700" />
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    number: "04",
-    name: "Launch",
-    subtitle: "Go to market",
-    description: "We launch with confidence. Marketing begins, systems activate, and your brand is ready to make an impact.",
-    icon: Rocket,
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80",
-    accent: "orange",
-  },
-  {
-    number: "05",
-    name: "Grow",
-    subtitle: "Optimize & scale",
-    description: "We continuously optimize through data, creativity, campaigns and technology to scale your success.",
-    icon: LineChart,
-    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80",
-    accent: "emerald",
+    icon: HiOutlineMegaphone,
+    iconBg: "bg-gradient-to-br from-sky-500 to-blue-600",
+    title: "Advertising without branding",
+    desc: "is expense.",
+    art: (
+      <div className="w-full h-full flex items-center justify-end gap-1 pr-4">
+        <div className="flex items-end gap-1 h-16">
+          <div className="w-3 bg-blue-200 rounded-t h-6" />
+          <div className="w-3 bg-blue-400 rounded-t h-10" />
+          <div className="w-3 bg-blue-600 rounded-t h-16" />
+        </div>
+      </div>
+    ),
   },
 ];
 
-const accentClasses: Record<string, { chip: string; badge: string }> = {
-  blue: { chip: "bg-blue-600", badge: "bg-blue-600" },
-  violet: { chip: "bg-violet-600", badge: "bg-violet-600" },
-  orange: { chip: "bg-orange-500", badge: "bg-orange-500" },
-  emerald: { chip: "bg-emerald-500", badge: "bg-emerald-500" },
-};
-
-const planningItems = [
-  { icon: UsersRound, label: "Audience Research" },
-  { icon: MessageSquare, label: "Positioning & Messaging" },
-  { icon: Share2, label: "Channel Strategy" },
-  { icon: FileText, label: "Content Planning" },
-  { icon: Send, label: "Campaign Execution" },
-  { icon: PieChart, label: "Analytics & Optimization" },
+const steps = [
+  { icon: HiOutlineDocumentText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-indigo-500", text: "text-indigo-600" },
+  { icon: HiOutlineIdentification, title: "2. Identity", desc: "We craft a unique visual identity that represents your brand.", color: "from-blue-500 to-blue-600", text: "text-blue-600" },
+  { icon: HiOutlineDesktopComputer, title: "3. Website", desc: "We build strategic, high-performing websites that convert.", color: "from-sky-500 to-blue-500", text: "text-sky-600" },
+  { icon: HiOutlineMegaphone, title: "4. Marketing", desc: "We create consistent content and campaigns that engage.", color: "from-teal-400 to-cyan-500", text: "text-teal-600" },
+  { icon: HiOutlineCog, title: "5. Automation", desc: "We automate workflows to save time and increase efficiency.", color: "from-amber-400 to-orange-500", text: "text-amber-600" },
+  { icon: HiOutlineChartBar, title: "6. Growth", desc: "We analyze, optimize and scale for long-term, sustainable growth.", color: "from-green-500 to-emerald-500", text: "text-green-600" },
 ];
 
-const workSteps = [
-  { icon: UsersRound, title: "Understand", description: "We listen, research and align on your vision." },
-  { icon: Target, title: "Strategize", description: "We map the right plan for measurable results." },
-  { icon: PenLine, title: "Create", description: "We design and build experiences that connect." },
-  { icon: Play, title: "Implement", description: "We launch with precision and performance." },
-  { icon: Sliders, title: "Optimize", description: "We analyze, learn and grow together." },
-];
-
-const impactItems = [
-  { icon: Star, label: "Stronger Brands" },
-  { icon: CheckCircle2, label: "Better Engagement" },
-  { icon: BarChart3, label: "Sustainable Growth" },
-];
-
-export function CorePositioningSection() {
+export default function CorePositioning() {
   return (
-    <section className="border-b border-border bg-background" aria-labelledby="brand-framework-title">
-      <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-        {/* Header row: eyebrow/title/subtitle on the left, four pillars on the right */}
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-xl">
-            <p className="eyebrow">Brand Engineering Framework</p>
-            <h2 id="brand-framework-title" className="mt-3 text-3xl font-bold leading-tight text-foreground md:text-4xl">
-              Five stages. One <span className="bg-gradient-to-r from-primary to-neon-violet bg-clip-text text-transparent">blueprint.</span>
-            </h2>
-            <div className="mt-5 h-px w-16 rounded-full bg-gradient-to-r from-primary via-neon-violet to-neon-cyan" />
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              A proven framework that turns strategy into scalable brands and measurable growth.
-            </p>
-          </div>
+    <section className="w-full bg-[#F4F6FB] py-16 px-6 md:px-12 font-sans">
+      <div className="max-w-6xl mx-auto">
+        <p className="text-xs font-bold tracking-[0.2em] text-indigo-600 mb-4">
+          CORE POSITIONING
+        </p>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+          We don't sell services.
+          <br />
+          We build{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
+            business ecosystems.
+          </span>
+        </h2>
+        <div className="w-24 h-1 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400 mb-6" />
+        <p className="text-slate-500 text-base md:text-lg mb-12 max-w-xl">
+          Isolated solutions create gaps.
+          <br />
+          Connected strategy creates growth.
+        </p>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-4 lg:w-auto lg:shrink-0">
-            {pillars.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex shrink-0 rounded-lg bg-primary/10 p-2 text-primary">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block font-display text-sm font-semibold text-foreground">{title}</span>
-                  <span className="block text-sm text-muted-foreground">{description}</span>
-                </span>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          {cards.map((c, i) => (
+            <div
+              key={i}
+              className="rounded-2xl bg-white shadow-sm overflow-hidden flex flex-col"
+            >
+              <div className="h-36 bg-gradient-to-br from-indigo-50 to-blue-100 relative">
+                {c.art}
+                <div
+                  className={`absolute -bottom-5 left-5 w-11 h-11 rounded-full ${c.iconBg} flex items-center justify-center shadow-md border-4 border-white`}
+                >
+                  <c.icon className="text-white text-lg" />
+                </div>
               </div>
+              <div className="pt-8 pb-5 px-5">
+                <h3 className="font-bold text-slate-900 text-[15px] leading-snug">
+                  {c.title}
+                </h3>
+                <p className="text-slate-500 text-sm mt-1">{c.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Banner */}
+        <div className="rounded-2xl bg-white shadow-sm px-6 py-5 flex items-center gap-4 mb-10">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center shrink-0">
+            <HiCheck className="text-white text-lg" />
+          </div>
+          <p className="text-slate-700 text-[15px] md:text-base">
+            At GeneRays, every service connects together to create{" "}
+            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
+              one powerful business ecosystem.
+            </span>
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="rounded-2xl bg-white shadow-sm px-6 py-10">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-2">
+            {steps.map((s, i) => (
+              <React.Fragment key={i}>
+                <div className="flex md:flex-col items-center md:items-center gap-4 md:gap-3 text-center md:w-32">
+                  <div
+                    className={`w-14 h-14 shrink-0 rounded-full bg-gradient-to-br ${s.color} flex items-center justify-center shadow-md`}
+                  >
+                    <s.icon className="text-white text-2xl" />
+                  </div>
+                  <div className="text-left md:text-center">
+                    <h4 className={`font-bold text-sm ${s.text}`}>{s.title}</h4>
+                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">
+                      {s.desc}
+                    </p>
+                  </div>
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="hidden md:flex items-center flex-1 pt-7">
+                    <div className="w-full h-px bg-slate-200 relative">
+                      <div className="absolute left-1/2 -translate-x-1/2 -top-1 w-2 h-2 rounded-full bg-slate-300" />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
-
-        {/* Five-stage timeline */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {stages.map(({ number, name, subtitle, description, icon: Icon, image, accent }) => {
-            const { chip, badge } = accentClasses[accent];
-            return (
-              <div key={number} className="rounded-2xl border border-border bg-card p-4 transition-shadow duration-300 hover:shadow-[var(--shadow-glow)]">
-                <div className="flex items-center gap-2.5">
-                  <span className={`inline-flex h-8 w-8 items-center justify-center rounded-lg font-display text-sm font-bold text-white ${chip}`}>
-                    {number}
-                  </span>
-                  <span>
-                    <span className="block font-display text-sm font-bold uppercase tracking-wide text-foreground">{name}</span>
-                    <span className="block text-xs text-muted-foreground">{subtitle}</span>
-                  </span>
-                </div>
-
-                <div className="relative mt-4 overflow-hidden rounded-xl">
-                  <img
-                    src={image}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                  <span className={`absolute -bottom-3 left-3 inline-flex h-9 w-9 items-center justify-center rounded-full text-white shadow-md ${badge}`}>
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </div>
-
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{description}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Digital marketing planning strip */}
-        <div className="mt-12 flex flex-col gap-6 rounded-2xl border border-border bg-primary-soft p-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-4">
-            <span className="inline-flex shrink-0 rounded-xl bg-primary p-3 text-primary-foreground">
-              <Target className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span>
-              <span className="block font-display text-base font-bold text-foreground">Digital Marketing Planning</span>
-              <span className="block text-sm text-muted-foreground">Strategic roadmap to attract, engage and convert the right audience.</span>
-            </span>
-          </div>
-
-          <div className="flex flex-wrap gap-x-6 gap-y-4">
-            {planningItems.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2.5">
-                <span className="inline-flex rounded-lg bg-background p-2 text-primary">
-                  <Icon className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="text-sm font-medium text-foreground">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* How we work + Built for impact */}
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
-          <div className="rounded-2xl border border-border bg-card p-8">
-            <h3 className="text-center font-display text-lg font-bold text-foreground">How We Work</h3>
-            <div className="mt-6 grid gap-8 sm:grid-cols-3 lg:grid-cols-5">
-              {workSteps.map(({ icon: Icon, title, description }) => (
-                <div key={title} className="text-center">
-                  <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </span>
-                  <p className="mt-4 font-display text-sm font-bold text-foreground">{title}</p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{description}</p>
+      </div>
+    </section>
+  );
+}
+-relaxed text-muted-foreground">{description}</p>
                 </div>
               ))}
             </div>
