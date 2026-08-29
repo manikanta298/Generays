@@ -18,13 +18,13 @@ const cards = [
     title: "A logo without identity",
     desc: "is decoration.",
     art: (
-      <div className="relative w-full h-full flex items-center justify-center">
-        <div className="w-40 h-28 bg-gradient-to-br from-slate-900 to-blue-950 rounded-md shadow-lg absolute rotate-[-8deg] translate-x-3" />
-        <div className="w-44 h-28 bg-white rounded-md shadow-xl flex items-center justify-center gap-2 relative z-10">
-          <div className="w-7 h-7 rounded bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">◆</div>
+      <div className="relative flex h-full w-full items-center justify-center">
+        <div className="absolute h-28 w-40 translate-x-3 rotate-[-8deg] rounded-md bg-gradient-to-br from-slate-900 to-blue-950 shadow-lg" />
+        <div className="relative z-10 flex h-28 w-44 items-center justify-center gap-2 rounded-md bg-white shadow-xl">
+          <div className="flex h-7 w-7 items-center justify-center rounded bg-blue-600 text-[10px] font-bold text-white">◆</div>
           <div className="text-left">
-            <div className="text-[10px] font-bold text-slate-800 leading-tight">YOUR</div>
-            <div className="text-[10px] font-bold text-slate-800 leading-tight">LOGO</div>
+            <div className="text-[10px] font-bold leading-tight text-slate-800">YOUR</div>
+            <div className="text-[10px] font-bold leading-tight text-slate-800">LOGO</div>
           </div>
         </div>
       </div>
@@ -36,19 +36,19 @@ const cards = [
     title: "A website without strategy",
     desc: "is a brochure.",
     art: (
-      <div className="w-full h-full flex items-center justify-center p-3">
-        <div className="w-full bg-white rounded-md shadow-lg p-2 border border-slate-100">
-          <div className="flex items-center justify-between text-[8px] text-slate-400 font-medium mb-2 px-1">
-            <span className="text-blue-600 font-bold">Logo</span>
+      <div className="flex h-full w-full items-center justify-center p-3">
+        <div className="w-full rounded-md border border-slate-100 bg-white p-2 shadow-lg">
+          <div className="mb-2 flex items-center justify-between px-1 text-[8px] font-medium text-slate-400">
+            <span className="font-bold text-blue-600">Logo</span>
             <span className="flex gap-2">
               <span>Home</span><span>About</span><span>Services</span><span>Contact</span>
             </span>
           </div>
           <div className="flex gap-2">
-            <div className="w-1/2 h-12 bg-blue-100 rounded flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full bg-blue-300" />
+            <div className="flex h-12 w-1/2 items-center justify-center rounded bg-blue-100">
+              <div className="h-4 w-4 rounded-full bg-blue-300" />
             </div>
-            <div className="w-1/2 h-12 bg-indigo-100 rounded" />
+            <div className="h-12 w-1/2 rounded bg-indigo-100" />
           </div>
         </div>
       </div>
@@ -60,12 +60,12 @@ const cards = [
     title: "Social media without consistency",
     desc: "is noise.",
     art: (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="w-24 h-40 bg-slate-900 rounded-2xl p-1.5 shadow-xl">
-          <div className="w-full h-full bg-white rounded-xl overflow-hidden relative">
-            <div className="h-8 bg-slate-100 flex items-center gap-1 px-1.5">
-              <div className="w-3 h-3 rounded-full bg-blue-400" />
-              <div className="w-6 h-1.5 bg-slate-300 rounded" />
+      <div className="flex h-full w-full items-center justify-center">
+        <div className="h-40 w-24 rounded-2xl bg-slate-900 p-1.5 shadow-xl">
+          <div className="relative h-full w-full overflow-hidden rounded-xl bg-white">
+            <div className="flex h-8 items-center gap-1 bg-slate-100 px-1.5">
+              <div className="h-3 w-3 rounded-full bg-blue-400" />
+              <div className="h-1.5 w-6 rounded bg-slate-300" />
             </div>
             <div className="h-16 bg-slate-700" />
           </div>
@@ -79,11 +79,11 @@ const cards = [
     title: "Advertising without branding",
     desc: "is expense.",
     art: (
-      <div className="w-full h-full flex items-center justify-end gap-1 pr-4">
-        <div className="flex items-end gap-1 h-16">
-          <div className="w-3 bg-blue-200 rounded-t h-6" />
-          <div className="w-3 bg-blue-400 rounded-t h-10" />
-          <div className="w-3 bg-blue-600 rounded-t h-16" />
+      <div className="flex h-full w-full items-end justify-end gap-1 pr-4">
+        <div className="flex h-16 items-end gap-1">
+          <div className="h-6 w-3 rounded-t bg-blue-200" />
+          <div className="h-10 w-3 rounded-t bg-blue-400" />
+          <div className="h-16 w-3 rounded-t bg-blue-600" />
         </div>
       </div>
     ),
@@ -101,83 +101,67 @@ const steps = [
 
 export function CorePositioningSection() {
   return (
-    <section className="w-full bg-[#F4F6FB] py-16 px-6 md:px-12 font-sans">
-      <div className="max-w-6xl mx-auto">
-        <p className="text-xs font-bold tracking-[0.2em] text-indigo-600 mb-4">
-          CORE POSITIONING
-        </p>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+    <section className="w-full bg-[#F4F6FB] py-14 font-sans sm:py-16 lg:py-20">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="mb-4 text-xs font-bold tracking-[0.2em] text-indigo-600">CORE POSITIONING</p>
+        <h2 className="mb-6 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl md:text-5xl">
           We don't sell services.
           <br />
           We build{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
-            business ecosystems.
-          </span>
+          <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">business ecosystems.</span>
         </h2>
-        <div className="w-24 h-1 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400 mb-6" />
-        <p className="text-slate-500 text-base md:text-lg mb-12 max-w-xl">
+        <div className="mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400" />
+        <p className="mb-10 max-w-xl text-base text-slate-500 sm:mb-12 md:text-lg">
           Isolated solutions create gaps.
           <br />
           Connected strategy creates growth.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {cards.map((c, i) => (
-            <div
-              key={i}
-              className="rounded-2xl bg-white shadow-sm overflow-hidden flex flex-col"
-            >
-              <div className="h-36 bg-gradient-to-br from-indigo-50 to-blue-100 relative">
+            <div key={i} className="flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="relative h-36 shrink-0 bg-gradient-to-br from-indigo-50 to-blue-100 sm:h-40">
                 {c.art}
-                <div
-                  className={`absolute -bottom-5 left-5 w-11 h-11 rounded-full ${c.iconBg} flex items-center justify-center shadow-md border-4 border-white`}
-                >
-                  <c.icon className="text-white text-lg" />
+                <div className={`absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-full border-4 border-white ${c.iconBg} shadow-md`}>
+                  <c.icon className="text-lg text-white" />
                 </div>
               </div>
-              <div className="pt-8 pb-5 px-5">
-                <h3 className="font-bold text-slate-900 text-[15px] leading-snug">
-                  {c.title}
-                </h3>
-                <p className="text-slate-500 text-sm mt-1">{c.desc}</p>
+              <div className="px-5 pb-5 pt-8">
+                <h3 className="text-[15px] font-bold leading-snug text-slate-900">{c.title}</h3>
+                <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="rounded-2xl bg-white shadow-sm px-6 py-5 flex items-center gap-4 mb-10">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center shrink-0">
-            <Check className="text-white text-lg" />
+        <div className="mb-10 flex items-start gap-3 rounded-2xl bg-white px-4 py-5 shadow-sm sm:items-center sm:gap-4 sm:px-6">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-blue-500">
+            <Check className="text-lg text-white" />
           </div>
-          <p className="text-slate-700 text-[15px] md:text-base">
+          <p className="text-sm leading-relaxed text-slate-700 sm:text-[15px] md:text-base">
             At GeneRays, every service connects together to create{" "}
-            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
-              one powerful business ecosystem.
-            </span>
+            <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text font-semibold text-transparent">one powerful business ecosystem.</span>
           </p>
         </div>
 
-        <div className="rounded-2xl bg-white shadow-sm px-6 py-10">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-2">
+        <div className="rounded-2xl bg-white px-4 py-8 shadow-sm sm:px-6 sm:py-10">
+          <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-2">
+            <div className="absolute bottom-8 left-7 top-8 w-px bg-slate-200 md:hidden" aria-hidden="true" />
             {steps.map((s, i) => (
               <React.Fragment key={i}>
-                <div className="flex md:flex-col items-center md:items-center gap-4 md:gap-3 text-center md:w-32">
-                  <div
-                    className={`w-14 h-14 shrink-0 rounded-full bg-gradient-to-br ${s.color} flex items-center justify-center shadow-md`}
-                  >
-                    <s.icon className="text-white text-2xl" />
+                <div className="relative z-10 flex min-w-0 items-start gap-4 md:w-32 md:flex-col md:items-center md:gap-3">
+                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${s.color} shadow-md`}>
+                    <s.icon className="text-2xl text-white" />
                   </div>
-                  <div className="text-left md:text-center">
+                  <div className="min-w-0 text-left md:text-center">
                     <h4 className={`font-bold text-sm ${s.text}`}>{s.title}</h4>
-                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                      {s.desc}
-                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-slate-500">{s.desc}</p>
                   </div>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="hidden md:flex items-center flex-1 pt-7">
-                    <div className="w-full h-px bg-slate-200 relative">
-                      <div className="absolute left-1/2 -translate-x-1/2 -top-1 w-2 h-2 rounded-full bg-slate-300" />
+                  <div className="hidden flex-1 items-center pt-7 md:flex">
+                    <div className="relative h-px w-full bg-slate-200">
+                      <div className="absolute left-1/2 -top-1 h-2 w-2 -translate-x-1/2 rounded-full bg-slate-300" />
                     </div>
                   </div>
                 )}
