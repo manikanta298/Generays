@@ -22,7 +22,7 @@ export function GallerySection() {
             borderRadius={0.04}
             scrollSpeed={1.8}
             scrollEase={0.06}
-            autoRotateSpeed={0.18}
+            autoRotateSpeed={0.22}
             fontUrl="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"
             font="600 26px Space Grotesk"
           />
