@@ -5,7 +5,7 @@ type GL = Renderer["gl"];
 
 type CircularGalleryItem = {
   image: string;
-  // text: string;
+  text: string;
 };
 
 export interface CircularGalleryProps {
