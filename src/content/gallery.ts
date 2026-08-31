@@ -8,7 +8,7 @@ import rrPropertiesRamNavami from '@/assets/gallery-rr-properties-ram-navami.jpg
 export type GalleryImage = {
   src: string;
   alt: string;
-  text: string;
+  
 };
 
 export const galleryImages: GalleryImage[] = [
