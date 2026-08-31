@@ -85,4 +85,55 @@ export function SiteHeader() {
       )}
     </header>
   );
+}              className="whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            to="/contact"
+            className="hidden min-h-10 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:inline-flex"
+          >
+            Build My Brand
+          </Link>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:hidden"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="border-t border-border/60 bg-background/95 backdrop-blur-xl lg:hidden">
+          <nav className="mx-auto flex w-full max-w-7xl flex-col px-4 py-3 sm:px-6" aria-label="Mobile navigation">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setOpen(false)}
+                className="flex min-h-12 items-center border-b border-border/60 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary last:border-0"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="mt-3 flex min-h-11 items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:opacity-90"
+            >
+              Build My Brand
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
 }
