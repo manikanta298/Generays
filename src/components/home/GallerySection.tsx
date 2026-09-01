@@ -27,10 +27,6 @@ export function GallerySection() {
             font="600 26px Space Grotesk"
           />
         </div>
-
-        <p className="mt-1 text-center text-xs uppercase tracking-[0.16em] text-muted-foreground">
-          Auto-rotating · Drag or scroll to explore
-        </p>
       </div>
     </section>
   );
