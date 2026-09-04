@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 type GL = Renderer["gl"];
 
@@ -11,10 +11,7 @@ type CircularGalleryItem = {
 export interface CircularGalleryProps {
   items?: CircularGalleryItem[];
   bend?: number;
-  textColor?: string;
   borderRadius?: number;
-  font?: string;
-  fontUrl?: string;
   scrollSpeed?: number;
   scrollEase?: number;
   autoRotateSpeed?: number;
@@ -82,9 +79,7 @@ class Media {
   private viewport!: Viewport;
   private bend!: number;
   private text!: string;
-  private textColor!: string;
   private borderRadius!: number;
-  private font!: string;
   private index!: number;
   private count!: number;
   private x = 0;
@@ -101,9 +96,7 @@ class Media {
     gl: GL;
     image: string;
     text: string;
-    textColor: string;
     borderRadius: number;
-    font: string;
     scene: Transform;
     screen: ScreenSize;
     viewport: Viewport;
@@ -116,7 +109,6 @@ class Media {
     Object.assign(this, args);
     this.createShader();
     this.createMesh();
-    this.createLabel();
     this.onResize();
   }
 
@@ -222,51 +214,6 @@ class Media {
     this.plane.setParent(this.scene);
   }
 
-  private createLabel() {
-    const { texture, width, height } = createTextTexture(
-      this.gl,
-      this.text,
-      this.font || "bold 26px Inter, system-ui, sans-serif",
-      this.textColor,
-      this.labelCache
-    );
-
-    const geometry = new Plane(this.gl);
-    const program = new Program(this.gl, {
-      transparent: true,
-      depthTest: false,
-      depthWrite: false,
-      vertex: `
-        attribute vec3 position;
-        attribute vec2 uv;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragment: `
-        precision highp float;
-        uniform sampler2D tMap;
-        varying vec2 vUv;
-        void main() {
-          vec4 color = texture2D(tMap, vUv);
-          if (color.a < 0.05) discard;
-          gl_FragColor = color;
-        }
-      `,
-      uniforms: { tMap: { value: texture } },
-    });
-
-    const mesh = new Mesh(this.gl, { geometry, program });
-    const aspect = width / height;
-    const textHeight = this.plane.scale.y * 0.13;
-    mesh.scale.set(textHeight * aspect, textHeight, 1);
-    mesh.position.y = -this.plane.scale.y * 0.58;
-    mesh.setParent(this.plane);
-  }
 
   getHitDistance(clientX: number, clientY: number, rect: DOMRect) {
     const worldX = ((clientX - rect.left) / this.screen.width - 0.5) * this.viewport.width;
@@ -304,7 +251,7 @@ class Media {
     }
 
     const speed = scroll.current - scroll.last;
-    this.program.uniforms.uTime.value += deltaSeconds * 1.8;
+    this.program.uniforms.uTime.value += deltaSeconds * 1.2;
     this.program.uniforms.uSpeed.value = speed;
 
     const halfPlane = this.plane.scale.x / 2;
@@ -373,7 +320,7 @@ class CircularGalleryApp {
       scrollEase,
       autoRotateSpeed,
       onSelect,
-    }: Required<Pick<CircularGalleryProps, "bend" | "textColor" | "borderRadius" | "font" | "scrollSpeed" | "scrollEase" | "autoRotateSpeed">> & {
+    }: Required<Pick<CircularGalleryProps, "bend" | "borderRadius" | "scrollSpeed" | "scrollEase" | "autoRotateSpeed">> & {
       items: CircularGalleryItem[];
       onSelect?: (item: CircularGalleryItem) => void;
     }
@@ -400,8 +347,8 @@ class CircularGalleryApp {
 
     this.scene = new Transform();
     this.geometry = new Plane(this.gl, {
-      widthSegments: 80,
-      heightSegments: 40,
+      widthSegments: 48,
+      heightSegments: 24,
     });
 
     const galleryItems = [...items, ...items];
@@ -411,7 +358,6 @@ class CircularGalleryApp {
     // in-flight image request and the same rasterized label texture
     // instead of paying the fetch/decode/canvas cost twice per item.
     const imageLoader: ImageLoader = new Map();
-    const labelCache = new Map<string, TextTexture>();
 
     this.updateSize();
 
@@ -422,9 +368,7 @@ class CircularGalleryApp {
           gl: this.gl,
           image: item.image,
           text: item.text,
-          textColor,
           borderRadius,
-          font,
           scene: this.scene,
           screen: this.screen,
           viewport: this.viewport,
@@ -432,7 +376,6 @@ class CircularGalleryApp {
           index,
           count: galleryItems.length,
           imageLoader,
-          labelCache,
         })
     );
 
@@ -598,31 +541,6 @@ function resolveFontSize(font: string) {
   return match ? Number(match[1]) : 30;
 }
 
-async function prepareFont(font: string, fontUrl?: string) {
-  if (!fontUrl || !document.fonts?.load) return;
-
-  try {
-    if (fontUrl.includes("fonts.googleapis.com")) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = fontUrl;
-      document.head.appendChild(link);
-
-      const family = (font.match(/px\s+(.+)$/)?.[1] || "").replace(/["']/g, "");
-      if (family) {
-        await document.fonts.load(`bold ${resolveFontSize(font)}px "${family}"`);
-      }
-    } else {
-      const family = `CircularGalleryFont-${Math.random().toString(36).slice(2, 7)}`;
-      const face = new FontFace(family, `url(${fontUrl})`);
-      await face.load();
-      document.fonts.add(face);
-    }
-  } catch (error) {
-    console.warn("CircularGallery: font preload failed; using fallback.", error);
-  }
-}
-
 // A URL -> in-flight/finished decode promise. Shared by every Media
 // instance so the 7 unique images used by the (doubled, for looping)
 // gallery items are each fetched and decoded exactly once, no matter how
@@ -656,18 +574,14 @@ function loadImage(url: string): Promise<HTMLImageElement | null> {
 export default function CircularGallery({
   items = DEFAULT_ITEMS,
   bend = 3,
-  textColor = "#ffffff",
   borderRadius = 0.05,
-  font = "bold 30px Figtree",
-  fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05,
-  autoRotateSpeed = 3.25,
+  autoRotateSpeed = 4.8,
   onSelect,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onSelectRef = useRef(onSelect);
-  const [selectedItem, setSelectedItem] = useState<CircularGalleryItem | null>(null);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
@@ -704,7 +618,6 @@ export default function CircularGallery({
       // its own image finishes loading (see Media/loadImageOnce). This
       // is what actually fixes the "everything blocks, then pops in
       // already spinning" lag: there's no barrier before first paint.
-      await prepareFont(font, fontUrl);
       if (cancelled || !containerRef.current) return;
 
       try {
@@ -733,7 +646,7 @@ export default function CircularGallery({
       cancelled = true;
       app?.destroy();
     };
-  }, [safeItems, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoRotateSpeed]);
+  }, [safeItems, bend, borderRadius, scrollSpeed, scrollEase, autoRotateSpeed]);
 
   return (
     <>
@@ -746,83 +659,6 @@ export default function CircularGallery({
         style={{ touchAction: "pan-y", contain: "layout paint" }}
       />
 
-      {selectedItem && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${selectedItem.text} image preview`}
-          onClick={() => setSelectedItem(null)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "24px",
-            background: "rgba(0, 0, 0, 0.78)",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          <div
-            onClick={(event) => event.stopPropagation()}
-            style={{
-              position: "relative",
-              width: "min(92vw, 1100px)",
-              maxHeight: "92vh",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "14px",
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedItem(null)}
-              aria-label="Close image preview"
-              style={{
-                position: "absolute",
-                top: "-12px",
-                right: "-12px",
-                width: "42px",
-                height: "42px",
-                border: "1px solid rgba(255,255,255,.35)",
-                borderRadius: "999px",
-                background: "rgba(15,23,42,.9)",
-                color: "#fff",
-                fontSize: "24px",
-                lineHeight: 1,
-                cursor: "pointer",
-                zIndex: 2,
-              }}
-            >
-              ×
-            </button>
-
-            <img
-              src={selectedItem.image}
-              alt={selectedItem.text}
-              style={{
-                display: "block",
-                width: "100%",
-                maxHeight: "78vh",
-                objectFit: "contain",
-                borderRadius: "12px",
-              }}
-            />
-            <div
-              style={{
-                color: "#fff",
-                fontSize: "16px",
-                fontWeight: 600,
-                textAlign: "center",
-              }}
-            >
-              {selectedItem.text}
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
