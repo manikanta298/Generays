@@ -297,6 +297,7 @@ class CircularGalleryApp {
   private scrollSpeed: number;
   private scrollEase: number;
   private autoRotateSpeed: number;
+  private imageLoader: ImageLoader;
   private raf = 0;
   private pointerDown = false;
   private suppressNextClick = false;
@@ -332,7 +333,7 @@ class CircularGalleryApp {
     this.renderer = new Renderer({
       alpha: true,
       antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
     });
     this.gl = this.renderer.gl;
     this.gl.clearColor(0, 0, 0, 0);
@@ -355,6 +356,7 @@ class CircularGalleryApp {
     // in-flight image request and the same rasterized label texture
     // instead of paying the fetch/decode/canvas cost twice per item.
     const imageLoader: ImageLoader = new Map();
+    this.imageLoader = imageLoader;
 
     this.updateSize();
 
