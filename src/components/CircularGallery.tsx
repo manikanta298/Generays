@@ -574,7 +574,7 @@ export default function CircularGallery({
   borderRadius = 0.05,
   scrollSpeed = 2,
   scrollEase = 0.05,
-  autoRotateSpeed = 4.8,
+  autoRotateSpeed = 1.35,
   onSelect,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -599,27 +599,17 @@ export default function CircularGallery({
     let cancelled = false;
 
     const start = async () => {
-      // Only wait on the font (fast, local-ish) so labels measure/render
-      // correctly from frame one. Images are intentionally NOT awaited
-      // here — the gallery mounts and starts rotating immediately with
-      // transparent placeholders, and each tile's texture swaps in as
-      // its own image finishes loading (see Media/loadImageOnce). This
-      // is what actually fixes the "everything blocks, then pops in
-      // already spinning" lag: there's no barrier before first paint.
       if (cancelled || !containerRef.current) return;
 
       try {
         app = new CircularGalleryApp(container, {
           items: safeItems,
           bend,
-          textColor,
           borderRadius,
-          font,
           scrollSpeed,
           scrollEase,
           autoRotateSpeed,
           onSelect: (item) => {
-            setSelectedItem(item);
             onSelectRef.current?.(item);
           },
         });
