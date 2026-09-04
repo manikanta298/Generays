@@ -89,7 +89,6 @@ class Media {
   private plane!: Mesh;
   private program!: Program;
   private imageLoader?: ImageLoader;
-  private labelCache?: Map<string, TextTexture>;
 
   constructor(args: {
     geometry: Plane;
@@ -313,9 +312,7 @@ class CircularGalleryApp {
     {
       items,
       bend,
-      textColor,
       borderRadius,
-      font,
       scrollSpeed,
       scrollEase,
       autoRotateSpeed,
