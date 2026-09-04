@@ -587,16 +587,7 @@ export default function CircularGallery({
     onSelectRef.current = onSelect;
   }, [onSelect]);
 
-  useEffect(() => {
-    if (!selectedItem) return;
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedItem(null);
-    };
-
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [selectedItem]);
 
   const safeItems = useMemo(
     () => (items.length ? items : DEFAULT_ITEMS),
