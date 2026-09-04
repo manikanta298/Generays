@@ -179,7 +179,7 @@ export function FrameworkSection() {
                     decoding="async"
                     className="aspect-[4/3] w-full object-cover"
                   />
-                  <span className={`absolute -bottom-3 left-3 inline-flex h-9 w-9 m-20 items-center justify-center rounded-full text-white shadow-md ${badge}`}>
+                  <span className={`absolute -bottom-3 left-3 inline-flex h-9 w-9 m-5 items-center justify-center rounded-full text-white shadow-md ${badge}`}>
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                 </div>
