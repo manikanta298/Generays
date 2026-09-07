@@ -630,3 +630,86 @@ button, input, textarea, select { font: inherit; }
   transition: none !important;
   scroll-behavior: auto !important;
 }
+
+
+/* ---------- Home page motion + compact section rhythm ---------- */
+
+.home-page {
+  --home-section-space: clamp(3rem, 5vw, 4.75rem);
+  overflow: clip;
+}
+
+.home-page > section {
+  margin-block: 0 !important;
+}
+
+/* Keep the hero composition intact while making the rest of the page use one compact rhythm. */
+.home-page > section:not(:has(.home-hero__container)) > div:not(.blueprint-grid) {
+  padding-block: var(--home-section-space) !important;
+}
+
+.home-page > section > .service-bento .service-bento__inner {
+  padding-block: var(--home-section-space) !important;
+}
+
+.home-page > section .home-transform__inner {
+  padding-block: var(--home-section-space) !important;
+}
+
+/* Every section assembles gently as it enters the viewport. */
+.home-page .home-reveal-section {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--home-reveal-index, 0) * 35ms);
+  will-change: opacity, transform;
+}
+
+.home-page .home-reveal-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Text elements reveal in a short stagger, without affecting document layout. */
+.home-page .home-reveal-text {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 560ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--home-text-index, 0) * 45ms);
+  will-change: opacity, transform;
+}
+
+.home-page .home-reveal-text.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Don't animate the same text twice through nested section/text observers. */
+.home-page .home-reveal-section.is-visible .home-reveal-text {
+  transition-delay: calc(var(--home-text-index, 0) * 35ms);
+}
+
+@media (max-width: 760px) {
+  .home-page {
+    --home-section-space: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    --home-section-space: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-reveal-section,
+  .home-page .home-reveal-text {
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
+}
