@@ -624,13 +624,6 @@ button, input, textarea, select { font: inherit; }
   }
 }
 
-/* Static UI: disable all CSS motion and transitions except the requested technology marquee. */
-*:not(.tech-marquee__track), *:not(.tech-marquee__track)::before, *:not(.tech-marquee__track)::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
 
 /* ---------- Home page motion + compact section rhythm ---------- */
 
