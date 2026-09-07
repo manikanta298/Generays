@@ -56,29 +56,7 @@ export function HomeHero() {
             src={heroImage}
             alt="Generays growth strategy"
           />
-        </div>          <div className="hero-card hero-card--growth">
-            <span className="hero-card__icon"><BarChart3 aria-hidden="true" /></span>
-            <div>
-              <strong>Growth Focused</strong>
-              <p>We build strategies that drive real growth.</p>
-            </div>
-          </div>
-
-          <div className="hero-card hero-card--creative">
-            <span className="hero-card__icon"><Lightbulb aria-hidden="true" /></span>
-            <div>
-              <strong>Creative &amp; Bold</strong>
-              <p>Ideas that are unique, impactful &amp; memorable.</p>
-            </div>
-          </div>
-
-          <div className="hero-card hero-card--data">
-            <span className="hero-card__icon"><PieChart aria-hidden="true" /></span>
-            <div>
-              <strong>Data Driven</strong>
-              <p>Smart decisions backed by data and analytics.</p>
-            </div>
-          </div>
+        </div>         
 
           <Sparkles className="hero-spark" aria-hidden="true" />
         </div>
