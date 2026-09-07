@@ -42,6 +42,7 @@ export function HomeHero() {
             className="home-hero__image"
             src={heroImage}
             alt="Digital growth strategy illustration"  />
+           </div>
         </div>
       </div>
     </section>
