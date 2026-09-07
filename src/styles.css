@@ -418,33 +418,32 @@
   opacity: 1;
 }
 
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: 180px;
-  gap: 12px;
+.gallery-carousel {
+  width: 100%;
+  overflow: hidden;
+  perspective: 1200px;
 }
 
-.gallery-tile {
+.gallery-carousel__track {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+  animation: gallery-carousel-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.gallery-carousel__tile {
   position: relative;
+  flex: 0 0 clamp(250px, 34vw, 420px);
+  height: clamp(220px, 32vw, 360px);
   overflow: hidden;
-  min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   background: var(--color-card);
-}
-
-.gallery-tile--feature {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
- .gallery-tile {
   perspective: 1000px;
-  transform-style: preserve-3d;
 }
 
-.gallery-tile img {
+.gallery-carousel__tile img {
   display: block;
   width: 100%;
   height: 100%;
@@ -456,12 +455,11 @@
   will-change: transform;
 }
 
-.gallery-tile:hover img,
-.gallery-tile:focus-within img {
-  transform: perspective(1000px) rotateX(3deg) rotateY(-6deg) translateZ(12px);
+.gallery-carousel__tile:hover img {
+  transform: perspective(1000px) rotateX(3deg) rotateY(-6deg) translateZ(14px);
 }
 
-.gallery-tile::after {
+.gallery-carousel__tile::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -469,7 +467,7 @@
   pointer-events: none;
 }
 
-.gallery-tile figcaption {
+.gallery-carousel__tile figcaption {
   position: absolute;
   right: 14px;
   bottom: 12px;
@@ -483,27 +481,31 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 900px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 190px;
+@keyframes gallery-carousel-scroll {
+  from {
+    transform: translateX(0);
   }
+  to {
+    transform: translateX(calc(-50% - 9px));
+  }
+}
 
-  .gallery-tile--feature {
-    grid-column: span 2;
-    grid-row: span 2;
+@media (prefers-reduced-motion: reduce) {
+  .gallery-carousel__track {
+    animation: none;
+    transform: none;
   }
 }
 
 @media (max-width: 640px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 210px;
+  .gallery-carousel__track {
+    gap: 12px;
   }
 
-  .gallery-tile--feature {
-    grid-column: auto;
-    grid-row: span 1;
+  .gallery-carousel__tile {
+    flex-basis: 82vw;
+    height: 58vw;
+    max-height: 320px;
   }
 }
 
