@@ -197,7 +197,7 @@
   display: block;
   width: min(100%, 690px);
   height: auto;
-  max-height: 650px;
+  max-height: 500px;
   object-fit: contain;
   object-position: center;
 }
