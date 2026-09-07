@@ -10,7 +10,7 @@
   width: min(100% - 64px, 1280px);
   min-height: clamp(600px, 48vw, 720px);
   margin: 0 auto;
-  padding: 56px 0 64px;
+  padding: 0px 0 0px;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(480px, 1.08fr);
   align-items: center;
