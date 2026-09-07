@@ -518,8 +518,114 @@ button, input, textarea, select { font: inherit; }
 :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
 
 
-/* Static UI: disable all CSS motion and transitions. */
-*, *::before, *::after {
+
+
+/* ---------- Technology icon infinite marquee ---------- */
+
+.tech-marquee {
+  --tech-marquee-gap: 18px;
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tech-marquee__viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+}
+
+.tech-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: var(--tech-marquee-gap);
+  will-change: transform;
+  animation-duration: 24s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.tech-marquee__track--left {
+  animation-name: tech-marquee-left;
+}
+
+.tech-marquee__track--right {
+  animation-name: tech-marquee-right;
+}
+
+.tech-marquee__badge {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-card);
+  color: var(--color-foreground);
+  box-shadow: 0 8px 24px -18px color-mix(in oklab, var(--color-primary) 45%, transparent);
+}
+
+@keyframes tech-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - (var(--tech-marquee-gap) / 2)));
+  }
+}
+
+@keyframes tech-marquee-right {
+  from {
+    transform: translateX(calc(-50% - (var(--tech-marquee-gap) / 2)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-marquee {
+    --tech-marquee-gap: 12px;
+    gap: 12px;
+  }
+
+  .tech-marquee__badge {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    border-radius: 14px;
+  }
+
+  .tech-marquee__track {
+    animation-duration: 20s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee__track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Static UI: disable all CSS motion and transitions except the requested technology marquee. */
+*:not(.tech-marquee__track), *:not(.tech-marquee__track)::before, *:not(.tech-marquee__track)::after {
   animation: none !important;
   transition: none !important;
   scroll-behavior: auto !important;
