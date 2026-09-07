@@ -14,32 +14,32 @@ export type GalleryImage = {
 export const galleryImages: GalleryImage[] = [
   {
     src: ravisSolarEngineers,
-    
     alt: 'Solar EV charging campaign poster for Ravi Solar Engineers, Kakinada',
+    text: 'Ravi Solar Engineers',
   },
   {
     src: helloKakinadaLaunch,
- 
     alt: 'Brand campaign poster for HelloKakinada.in local business platform',
+    text: 'HelloKakinada Launch',
   },
   {
     src: vamsiChestHospital,
-   
     alt: 'Asthma awareness campaign poster for Vamsi Chest & Multi Speciality Hospital',
+    text: 'Vamsi Chest Hospital',
   },
   {
     src: rrPropertiesUgadi,
-   
     alt: 'Ugadi festival greeting campaign poster for RR Properties',
+    text: 'RR Properties — Ugadi',
   },
   {
     src: rrPropertiesRamNavami,
-   
     alt: 'Ram Navami festival greeting campaign poster for RR Properties',
+    text: 'RR Properties — Ram Navami',
   },
   {
     src: helloKakinadaAnniversary,
-   
     alt: 'One year anniversary campaign poster for HelloKakinada.in',
+    text: 'HelloKakinada Anniversary',
   },
 ];
