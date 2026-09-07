@@ -16,10 +16,10 @@
   min-height: 680px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(440px, 1.05fr);
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
   align-items: center;
-  gap: 30px;
-  padding: 64px 0 72px;
+  gap: 12px;
+  padding: 56px 0 64px;
 }
 
 .hero-copy {
@@ -177,8 +177,11 @@
 
 .hero-visual {
   position: relative;
+  width: 100%;
+  min-width: 0;
   min-height: 590px;
   isolation: isolate;
+  overflow: visible;
 }
 
 .hero-visual__ring {
@@ -233,7 +236,7 @@
 
 .hero-person {
   position: absolute;
-  width: 64%;
+  width: min(64%, 400px);
   max-width: 400px;
   height: 82%;
   left: 50%;
@@ -303,12 +306,12 @@
 
 .hero-card--growth {
   top: 70px;
-  left: 0;
+  left: clamp(0px, 2vw, 18px);
 }
 
 .hero-card--creative {
   top: 190px;
-  right: 0;
+  right: clamp(0px, 1vw, 10px);
 }
 
 .hero-card--data {
@@ -366,6 +369,8 @@
   .hero-container {
     width: min(100% - 28px, 430px);
     padding-top: 30px;
+    padding-bottom: 18px;
+    overflow: visible;
   }
 
   .hero-eyebrow {
@@ -410,8 +415,10 @@
   }
 
   .hero-visual {
-    min-height: 455px;
-    margin-top: 8px;
+    min-height: 430px;
+    height: 430px;
+    margin-top: 4px;
+    overflow: visible;
   }
 
   .hero-visual__ring--large {
@@ -427,8 +434,8 @@
   }
 
   .hero-person {
-    width: 70%;
-    height: 73%;
+    width: min(72%, 300px);
+    height: 74%;
     bottom: 2px;
   }
 
@@ -459,18 +466,18 @@
   }
 
   .hero-card--growth {
-    top: 40px;
-    left: -2px;
+    top: 36px;
+    left: 0;
   }
 
   .hero-card--creative {
-    top: 130px;
-    right: -2px;
+    top: 126px;
+    right: 0;
   }
 
   .hero-card--data {
     left: 0;
-    bottom: 14px;
+    bottom: 8px;
   }
 
   .hero-visual__slash {
