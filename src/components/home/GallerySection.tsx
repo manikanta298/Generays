@@ -5,7 +5,7 @@ import CircularGallery from "@/components/CircularGallery";
 export function GallerySection() {
   return (
     <section className="bg-background" aria-labelledby="visual-gallery-title">
-      <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+      <div className="mx-auto max-w-6xl">
         <div id="visual-gallery-title">
           <SectionHeading
             eyebrow="Visual gallery"
