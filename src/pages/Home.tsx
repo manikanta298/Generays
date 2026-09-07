@@ -7,8 +7,11 @@ import { WhyGeneRaysSection } from "@/components/home/WhyGeneRaysSection";
 import { TransformationSection } from "@/components/home/TransformationSection";
 import { GallerySection } from "@/components/home/GallerySection";
 import { FinalCallSection } from "@/components/home/FinalCallSection";
+import { useHomeMotion } from "@/hooks/use-home-motion";
 
 export default function HomePage() {
+  useHomeMotion();
+
   return (
     <div className="home-page">
       <HomeHero />
