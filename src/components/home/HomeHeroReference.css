@@ -194,6 +194,7 @@
 }
 
 .home-hero__image {
+  margin left:10px
   display: block;
   width: min(100%, 690px);
   height: auto;
