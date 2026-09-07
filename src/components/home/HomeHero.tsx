@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import "./HomeHeroReference.css";
 import heroImage from "@/assets/heroimage.png";
 
-const trustedAvatars = [
-  "https://i.pravatar.cc/80?img=12",
-  "https://i.pravatar.cc/80?img=32",
-  "https://i.pravatar.cc/80?img=47",
-];
 
 export function HomeHero() {
   return (
