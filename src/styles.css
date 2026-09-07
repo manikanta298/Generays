@@ -439,12 +439,24 @@
   grid-row: span 2;
 }
 
+.gallery-tile {
+  perspective: 1000px;
+}
+
 .gallery-tile img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: saturate(0.86) contrast(1.02);
+  transform: perspective(1000px) rotateY(0deg);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.gallery-tile:hover img,
+.gallery-tile:focus-within img {
+  transform: perspective(1000px) rotateY(8deg);
 }
 
 .gallery-tile::after {
