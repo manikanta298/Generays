@@ -1,6 +1,5 @@
 import { SectionHeading } from "@/components/page-hero";
 import { galleryImages } from "@/content/gallery";
-import CircularGallery from "@/components/CircularGallery";
 
 export function GallerySection() {
   return (
@@ -9,23 +8,28 @@ export function GallerySection() {
         <div id="visual-gallery-title">
           <SectionHeading
             eyebrow="Visual gallery"
-            title="Ideas, systems and experiences in motion."
-            subtitle="Explore a curated visual layer of GeneRays work. The gallery moves automatically, or you can drag, scroll, or use the arrow keys to take control."
+            title="Ideas, systems and experiences."
+            subtitle="Explore selected GeneRays work. Images are loaded directly as static assets with no carousel, WebGL renderer, auto-rotation, or loading animation."
           />
         </div>
 
-        <div className="mt-4 h-[500px] w-full md:mt-6 md:h-[620px]">
-          <CircularGallery
-            items={galleryImages.map((item) => ({ image: item.src, text: item.text }))}
-            bend={3}
-            textColor="oklch(0.19 0.01 265)"
-            borderRadius={0.04}
-            scrollSpeed={4.8}
-            scrollEase={0.06}
-            autoRotateSpeed={0.132}
-            fontUrl="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"
-            font="600 26px Space Grotesk"
-          />
+        <div className="gallery-grid mt-6" aria-label="GeneRays project gallery">
+          {galleryImages.map((item, index) => (
+            <figure
+              key={item.src}
+              className={`gallery-tile ${index === 0 ? "gallery-tile--feature" : ""}`}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                width={900}
+                height={700}
+              />
+              {item.text && <figcaption>{item.text}</figcaption>}
+            </figure>
+          ))}
         </div>
       </div>
     </section>
