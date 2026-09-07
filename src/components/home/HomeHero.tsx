@@ -1,15 +1,13 @@
-import { ArrowRight, BarChart3, Lightbulb, PieChart, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./HomeHeroReference.css";
+import heroImage from "@/assets/heroimage.png";
 
 const trustedAvatars = [
   "https://i.pravatar.cc/80?img=12",
   "https://i.pravatar.cc/80?img=32",
   "https://i.pravatar.cc/80?img=47",
 ];
-
-const heroPerson =
-  "https://images.pexels.com/photos/7350917/pexels-photo-7350917.jpeg?auto=compress&cs=tinysrgb&w=900";
 
 export function HomeHero() {
   return (
@@ -57,17 +55,13 @@ export function HomeHero() {
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Generays growth strategy illustration">
-          <div className="hero-visual__ring hero-visual__ring--large" />
-          <div className="hero-visual__ring hero-visual__ring--small" />
-          <div className="hero-visual__slash" aria-hidden="true" />
-          <div className="hero-visual__orb" aria-hidden="true" />
-
-          <div className="hero-person">
-            <img src={heroPerson} alt="Professional working on a laptop" />
-          </div>
-
-          <div className="hero-card hero-card--growth">
+        <div className="hero-visual">
+          <img
+            className="hero-visual__image"
+            src={heroImage}
+            alt="Generays growth strategy"
+          />
+        </div>          <div className="hero-card hero-card--growth">
             <span className="hero-card__icon"><BarChart3 aria-hidden="true" /></span>
             <div>
               <strong>Growth Focused</strong>
