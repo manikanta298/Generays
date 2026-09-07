@@ -439,8 +439,9 @@
   grid-row: span 2;
 }
 
-.gallery-tile {
+ .gallery-tile {
   perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .gallery-tile img {
@@ -449,14 +450,15 @@
   height: 100%;
   object-fit: cover;
   filter: saturate(0.86) contrast(1.02);
-  transform: perspective(1000px) rotateY(0deg);
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0);
   transform-origin: center;
+  transform-style: preserve-3d;
   will-change: transform;
 }
 
 .gallery-tile:hover img,
 .gallery-tile:focus-within img {
-  transform: perspective(1000px) rotateY(8deg);
+  transform: perspective(1000px) rotateX(3deg) rotateY(-6deg) translateZ(12px);
 }
 
 .gallery-tile::after {
