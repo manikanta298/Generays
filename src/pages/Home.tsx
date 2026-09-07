@@ -11,7 +11,7 @@ import { FinalCallSection } from "@/components/home/FinalCallSection";
 export default function HomePage() {
   return (
     <div className="home-page">
-      {/* <HomeHero /> */}
+      <HomeHero />
       <GallerySection />
       <CorePositioningSection />
       <FrameworkSection />
