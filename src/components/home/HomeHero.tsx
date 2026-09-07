@@ -35,25 +35,13 @@ export function HomeHero() {
           </div>
 
           <div className="home-hero__trust" aria-label="Trusted by more than 100 businesses">
-            {/* <div className="home-hero__avatars" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <strong>100+</strong>
-            </div>
-            <div>
-              <b>Trusted by 100+ Businesses</b>
-              <span>to scale and succeed</span>
-            </div>
-          </div>
-        </div> */}
+<div className="home-hero__avatars" aria-hidden="true">
 
         <div className="home-hero__visual">
           <img
             className="home-hero__image"
             src={heroImage}
-            alt="Digital growth strategy illustration"
-          />
+            alt="Digital growth strategy illustration"  />
         </div>
       </div>
     </section>
