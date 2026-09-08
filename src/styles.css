@@ -628,7 +628,7 @@ button, input, textarea, select { font: inherit; }
 /* ---------- Home page motion + compact section rhythm ---------- */
 
 .home-page {
-  --home-section-space: clamp(1.5rem, 2.5vw, 2.5rem);
+  --home-section-space: clamp(1.5rem, 1.5vw, 2.5rem);
   overflow: clip;
 }
 
