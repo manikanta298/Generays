@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import SplashCursor from "@/components/SplashCursor";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
 import ProcessPage from "@/pages/Process";
@@ -34,6 +35,7 @@ function RouteSeo() {
 export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <LoadingScreen />
       <SplashCursor />
       <SiteHeader />
       <main className="min-h-[70vh]">
