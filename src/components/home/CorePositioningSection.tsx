@@ -10,6 +10,10 @@ import {
   Settings,
   BarChart3,
 } from "lucide-react";
+import logoWithoutIdentity from "@/assets/A logo without identity.png";
+import websiteWithoutStrategy from "@/assets/A website without strategy.png";
+import socialMediaWithoutConsistency from "@/assets/Social media without consistency.png";
+import advertisingWithoutBranding from "@/assets/Advertising without branding.png";
 
 const cards = [
   {
@@ -18,16 +22,11 @@ const cards = [
     title: "A logo without identity",
     desc: "is decoration.",
     art: (
-      <div className="relative flex h-full w-full items-center justify-center">
-        <div className="absolute h-28 w-40 translate-x-3 rotate-[-8deg] rounded-md bg-gradient-to-br from-slate-900 to-blue-950 shadow-lg" />
-        <div className="relative z-10 flex h-28 w-44 items-center justify-center gap-2 rounded-md bg-white shadow-xl">
-          <div className="flex h-7 w-7 items-center justify-center rounded bg-blue-600 text-[10px] font-bold text-white">◆</div>
-          <div className="text-left">
-            <div className="text-[10px] font-bold leading-tight text-slate-800">YOUR</div>
-            <div className="text-[10px] font-bold leading-tight text-slate-800">LOGO</div>
-          </div>
-        </div>
-      </div>
+      <img
+        src={logoWithoutIdentity}
+        alt="A logo without identity"
+        className="h-full w-full object-cover"
+      />
     ),
   },
   {
@@ -36,22 +35,11 @@ const cards = [
     title: "A website without strategy",
     desc: "is a brochure.",
     art: (
-      <div className="flex h-full w-full items-center justify-center p-3">
-        <div className="w-full rounded-md border border-slate-100 bg-white p-2 shadow-lg">
-          <div className="mb-2 flex items-center justify-between px-1 text-[8px] font-medium text-slate-400">
-            <span className="font-bold text-blue-600">Logo</span>
-            <span className="flex gap-2">
-              <span>Home</span><span>About</span><span>Services</span><span>Contact</span>
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <div className="flex h-12 w-1/2 items-center justify-center rounded bg-blue-100">
-              <div className="h-4 w-4 rounded-full bg-blue-300" />
-            </div>
-            <div className="h-12 w-1/2 rounded bg-indigo-100" />
-          </div>
-        </div>
-      </div>
+      <img
+        src={websiteWithoutStrategy}
+        alt="A website without strategy"
+        className="h-full w-full object-cover"
+      />
     ),
   },
   {
@@ -60,17 +48,11 @@ const cards = [
     title: "Social media without consistency",
     desc: "is noise.",
     art: (
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="h-40 w-24 rounded-2xl bg-slate-900 p-1.5 shadow-xl">
-          <div className="relative h-full w-full overflow-hidden rounded-xl bg-white">
-            <div className="flex h-8 items-center gap-1 bg-slate-100 px-1.5">
-              <div className="h-3 w-3 rounded-full bg-blue-400" />
-              <div className="h-1.5 w-6 rounded bg-slate-300" />
-            </div>
-            <div className="h-16 bg-slate-700" />
-          </div>
-        </div>
-      </div>
+      <img
+        src={socialMediaWithoutConsistency}
+        alt="Social media without consistency"
+        className="h-full w-full object-cover"
+      />
     ),
   },
   {
@@ -79,13 +61,11 @@ const cards = [
     title: "Advertising without branding",
     desc: "is expense.",
     art: (
-      <div className="flex h-full w-full items-end justify-end gap-1 pr-4">
-        <div className="flex h-16 items-end gap-1">
-          <div className="h-6 w-3 rounded-t bg-blue-200" />
-          <div className="h-10 w-3 rounded-t bg-blue-400" />
-          <div className="h-16 w-3 rounded-t bg-blue-600" />
-        </div>
-      </div>
+      <img
+        src={advertisingWithoutBranding}
+        alt="Advertising without branding"
+        className="h-full w-full object-cover"
+      />
     ),
   },
 ];
