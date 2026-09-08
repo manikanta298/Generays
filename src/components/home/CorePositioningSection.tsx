@@ -97,20 +97,20 @@ export function CorePositioningSection() {
           Connected strategy creates growth.
         </p>
 
-        <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        <div className="core-positioning__cards mb-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c, i) => (
-            <div key={i} className="flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="relative h-36 shrink-0 bg-gradient-to-br from-indigo-50 to-blue-100 sm:h-40">
+            <article key={i} className="core-positioning__card flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1">
+              <div className="core-positioning__card-art relative h-36 shrink-0 bg-gradient-to-br from-indigo-50 to-blue-100 sm:h-40">
                 {c.art}
                 <div className={`absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-full border-4 border-white ${c.iconBg} shadow-md`}>
                   <c.icon className="text-lg text-white" />
                 </div>
               </div>
-              <div className="px-5 pb-5 pt-8">
+              <div className="core-positioning__card-copy flex min-h-[96px] flex-1 flex-col justify-start px-5 pb-5 pt-8">
                 <h3 className="text-[15px] font-bold leading-snug text-slate-900">{c.title}</h3>
                 <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
