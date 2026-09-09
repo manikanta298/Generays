@@ -15,12 +15,12 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <HomeHero />
-      <CorePositioningSection />
       <FrameworkSection />
       <ServicesSection />
       <GallerySection />
       <TechnologySection />
       <WhyGeneRaysSection />
+      <CorePositioningSection />
       {/* <TransformationSection /> */}
       <FinalCallSection />
     </div>
