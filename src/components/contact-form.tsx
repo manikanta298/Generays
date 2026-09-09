@@ -5,10 +5,49 @@ import { RazorpayCheckout } from "@/components/razorpay-checkout";
 
 export default function ContactPageContent() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      company: String(formData.get("company") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      service: String(formData.get("service") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send your enquiry.");
+      }
+
+      form.reset();
+      setSent(true);
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "Unable to send your enquiry.",
+      );
+    } finally {
+      setSending(false);
+    }
   }
 
   const fieldClass = "mt-2 w-full rounded-sm border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary";
@@ -37,7 +76,11 @@ export default function ContactPageContent() {
                 </div>
                 <div><label className={labelClass} htmlFor="service">What do you need?</label><select id="service" name="service" className={fieldClass} defaultValue=""><option value="" disabled>Select a service</option>{services.map((service) => <option key={service.slug} value={service.slug}>{service.title}</option>)}<option value="not-sure">Not sure yet — advise me</option></select></div>
                 <div><label className={labelClass} htmlFor="message">Tell us about your business</label><textarea id="message" name="message" rows={5} required className={fieldClass} placeholder="What you do, who you sell to, and what's not working today." /></div>
-                <button type="submit" className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">Build My Brand <ArrowRight className="h-4 w-4" /></button>
+                {error ? <p className="text-sm font-medium text-destructive" role="alert">{error}</p> : null}
+                <button type="submit" disabled={sending} className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+                  {sending ? "Sending…" : "Build My Brand"}
+                  {!sending ? <ArrowRight className="h-4 w-4" /> : null}
+                </button>
               </form>
             )}
           </div>
