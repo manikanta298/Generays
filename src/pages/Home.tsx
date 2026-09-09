@@ -15,14 +15,13 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <HomeHero />
-      <GallerySection />
       <CorePositioningSection />
       <FrameworkSection />
       <ServicesSection />
+      <GallerySection />
       <TechnologySection />
       <WhyGeneRaysSection />
       {/* <TransformationSection /> */}
-      {/* <GallerySection /> */}
       <FinalCallSection />
     </div>
   );
