@@ -14,8 +14,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary/10 bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:h-[72px] sm:px-6 lg:h-20 lg:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5 lg:px-8 lg:pt-6">
+      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between rounded-full border border-white/10 bg-slate-950/75 px-3 shadow-[0_18px_50px_-24px_rgba(0,0,0,0.85)] backdrop-blur-2xl backdrop-saturate-150 sm:h-[66px] sm:px-5 lg:h-[72px] lg:px-6">
         <Link
           to="/"
           className="shrink-0 rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -25,16 +25,16 @@ export function SiteHeader() {
           <img
             src="/Generays.png"
             alt="Generays"
-            className="h-auto w-[132px] sm:w-[150px] lg:w-[170px]"
+            className="h-auto w-[112px] sm:w-[132px] lg:w-[150px]"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary navigation">
           {nav.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              className="whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+              className="whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               {item.label}
             </Link>
@@ -44,7 +44,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             to="/contact"
-            className="hidden min-h-10 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:inline-flex"
+            className="hidden min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-5 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 lg:inline-flex"
           >
             Build My Brand
           </Link>
@@ -53,7 +53,7 @@ export function SiteHeader() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:hidden"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -61,14 +61,14 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border/60 bg-background/95 backdrop-blur-xl lg:hidden">
-          <nav className="mx-auto flex w-full max-w-7xl flex-col px-4 py-3 sm:px-6" aria-label="Mobile navigation">
+        <div className="absolute left-3 right-3 top-[4.5rem] overflow-hidden rounded-[24px] border border-white/10 bg-slate-950/90 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.9)] backdrop-blur-2xl sm:left-5 sm:right-5 lg:hidden">
+          <nav className="mx-auto flex w-full flex-col p-3 sm:p-4" aria-label="Mobile navigation">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 onClick={() => setOpen(false)}
-                className="flex min-h-12 items-center border-b border-border/60 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary last:border-0"
+                className="flex min-h-12 items-center rounded-xl px-4 py-2 text-sm font-medium text-white/75 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </Link>
@@ -76,7 +76,7 @@ export function SiteHeader() {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-3 flex min-h-11 items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:opacity-90"
+              className="mt-2 flex min-h-11 items-center justify-center rounded-full border border-white/10 bg-white/10 px-4 py-2.5 text-center text-sm font-semibold text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/15"
             >
               Build My Brand
             </Link>
