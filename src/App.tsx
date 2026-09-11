@@ -34,7 +34,7 @@ function RouteSeo() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#071426] text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <LoadingScreen />
       <SplashCursor />
       <SiteHeader />
