@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { aboutImage } from "@/content/media";
-import { promises, transformation, whyGeneRays } from "@/content/site";
-
+import { promises, transformation } from "@/content/site";
+import { AboutOriginality } from "@/components/about-originality";
 
 export default function AboutPage() {
   return (
@@ -22,9 +22,7 @@ export default function AboutPage() {
       <section className="border-b border-border bg-primary-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <SectionHeading eyebrow="Why GeneRays" title="We believe in originality." />
-          <ul className="mt-12 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {whyGeneRays.map((point) => <li key={point} className="flex gap-3 bg-background p-7 text-sm text-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{point}</li>)}
-          </ul>
+          <div className="mt-12"><AboutOriginality /></div>
         </div>
       </section>
       <section className="border-b border-border bg-primary text-primary-foreground">
