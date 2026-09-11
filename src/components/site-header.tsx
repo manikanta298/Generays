@@ -15,15 +15,15 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5 lg:px-8 lg:pt-6">
-      <div className="site-header-shell mx-auto flex h-14 w-full max-w-6xl items-center justify-between rounded-full border px-3 sm:h-[66px] sm:px-5 lg:h-[72px] lg:px-6">
-        <Link to="/" className="shrink-0 rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" onClick={() => setOpen(false)} aria-label="Generays home">
+      <div className="site-header-shell relative mx-auto flex h-14 w-full max-w-6xl items-center justify-between rounded-full border border-white/70 bg-white/65 px-3 shadow-[0_10px_30px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl sm:h-[66px] sm:px-5 lg:h-[72px] lg:px-6">
+        <Link to="/" className="absolute left-1/2 top-1/2 z-10 shrink-0 -translate-x-1/2 -translate-y-1/2 rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" onClick={() => setOpen(false)} aria-label="Generays home">
           <img src="/Generays.png" alt="Generays" className="h-auto w-[112px] sm:w-[132px] lg:w-[150px]" />
         </Link>
         <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary navigation">
           {nav.map((item) => <Link key={item.href} to={item.href} className="nav-link whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">{item.label}</Link>)}
         </nav>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link to="/contact" className="nav-action hidden min-h-10 items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 lg:inline-flex">Build My Brand</Link>
+        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          <Link to="/contact" className="nav-action hidden min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-sky-200/80 bg-sky-100/80 px-5 py-2 text-sm font-semibold text-primary shadow-[0_5px_16px_-10px_rgba(59,130,246,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 lg:inline-flex">Build My Brand</Link>
           <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen((value) => !value)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary/15 bg-white/75 text-primary shadow-sm backdrop-blur-md transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 lg:hidden">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
