@@ -64,20 +64,20 @@
   --font-space-grotesk: "Space Grotesk";
   --font-ibm-plex: "IBM Plex Sans";
   --radius: 0.5rem;
-  --background: oklch(0.965 0.018 267);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.19 0.01 265);
   --ink: oklch(0.19 0.01 265);
-  --card: oklch(0.995 0.004 267);
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.19 0.01 265);
-  --popover: oklch(0.995 0.004 267);
+  --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.19 0.01 265);
   --primary: oklch(0.353 0.146 269.5);
   --primary-foreground: oklch(1 0 0);
-  --primary-soft: oklch(0.935 0.025 267);
-  --secondary: oklch(0.945 0.014 267);
+  --primary-soft: oklch(0.955 0.017 269.5);
+  --secondary: oklch(0.968 0.006 265);
   --secondary-foreground: oklch(0.353 0.146 269.5);
-  --muted: oklch(0.94 0.012 267);
-  --muted-foreground: oklch(0.46 0.026 265);
+  --muted: oklch(0.972 0.005 265);
+  --muted-foreground: oklch(0.53 0.026 265);
   --accent: oklch(0.803 0.136 213);
   --accent-foreground: oklch(0.19 0.01 265);
   --highlight: oklch(0.845 0.132 82);
@@ -94,21 +94,21 @@
   --glass: color-mix(in oklab, var(--background) 78%, transparent);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.018 267);
-  --input: oklch(0.88 0.018 267);
+  --border: oklch(0.912 0.011 265);
+  --input: oklch(0.912 0.011 265);
   --ring: oklch(0.353 0.146 269.5);
   --chart-1: oklch(0.353 0.146 269.5);
   --chart-2: oklch(0.803 0.136 213);
   --chart-3: oklch(0.845 0.132 82);
   --chart-4: oklch(0.53 0.026 265);
   --chart-5: oklch(0.19 0.01 265);
-  --sidebar: oklch(0.975 0.01 267);
+  --sidebar: oklch(0.984 0.003 247.858);
   --sidebar-foreground: oklch(0.19 0.01 265);
   --sidebar-primary: oklch(0.353 0.146 269.5);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.945 0.014 267);
+  --sidebar-accent: oklch(0.968 0.006 265);
   --sidebar-accent-foreground: oklch(0.353 0.146 269.5);
-  --sidebar-border: oklch(0.88 0.018 267);
+  --sidebar-border: oklch(0.912 0.011 265);
   --sidebar-ring: oklch(0.353 0.146 269.5);
 }
 
@@ -199,33 +199,19 @@
 @utility lift-hover { transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; &:hover { transform: translateY(-6px); box-shadow: var(--shadow-glow-strong); } }
 @utility scanline { &::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--color-neon-cyan) 22%, transparent) 50%, transparent 100%); background-size: 100% 220%; opacity: 0; transition: opacity .4s ease; pointer-events: none; } &:hover::after { opacity: 1; animation: scan-sweep 1.4s ease-in-out infinite; } }
 @keyframes scan-sweep { from { background-position: 0 -110%; } to { background-position: 0 110%; } }
+@utility icon-chip { display: grid; place-items: center; height: 2.5rem; width: 2.5rem; border-radius: .75rem; background: color-mix(in oklab, var(--color-primary) 8%, transparent); color: var(--color-primary); border: 1px solid color-mix(in oklab, var(--color-primary) 12%, transparent); }
 
-/* Home rhythm and reveal motion */
-.home-page { --home-section-space: clamp(1.5rem, 1.5vw, 2.5rem); overflow: clip; }
-.home-page > section { margin-block: 0 !important; padding-block: var(--home-section-space) !important; }
-.home-reveal-section, .home-reveal-text { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--home-reveal-delay, 0ms); }
-.home-reveal-section.is-visible, .home-reveal-text.is-visible { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .home-reveal-section, .home-reveal-text { opacity: 1; transform: none; transition: none; } }
+@layer components {
+  .site-header-shell { isolation: isolate; }
+  .site-header-mobile-menu { isolation: isolate; }
+}
 
-.core-positioning__cards { align-items: stretch; grid-auto-rows: 1fr; }
-.core-positioning__card { border: 1px solid color-mix(in oklab, var(--primary) 10%, white); box-shadow: 0 14px 30px -22px color-mix(in oklab, var(--primary) 32%, transparent); }
-.core-positioning__card:hover { box-shadow: 0 22px 40px -24px color-mix(in oklab, var(--primary) 42%, transparent); }
-.core-positioning__card-art { height: 190px; }
-.core-positioning__card-art img { width: 100%; height: 100%; object-fit: cover; }
-@media (max-width: 767px) { .core-positioning__cards { gap: 14px; } .core-positioning__card { border-radius: 16px; box-shadow: 0 10px 24px -20px color-mix(in oklab, var(--primary) 28%, transparent); } .core-positioning__card-art { height: 170px; } }
+.home-page { --home-section-space: clamp(1.5rem, 2.5vw, 2.5rem); overflow: clip; }
+.home-page section { scroll-margin-top: 6rem; }
 
-/* Tech marquee */
-.tech-marquee { overflow: hidden; }
-.tech-marquee__track { display: flex; width: max-content; animation: tech-marquee-left 30s linear infinite; }
-.tech-marquee__track--reverse { animation-name: tech-marquee-right; }
-@keyframes tech-marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes tech-marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-@media (max-width: 767px) { .tech-marquee__track { animation-duration: 24s; } }
-@media (prefers-reduced-motion: reduce) { .tech-marquee__track { animation: none; transform: none; } }
+.home-reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.home-reveal.is-visible { opacity: 1; transform: none; }
 
-/* Loading screen */
-.site-loading { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--background); overflow: hidden; }
-.site-loading__video { width: 100%; height: 100%; object-fit: cover; }
-.site-loading__video--mobile { display: none; }
-@media (max-width: 767px) { .site-loading__video--desktop { display: none; } .site-loading__video--mobile { display: block; } }
-@media (prefers-reduced-motion: reduce) { .site-loading { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .home-reveal { opacity: 1; transform: none; transition: none; }
+}
