@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { processImage } from "@/content/media";
-import { ecosystem, framework } from "@/content/site";
-
+import { framework } from "@/content/site";
+import { ProcessEcosystem } from "@/components/process-ecosystem";
 
 export default function ProcessPage() {
   return (
@@ -25,10 +25,9 @@ export default function ProcessPage() {
       <section className="border-b border-border bg-primary-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <p className="eyebrow">The ecosystem</p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-bold text-foreground md:text-4xl">Every stage feeds the next.</h2>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            {ecosystem.map((node, i) => <span key={node} className="flex items-center gap-3"><span className="rounded-sm border border-primary/25 bg-background px-3.5 py-2 font-display text-sm font-semibold text-primary">{node}</span>{i < ecosystem.length - 1 ? <ArrowRight className="h-4 w-4 text-muted-foreground" /> : null}</span>)}
-          </div>
+          <h2 className="mt-3 max-w-2xl text-3xl font-bold text-foreground md:text-4xl">Every stage feeds the next—and loops back stronger.</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">Explore each stage to see how discovery, design, technology, launch and continuous growth operate as one connected system.</p>
+          <div className="mt-10"><ProcessEcosystem /></div>
           <Link to="/services" className="mt-12 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground">See what we build <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
