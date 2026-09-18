@@ -43,7 +43,7 @@ export function AnimatedTestimonials({
 
   return (
     <>
-      {/* Mobile carousel — light GeneRays card treatment with square media */}
+      {/* Mobile carousel — square white card using the homepage's light visual language */}
       <div className="mx-auto w-full max-w-md px-5 sm:max-w-lg sm:px-6 md:hidden">
         <div className="overflow-hidden rounded-[28px]">
           <div
@@ -53,10 +53,10 @@ export function AnimatedTestimonials({
             {testimonials.map((item, index) => (
               <article
                 key={item.name}
-                className="w-full shrink-0 rounded-[28px] bg-white p-4 text-slate-900 shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] sm:p-5"
+                className="flex aspect-square w-full shrink-0 flex-col rounded-[28px] bg-white p-3.5 text-slate-900 shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] sm:p-4"
                 aria-label={"Testimonial from " + item.name}
               >
-                <div className="aspect-square w-full overflow-hidden rounded-[22px] bg-slate-100">
+                <div className="h-[46%] min-h-0 shrink-0 overflow-hidden rounded-[22px] bg-slate-100">
                   <img
                     src={item.src}
                     alt={item.name}
@@ -66,46 +66,53 @@ export function AnimatedTestimonials({
                   />
                 </div>
 
-                <div className="px-1 pb-2 pt-6">
-                  <p className="font-display text-xl font-bold leading-tight text-slate-950 sm:text-2xl">
+                <div className="flex min-h-0 flex-1 flex-col px-1 pt-3 sm:pt-3.5">
+                  <p className="font-display text-lg font-bold leading-tight text-slate-950 sm:text-xl">
                     {item.name}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-slate-500 sm:text-base">
+                  <p className="mt-0.5 text-xs font-medium text-slate-500 sm:text-sm">
                     {item.designation}
                   </p>
-                  <blockquote className="mt-5 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
+                  <blockquote className="mt-2 line-clamp-3 min-h-0 flex-1 overflow-hidden text-sm leading-5 text-slate-700 sm:text-base sm:leading-6">
                     “{item.quote}”
                   </blockquote>
+
+                  <div
+                    className="mt-2 flex shrink-0 items-center justify-between border-t border-slate-100 pt-2"
+                    aria-label="Mobile testimonial navigation"
+                  >
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={goToPrevious}
+                        aria-label="Previous testimonial"
+                        className="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={goToNext}
+                        aria-label="Next testimonial"
+                        className="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </button>
+                    </div>
+
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                      {String(active + 1).padStart(2, "0")} /{" "}
+                      {String(testimonials.length).padStart(2, "0")}
+                    </span>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
         </div>
-
-        <div className="mt-6 flex items-center justify-start gap-3 pb-1" aria-label="Mobile testimonial navigation">
-          <button
-            type="button"
-            onClick={goToPrevious}
-            aria-label="Previous testimonial"
-            className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={goToNext}
-            aria-label="Next testimonial"
-            className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <ArrowRight className="h-5 w-5" aria-hidden="true" />
-          </button>
-          <span className="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            {String(active + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
-          </span>
-        </div>
       </div>
 
-      {/* Tablet + desktop — existing two-column presentation preserved */}
+      {/* Tablet + desktop — responsive image/quote composition */}
       <div className="mx-auto hidden w-full max-w-6xl items-center gap-10 md:grid md:grid-cols-[0.8fr_1.2fr] md:gap-16">
         <div className="relative mx-auto h-[360px] w-full max-w-[300px] sm:h-[400px] sm:max-w-[340px] md:h-[380px] md:max-w-[310px] lg:h-[480px] lg:max-w-[390px]">
           {testimonials.map((item, index) => {
@@ -154,22 +161,30 @@ export function AnimatedTestimonials({
             </p>
           </div>
 
-          <div className="mt-8 flex items-center gap-2" aria-label="Testimonial navigation">
-            {testimonials.map((item, index) => (
+          <div className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5" aria-label="Testimonial navigation">
+            <div className="flex items-center gap-2">
               <button
-                key={item.name}
                 type="button"
-                onClick={() => setActive(index)}
-                aria-label={"View testimonial from " + item.name}
-                aria-current={index === active ? "true" : undefined}
-                className={
-                  "h-1.5 rounded-full transition-all duration-300 " +
-                  (index === active
-                    ? "w-10 bg-accent"
-                    : "w-5 bg-primary/20 hover:bg-primary/40")
-                }
-              />
-            ))}
+                onClick={goToPrevious}
+                aria-label="Previous testimonial"
+                className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-primary shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={goToNext}
+                aria-label="Next testimonial"
+                className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-primary shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/50">
+              {String(active + 1).padStart(2, "0")} /{" "}
+              {String(testimonials.length).padStart(2, "0")}
+            </span>
           </div>
         </div>
       </div>
