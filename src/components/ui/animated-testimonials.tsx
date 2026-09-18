@@ -99,7 +99,7 @@ export function AnimatedTestimonials({
           >
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </button>
-          <span className="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+          <span className="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             {String(active + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
           </span>
         </div>
@@ -107,7 +107,7 @@ export function AnimatedTestimonials({
 
       {/* Tablet + desktop — existing two-column presentation preserved */}
       <div className="mx-auto hidden w-full max-w-6xl items-center gap-10 md:grid md:grid-cols-[0.8fr_1.2fr] md:gap-16">
-        <div className="relative mx-auto h-[360px] w-full max-w-[300px] sm:h-[400px] sm:max-w-[340px] md:h-[440px] md:max-w-[360px] lg:h-[480px] lg:max-w-[390px]">
+        <div className="relative mx-auto h-[360px] w-full max-w-[300px] sm:h-[400px] sm:max-w-[340px] md:h-[380px] md:max-w-[310px] lg:h-[480px] lg:max-w-[390px]">
           {testimonials.map((item, index) => {
             const offset = (index - active + testimonials.length) % testimonials.length;
             const isActive = index === active;
