@@ -60,7 +60,7 @@ export default function HomePage() {
       <TechnologySection />
       <WhyGeneRaysSection />
       <CorePositioningSection />
-      <section className="border-b border-slate-200 bg-[#F4F6FB] py-16 sm:py-20 md:border-primary-foreground/10 md:bg-primary md:py-24 lg:py-28">
+      <section className="border-b border-slate-200 bg-[#F4F6FB] py-16 sm:py-20 md:py-24 lg:py-28">
         <AnimatedTestimonials testimonials={testimonials} />
       </section>
       {/* <TransformationSection /> */}
