@@ -43,37 +43,37 @@ export function AnimatedTestimonials({
 
   return (
     <>
-      {/* Mobile carousel — square image cards with bottom navigation */}
+      {/* Mobile carousel — light GeneRays card treatment with square media */}
       <div className="mx-auto w-full max-w-md px-5 sm:max-w-lg sm:px-6 md:hidden">
-        <div className="overflow-hidden">
+        <div className="overflow-hidden rounded-[28px]">
           <div
             className="flex transition-transform duration-500 ease-out"
-            style={{ transform: "translateX(-" + active * 100 + "%)" }}
+            style={{ transform: "translate3d(-" + active * 100 + "%, 0, 0)" }}
           >
-            {testimonials.map((item) => (
+            {testimonials.map((item, index) => (
               <article
                 key={item.name}
-                className="w-full shrink-0"
+                className="w-full shrink-0 rounded-[28px] bg-white p-4 text-slate-900 shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] sm:p-5"
                 aria-label={"Testimonial from " + item.name}
               >
-                <div className="aspect-square w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+                <div className="aspect-square w-full overflow-hidden rounded-[22px] bg-slate-100">
                   <img
                     src={item.src}
                     alt={item.name}
                     className="block h-full w-full object-cover object-center"
-                    loading={item === testimonial ? "eager" : "lazy"}
+                    loading={index === active ? "eager" : "lazy"}
                     decoding="async"
                   />
                 </div>
 
-                <div className="pt-7">
-                  <p className="font-display text-xl font-bold leading-tight text-primary sm:text-2xl">
+                <div className="px-1 pb-2 pt-6">
+                  <p className="font-display text-xl font-bold leading-tight text-slate-950 sm:text-2xl">
                     {item.name}
                   </p>
-                  <p className="mt-1 text-sm text-primary/60 sm:text-base">
+                  <p className="mt-1 text-sm font-medium text-slate-500 sm:text-base">
                     {item.designation}
                   </p>
-                  <blockquote className="mt-7 text-lg leading-relaxed text-primary/65 sm:text-xl">
+                  <blockquote className="mt-5 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
                     “{item.quote}”
                   </blockquote>
                 </div>
@@ -82,23 +82,26 @@ export function AnimatedTestimonials({
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-start gap-4 pb-1">
+        <div className="mt-6 flex items-center justify-start gap-3 pb-1" aria-label="Mobile testimonial navigation">
           <button
             type="button"
             onClick={goToPrevious}
             aria-label="Previous testimonial"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-primary shadow-sm transition hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <ArrowLeft className="h-6 w-6" aria-hidden="true" />
+            <ArrowLeft className="h-5 w-5" aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={goToNext}
             aria-label="Next testimonial"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-primary shadow-sm transition hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <ArrowRight className="h-6 w-6" aria-hidden="true" />
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </button>
+          <span className="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+            {String(active + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+          </span>
         </div>
       </div>
 
