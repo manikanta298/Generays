@@ -43,9 +43,9 @@ export function AnimatedTestimonials({
 
   return (
     <>
-      {/* Mobile carousel — square white card using the homepage's light visual language */}
+      {/* Mobile carousel — content sits directly on the section surface */}
       <div className="mx-auto w-full max-w-md px-5 sm:max-w-lg sm:px-6 md:hidden">
-        <div className="overflow-hidden rounded-[28px]">
+        <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: "translate3d(-" + active * 100 + "%, 0, 0)" }}
@@ -53,7 +53,7 @@ export function AnimatedTestimonials({
             {testimonials.map((item, index) => (
               <article
                 key={item.name}
-                className="flex aspect-square w-full shrink-0 flex-col rounded-[28px] bg-white p-3.5 text-slate-900 shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] sm:p-4"
+                className="flex aspect-square w-full shrink-0 flex-col px-1 text-slate-900"
                 aria-label={"Testimonial from " + item.name}
               >
                 <div className="h-[46%] min-h-0 shrink-0 overflow-hidden rounded-[22px] bg-slate-100">
@@ -66,7 +66,7 @@ export function AnimatedTestimonials({
                   />
                 </div>
 
-                <div className="flex min-h-0 flex-1 flex-col px-1 pt-3 sm:pt-3.5">
+                <div className="flex min-h-0 flex-1 flex-col pt-3 sm:pt-3.5">
                   <p className="font-display text-lg font-bold leading-tight text-slate-950 sm:text-xl">
                     {item.name}
                   </p>
@@ -78,7 +78,7 @@ export function AnimatedTestimonials({
                   </blockquote>
 
                   <div
-                    className="mt-2 flex shrink-0 items-center justify-between border-t border-slate-100 pt-2"
+                    className="mt-2 flex shrink-0 items-center justify-between border-t border-slate-200 pt-2"
                     aria-label="Mobile testimonial navigation"
                   >
                     <div className="flex items-center gap-2">
@@ -112,8 +112,8 @@ export function AnimatedTestimonials({
         </div>
       </div>
 
-      {/* Tablet + desktop — responsive image/quote composition */}
-      <div className="mx-auto hidden w-full max-w-6xl items-center gap-10 md:grid md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+      {/* Tablet + desktop — image and testimonial content share the section surface */}
+      <div className="mx-auto hidden w-full max-w-6xl items-center gap-10 px-5 sm:px-6 md:grid md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:px-8">
         <div className="relative mx-auto h-[360px] w-full max-w-[300px] sm:h-[400px] sm:max-w-[340px] md:h-[380px] md:max-w-[310px] lg:h-[480px] lg:max-w-[390px]">
           {testimonials.map((item, index) => {
             const offset = (index - active + testimonials.length) % testimonials.length;
@@ -130,29 +130,29 @@ export function AnimatedTestimonials({
                 type="button"
                 onClick={() => setActive(index)}
                 aria-label={"Show testimonial from " + item.name}
-                className={"absolute inset-0 h-full w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl transition-all duration-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent " + cardClass}
+                className={"absolute inset-0 h-full w-full overflow-hidden rounded-3xl bg-transparent transition-all duration-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent " + cardClass}
               >
                 <img
                   src={item.src}
                   alt={item.name}
-                  className="block h-full w-full object-cover object-center"
+                  className="block h-full w-full rounded-3xl object-cover object-center"
                   loading={isActive ? "eager" : "lazy"}
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/55 via-transparent to-transparent" />
               </button>
             );
           })}
         </div>
 
-        <div className="min-w-0">
+        <div className="min-w-0 py-2 md:py-4">
           <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             Client testimonials
           </p>
-          <blockquote className="mt-5 text-2xl font-semibold leading-tight text-primary sm:text-3xl lg:text-4xl">
+          <blockquote className="mt-4 text-2xl font-semibold leading-tight text-primary sm:text-3xl lg:text-4xl">
             “{testimonial.quote}”
           </blockquote>
-          <div className="mt-8">
+          <div className="mt-6">
             <p className="font-display text-lg font-bold text-primary">
               {testimonial.name}
             </p>
@@ -161,7 +161,7 @@ export function AnimatedTestimonials({
             </p>
           </div>
 
-          <div className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5" aria-label="Testimonial navigation">
+          <div className="mt-7 flex items-center justify-between border-t border-slate-200 pt-4" aria-label="Testimonial navigation">
             <div className="flex items-center gap-2">
               <button
                 type="button"
