@@ -169,6 +169,8 @@ export default function PortfolioPage() {
             ))}
           </div>
           <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
+            Some websites may disable embedded previews for security reasons. If a preview is blocked, use the Open website button to view the project directly.
+          </p>
         </div>
       </section>
       <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
