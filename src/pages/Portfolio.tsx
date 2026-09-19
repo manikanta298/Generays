@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import raviSolarEngineers from "@/assets/gallery-ravi-solar-engineers.jpg";
 import helloKakinadaLaunch from "@/assets/gallery-hellokakinada-launch.jpg";
