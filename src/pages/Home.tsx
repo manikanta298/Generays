@@ -8,7 +8,6 @@ import { TransformationSection } from "@/components/home/TransformationSection";
 import { GallerySection } from "@/components/home/GallerySection";
 import { FinalCallSection } from "@/components/home/FinalCallSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import { SectionHeading } from "@/components/page-hero";
 import { useHomeMotion } from "@/hooks/use-home-motion";
 
 const testimonials = [
@@ -62,19 +61,23 @@ export default function HomePage() {
       <WhyGeneRaysSection />
       <CorePositioningSection />
       <section
-        className="border-b border-slate-200 bg-[#F4F6FB] py-16 sm:py-20 md:py-24 lg:py-28"
+        className="border-b border-slate-200 bg-[#F4F6FB] py-14 sm:py-16 lg:py-20"
         aria-labelledby="client-testimonials-title"
       >
-        <div className="mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8">
-          <div
-            id="client-testimonials-title"
-            className="mb-10 rounded-2xl border border-slate-200/80 bg-white px-5 py-6 shadow-[0_16px_45px_-28px_rgba(15,23,42,0.38)] sm:mb-12 sm:px-7 md:mb-16 md:px-8 md:py-7"
-          >
-            <SectionHeading
-              eyebrow="Client testimonials"
-              title="Trusted partnerships. Meaningful results."
-              subtitle="Hear directly from clients about the clarity, craft and impact GeneRays brings to every digital experience."
-            />
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div id="client-testimonials-title" className="mb-8 sm:mb-10 lg:mb-12">
+            <p className="mb-4 text-xs font-bold tracking-[0.2em] text-indigo-600">
+              CLIENT TESTIMONIALS
+            </p>
+            <h2 className="mb-6 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl md:text-5xl">
+              Trusted partnerships.
+              <br />
+              Meaningful results.
+            </h2>
+            <div className="mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400" />
+            <p className="max-w-xl text-base text-slate-500 md:text-lg">
+              Hear directly from clients about the clarity, craft and impact GeneRays brings to every digital experience.
+            </p>
           </div>
         </div>
 
