@@ -8,6 +8,7 @@ import { TransformationSection } from "@/components/home/TransformationSection";
 import { GallerySection } from "@/components/home/GallerySection";
 import { FinalCallSection } from "@/components/home/FinalCallSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { SectionHeading } from "@/components/page-hero";
 import { useHomeMotion } from "@/hooks/use-home-motion";
 
 const testimonials = [
@@ -60,7 +61,23 @@ export default function HomePage() {
       <TechnologySection />
       <WhyGeneRaysSection />
       <CorePositioningSection />
-      <section className="border-b border-slate-200 bg-[#F4F6FB] py-16 sm:py-20 md:py-24 lg:py-28">
+      <section
+        className="border-b border-slate-200 bg-[#F4F6FB] py-16 sm:py-20 md:py-24 lg:py-28"
+        aria-labelledby="client-testimonials-title"
+      >
+        <div className="mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8">
+          <div
+            id="client-testimonials-title"
+            className="mb-10 rounded-2xl border border-slate-200/80 bg-white px-5 py-6 shadow-[0_16px_45px_-28px_rgba(15,23,42,0.38)] sm:mb-12 sm:px-7 md:mb-16 md:px-8 md:py-7"
+          >
+            <SectionHeading
+              eyebrow="Client testimonials"
+              title="Trusted partnerships. Meaningful results."
+              subtitle="Hear directly from clients about the clarity, craft and impact GeneRays brings to every digital experience."
+            />
+          </div>
+        </div>
+
         <AnimatedTestimonials testimonials={testimonials} />
       </section>
       {/* <TransformationSection /> */}
