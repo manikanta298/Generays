@@ -118,7 +118,7 @@ const websiteProjects = [
     accent: "from-blue-700 to-cyan-400",
   },
 ];
-\nexport default function PortfolioPage() {
+export default function PortfolioPage() {
   return (
     <div className="bg-[#F4F6FB]">
       <section className="border-b border-slate-200 bg-[#F4F6FB] py-20 sm:py-24 lg:py-28">
@@ -235,7 +235,7 @@ const websiteProjects = [
           </div>
         </div>
       </section>
-\n      <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
+      <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
             <p className="text-xs font-bold tracking-[0.2em] text-indigo-600">
