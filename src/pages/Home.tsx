@@ -5,7 +5,6 @@ import { ServicesSection } from "@/components/home/ServicesSection";
 import { TechnologySection } from "@/components/home/TechnologySection";
 import { WhyGeneRaysSection } from "@/components/home/WhyGeneRaysSection";
 import { TransformationSection } from "@/components/home/TransformationSection";
-import { GallerySection } from "@/components/home/GallerySection";
 import { FinalCallSection } from "@/components/home/FinalCallSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { useHomeMotion } from "@/hooks/use-home-motion";
