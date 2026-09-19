@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import raviSolarEngineers from "@/assets/gallery-ravi-solar-engineers.jpg";
 import helloKakinadaLaunch from "@/assets/gallery-hellokakinada-launch.jpg";
@@ -119,6 +120,27 @@ const websiteProjects = [
   },
 ];
 export default function PortfolioPage() {
+  const [previewProject, setPreviewProject] = useState<(typeof websiteProjects)[number] | null>(null);
+
+  useEffect(() => {
+    if (!previewProject) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setPreviewProject(null);
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [previewProject]);
+
   return (
     <div className="bg-[#F4F6FB]">
       <section className="border-b border-slate-200 bg-[#F4F6FB] py-20 sm:py-24 lg:py-28">
@@ -197,11 +219,11 @@ export default function PortfolioPage() {
             </p>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-wrap gap-5">
             {websiteProjects.map((project) => (
               <article
                 key={project.title}
-                className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)]"
+                className="group flex min-w-0 flex-[1_1_calc(50%-0.625rem)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)] sm:flex-[1_1_calc(50%-0.625rem)]"
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
                   <iframe
@@ -227,18 +249,22 @@ export default function PortfolioPage() {
                   </p>
 
                   <div className="mt-5 flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewProject(project)}
+                      className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+                    >
+                      Preview
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+                      className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:border-indigo-200 hover:text-indigo-600"
                     >
                       Open website
-                      <ArrowRight className="h-4 w-4" />
                     </a>
-                    <span className="text-xs text-slate-400">
-                      Live preview
-                    </span>
                   </div>
                 </div>
               </article>
@@ -269,6 +295,52 @@ export default function PortfolioPage() {
           </Link>
         </div>
       </section>
+      {previewProject && (
+        <div
+          className="fixed inset-0 z-[100] flex h-[100dvh] w-full items-center justify-center bg-slate-950/95 p-2 sm:p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${previewProject.title} live website preview`}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setPreviewProject(null);
+            }
+          }}
+        >
+          <div className="flex h-full w-full flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
+            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 py-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-bold text-slate-900">
+                  {previewProject.title}
+                </p>
+                <p className="truncate text-xs text-slate-500">
+                  {previewProject.url}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPreviewProject(null)}
+                className="shrink-0 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                aria-label="Close live website preview"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="min-h-0 flex-1 bg-white">
+              <iframe
+                src={previewProject.url}
+                title={`${previewProject.title} full-screen live preview`}
+                className="h-full w-full border-0"
+                allow="fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
