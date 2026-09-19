@@ -58,7 +58,67 @@ const projects = [
   },
 ];
 
-export default function PortfolioPage() {
+
+
+const websiteProjects = [
+  {
+    title: "JATAS Ayurveda",
+    category: "Ayurveda & Wellness Website",
+    description: "A premium wellness-focused website for JATAS Ayurveda.",
+    url: "https://jatasayurveda.com/",
+    accent: "from-emerald-600 to-teal-400",
+  },
+  {
+    title: "RR Properties",
+    category: "Real Estate Website",
+    description: "A polished digital presence for RR Properties and its real-estate offering.",
+    url: "https://rrproperties.co.in/",
+    accent: "from-indigo-600 to-blue-400",
+  },
+  {
+    title: "ZENAIZ",
+    category: "Engineering Internship Platform",
+    description: "An engineering-focused digital experience for ZENAIZ.",
+    url: "https://www.zenaiz.com/",
+    accent: "from-violet-600 to-fuchsia-400",
+  },
+  {
+    title: "Anish Dental",
+    category: "Healthcare Website",
+    description: "A dental-care website designed to present services and patient information clearly.",
+    url: "https://anish-dental-five.vercel.app/",
+    accent: "from-cyan-600 to-sky-400",
+  },
+  {
+    title: "Beauty Parlour",
+    category: "Beauty & Salon Website",
+    description: "A modern beauty-parlour website experience.",
+    url: "https://beauty-parlour-website-ruby.vercel.app/",
+    accent: "from-rose-600 to-pink-400",
+  },
+  {
+    title: "GL Sports",
+    category: "Sports Website",
+    description: "A dedicated sports-focused web experience.",
+    url: "https://gl-sports.vercel.app/",
+    accent: "from-orange-600 to-amber-400",
+  },
+  {
+    title: "Eliphas Shipping Services",
+    category: "Shipping & Logistics Website",
+    description: "A business website for shipping and logistics services.",
+    url: "https://eliphas-shipping-services.vercel.app/",
+    accent: "from-slate-700 to-slate-400",
+  },
+  {
+    title: "Edu-Tech",
+    category: "Education Platform",
+    description: "An education-focused digital experience for learning and technology.",
+    url: "https://edu-tech123-uzav.vercel.app/",
+    accent: "from-blue-700 to-cyan-400",
+  },
+];
+\nexport default function PortfolioPage() {
   return (
     <div className="bg-[#F4F6FB]">
       <section className="border-b border-slate-200 bg-[#F4F6FB] py-20 sm:py-24 lg:py-28">
@@ -121,7 +181,61 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
+
+
+      <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20" aria-labelledby="website-projects-title">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 sm:mb-10">
+            <p className="mb-3 text-xs font-bold tracking-[0.2em] text-indigo-600">
+              WEB PROJECTS
+            </p>
+            <h2 id="website-projects-title" className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              Websites built for real businesses.
+            </h2>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-500">
+              Explore live websites created across healthcare, education, real estate, wellness, hospitality and business services.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {websiteProjects.map((project) => (
+              <article
+                key={project.title}
+                className="group flex min-h-[250px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)]"
+              >
+                <div className={"relative flex h-32 items-end overflow-hidden bg-gradient-to-br " + project.accent}>
+                  <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full border border-white/20" />
+                  <div className="absolute -bottom-14 -left-10 h-36 w-36 rounded-full border border-white/15" />
+                  <span className="relative p-5 text-4xl font-black tracking-tight text-white/90">
+                    {project.title.charAt(0)}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-indigo-600">
+                    {project.category}
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold text-slate-900">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500">
+                    {project.description}
+                  </p>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:border-indigo-200 hover:text-indigo-600"
+                  >
+                    Visit website
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+\n      <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
             <p className="text-xs font-bold tracking-[0.2em] text-indigo-600">
