@@ -1,3 +1,4 @@
+import { GallerySection } from "@/components/home/GallerySection";
 import { HomeHero } from "@/components/home/HomeHero";
 import { CorePositioningSection } from "@/components/home/CorePositioningSection";
 import { FrameworkSection } from "@/components/home/FrameworkSection";
