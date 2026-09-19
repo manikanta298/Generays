@@ -9,6 +9,7 @@ import AboutPage from "@/pages/About";
 import ProcessPage from "@/pages/Process";
 import ServicesPage from "@/pages/Services";
 import ServiceDetailPage from "@/pages/ServiceDetail";
+import PortfolioPage from "@/pages/Portfolio";
 import ContactPage from "@/pages/Contact";
 import NotFoundPage from "@/pages/NotFound";
 import ErrorPage from "@/pages/Error";
@@ -21,6 +22,7 @@ function RouteSeo() {
       "/about": "About GeneRays — A Brand Engineering Company",
       "/process": "Our Brand Engineering Process — GeneRays",
       "/services": "Services — Brand, Web, Commerce, Marketing & Automation",
+      "/portfolio": "Portfolio — Selected GeneRays Work",
       "/contact": "Contact GeneRays — Start Your Brand Journey",
     };
     document.title = titles[location.pathname] ?? "GeneRays — Brand Engineering";
@@ -46,6 +48,7 @@ export default function App() {
           <Route path="/process" element={<ProcessPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServiceDetailPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
