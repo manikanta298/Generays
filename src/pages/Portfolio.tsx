@@ -1,65 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import raviSolarEngineers from "@/assets/gallery-ravi-solar-engineers.jpg";
-import helloKakinadaLaunch from "@/assets/gallery-hellokakinada-launch.jpg";
-import helloKakinadaAnniversary from "@/assets/gallery-hellokakinada-anniversary.jpg";
-import vamsiChestHospital from "@/assets/gallery-vamsi-chest-hospital.jpg";
-import rrPropertiesUgadi from "@/assets/gallery-rr-properties-ugadi.jpg";
-import rrPropertiesRamNavami from "@/assets/gallery-rr-properties-ram-navami.jpg";
-
-const projects = [
-  {
-    title: "Ravi Solar Engineers",
-    category: "Brand Campaign",
-    description: "A focused visual campaign built to communicate solar energy and EV charging with clarity.",
-    image: raviSolarEngineers,
-    alt: "Solar EV charging campaign poster for Ravi Solar Engineers",
-    className: "md:col-span-2 md:row-span-2",
-  },
-  {
-    title: "HelloKakinada Launch",
-    category: "Digital Campaign",
-    description: "Launch creative for a local business discovery platform.",
-    image: helloKakinadaLaunch,
-    alt: "HelloKakinada launch campaign",
-    className: "",
-  },
-  {
-    title: "Vamsi Chest Hospital",
-    category: "Healthcare Creative",
-    description: "Patient-focused awareness creative with a clear, approachable visual system.",
-    image: vamsiChestHospital,
-    alt: "Vamsi Chest Hospital awareness campaign",
-    className: "",
-  },
-  {
-    title: "RR Properties — Ugadi",
-    category: "Seasonal Campaign",
-    description: "Festival campaign creative designed for consistent brand recognition.",
-    image: rrPropertiesUgadi,
-    alt: "RR Properties Ugadi campaign",
-    className: "",
-  },
-  {
-    title: "RR Properties — Ram Navami",
-    category: "Seasonal Campaign",
-    description: "A culturally relevant campaign visual aligned with the property's brand language.",
-    image: rrPropertiesRamNavami,
-    alt: "RR Properties Ram Navami campaign",
-    className: "",
-  },
-  {
-    title: "HelloKakinada Anniversary",
-    category: "Brand Campaign",
-    description: "Anniversary creative celebrating the platform's first year with a strong visual focus.",
-    image: helloKakinadaAnniversary,
-    alt: "HelloKakinada anniversary campaign",
-    className: "md:col-span-2",
-  },
-];
-
-
 
 const websiteProjects = [
   {
@@ -162,49 +103,6 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-16 lg:py-20" aria-labelledby="selected-work-title">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 sm:mb-10">
-            <p className="mb-3 text-xs font-bold tracking-[0.2em] text-indigo-600">
-              SELECTED WORK
-            </p>
-            <h2 id="selected-work-title" className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              A visual layer of GeneRays work.
-            </h2>
-          </div>
-
-          <div className="grid auto-rows-[220px] grid-cols-1 gap-5 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-4">
-            {projects.map((project) => (
-              <article
-                key={project.title}
-                className={"group relative min-h-0 overflow-hidden rounded-2xl bg-white " + project.className}
-              >
-                <img
-                  src={project.image}
-                  alt={project.alt}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-sky-200">
-                    {project.category}
-                  </p>
-                  <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75">
-                    {project.description}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
       <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20" aria-labelledby="website-projects-title">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 sm:mb-10">
@@ -270,10 +168,7 @@ export default function PortfolioPage() {
               </article>
             ))}
           </div>
-
           <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
-            Some websites may disable embedded previews for security reasons. If a preview is blocked, use the Open website button to view the project directly.
-          </p>
         </div>
       </section>
       <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
