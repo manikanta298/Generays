@@ -193,7 +193,7 @@ export default function PortfolioPage() {
               Websites built for real businesses.
             </h2>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-500">
-              Explore live websites created across healthcare, education, real estate, wellness, hospitality and business services.
+              Explore live website experiences created across healthcare, education, real estate, wellness, sports and business services.
             </p>
           </div>
 
@@ -201,15 +201,20 @@ export default function PortfolioPage() {
             {websiteProjects.map((project) => (
               <article
                 key={project.title}
-                className="group flex min-h-[250px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)]"
+                className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)]"
               >
-                <div className={"relative flex h-32 items-end overflow-hidden bg-gradient-to-br " + project.accent}>
-                  <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full border border-white/20" />
-                  <div className="absolute -bottom-14 -left-10 h-36 w-36 rounded-full border border-white/15" />
-                  <span className="relative p-5 text-4xl font-black tracking-tight text-white/90">
-                    {project.title.charAt(0)}
-                  </span>
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+                  <iframe
+                    src={project.url}
+                    title={`${project.title} live website preview`}
+                    className="absolute inset-0 h-full w-full border-0 bg-white"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-950/20 to-transparent" />
                 </div>
+
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-indigo-600">
                     {project.category}
@@ -220,19 +225,29 @@ export default function PortfolioPage() {
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500">
                     {project.description}
                   </p>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:border-indigo-200 hover:text-indigo-600"
-                  >
-                    Visit website
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </a>
+
+                  <div className="mt-5 flex flex-wrap items-center gap-2">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+                    >
+                      Open website
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                    <span className="text-xs text-slate-400">
+                      Live preview
+                    </span>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
+
+          <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
+            Some websites may disable embedded previews for security reasons. If a preview is blocked, use the Open website button to view the project directly.
+          </p>
         </div>
       </section>
       <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
