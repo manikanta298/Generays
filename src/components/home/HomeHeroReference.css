@@ -49,7 +49,7 @@
 .home-hero__title {
   margin: 28px 0 24px;
   color: #07163f;
-  font: 700 clamp(3.2rem, 5.6vw, 5.65rem)/.96 var(--font-space-grotesk), sans-serif;
+  font: 700 clamp(2.7rem, 4.6vw, 4.5rem)/.98 var(--font-space-grotesk), sans-serif;
   letter-spacing: -.055em;
 }
 
@@ -224,7 +224,7 @@
   }
 
   .home-hero__title {
-    font-size: clamp(2.8rem, 5.8vw, 4.6rem);
+    font-size: clamp(2.5rem, 4.8vw, 3.8rem);
   }
 }
 
@@ -255,7 +255,7 @@
 
   .home-hero__title {
     margin: 22px 0 20px;
-    font-size: clamp(2.65rem, 10.8vw, 4.25rem);
+    font-size: clamp(2.25rem, 9vw, 3.4rem);
     line-height: .98;
   }
 
@@ -269,7 +269,7 @@
   .home-hero__actions {
     margin-top: 26px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 11px;
     margin-right: 0;
   }
@@ -277,7 +277,8 @@
   .home-hero__primary,
   .home-hero__secondary {
     width: 100%;
-    min-height: 56px;
+    min-height: 52px;
+    padding-inline: 14px;
   }
 
   .home-hero__trust {
@@ -319,7 +320,7 @@
 
   .home-hero__title {
     margin-top: 20px;
-    font-size: clamp(2.45rem, 12vw, 3.55rem);
+    font-size: clamp(2.1rem, 10.5vw, 3.05rem);
   }
 
   .home-hero__title em::after {
