@@ -21,6 +21,7 @@
   position: relative;
   z-index: 2;
   max-width: 640px;
+  text-align: center;
 }
 
 .home-hero__eyebrow {
@@ -80,7 +81,7 @@
 
 .home-hero__description {
   max-width: 620px;
-  margin: 0;
+  margin: 0 auto;
   color: #394764;
   font: 400 clamp(1rem, 1.35vw, 1.2rem)/1.55 var(--font-ibm-plex), sans-serif;
 }
@@ -90,6 +91,7 @@
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 34px;
+  justify-content: center;
 }
 
 .home-hero__primary,
