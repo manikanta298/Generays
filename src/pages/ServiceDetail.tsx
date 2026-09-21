@@ -199,13 +199,13 @@ export default function ServiceDetailPage() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {service.items.map((item, index) => {
                 const Icon = getItemIcon(item);
                 return (
                   <article
                     key={item}
-                    className="group relative overflow-hidden rounded-2xl border border-border/80 bg-white/90 p-4 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_40px_-24px_rgba(37,99,235,0.28)]"
+                    className="group relative flex min-h-[108px] items-center overflow-hidden rounded-2xl border border-border/80 bg-white/90 p-5 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_40px_-24px_rgba(37,99,235,0.28)]"
                   >
                     <div className="absolute right-0 top-0 h-16 w-16 rounded-bl-[2rem] bg-primary/[0.04] transition-colors group-hover:bg-primary/[0.09]" aria-hidden="true" />
                     <div className="relative flex items-start gap-3">
