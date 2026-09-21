@@ -216,7 +216,9 @@ export default function ServiceDetailPage() {
                         <span className="text-[11px] font-bold tracking-wider text-primary/60">{String(index + 1).padStart(2, "0")}</span>
                         <h3 className="mt-0.5 text-sm font-semibold leading-5 text-foreground">{item}</h3>
                       </div>
-                      <Check className="ml-auto mt-1 h-4 w-4 shrink-0 text-primary/45 transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+                      <span className="ml-auto grid h-7 w-7 shrink-0 place-items-center self-center rounded-full border border-primary/15 bg-primary/5 text-primary/55 transition-all group-hover:border-primary/25 group-hover:bg-primary/10 group-hover:text-primary" aria-hidden="true">
+                        <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                      </span>
                     </div>
                   </article>
                 );
