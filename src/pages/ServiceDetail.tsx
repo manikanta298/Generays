@@ -49,6 +49,7 @@ import { framework, services } from "@/content/site";
 import { getServiceMedia } from "@/content/media";
 import { IconChip } from "@/components/futuristic";
 import NotFoundPage from "@/pages/NotFound";
+import "./ServiceDetail.css";
 
 const itemIcons: Array<[string[], LucideIcon]> = [
   [["corporate", "business", "brand"], BriefcaseBusiness],
@@ -176,11 +177,11 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-b border-border bg-background">
+      <section className={`service-included service-included--${service.letter} relative overflow-hidden border-b border-border bg-background`} data-service={service.slug}>
         <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${sectionVariant}`} aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-18">
-          <div className="grid gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:items-start">
-            <div className="lg:sticky lg:top-28">
+        <div className="relative mx-auto max-w-6xl px-5 py-12 md:py-16">
+          <div className="service-included__layout grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
+            <div className="service-included__intro lg:sticky lg:top-28">
               <div className="flex items-center gap-3">
                 <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary text-sm font-bold text-primary-foreground shadow-[0_12px_28px_-14px_hsl(var(--primary))]">
                   {service.letter}
@@ -199,17 +200,17 @@ export default function ServiceDetailPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="service-included__grid grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {service.items.map((item, index) => {
                 const Icon = getItemIcon(item);
                 return (
                   <article
                     key={item}
-                    className="group relative flex min-h-[108px] items-center overflow-hidden rounded-2xl border border-border/80 bg-white/90 p-5 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_40px_-24px_rgba(37,99,235,0.28)]"
+                    className="service-included__card group relative flex min-h-[104px] items-center overflow-hidden rounded-2xl border border-border/80 bg-white/90 p-4 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_40px_-24px_rgba(37,99,235,0.28)]"
                   >
                     <div className="absolute right-0 top-0 h-16 w-16 rounded-bl-[2rem] bg-primary/[0.04] transition-colors group-hover:bg-primary/[0.09]" aria-hidden="true" />
                     <div className="relative flex items-start gap-3">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
+                      <span className="service-included__icon grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                       <div className="min-w-0">
