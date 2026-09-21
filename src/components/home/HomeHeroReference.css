@@ -198,7 +198,7 @@
 }
 
 .home-hero__image {
-  margin left:10px;
+  margin-left: 10px;
   display: block;
   width: min(100%, 690px);
   height: auto;
@@ -213,6 +213,14 @@
     grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr);
     gap: 24px;
     padding-block: 40px 52px;
+  }
+
+  .home-hero__content {
+    margin-left: clamp(24px, 6vw, 100px);
+  }
+
+  .home-hero__actions {
+    margin-right: clamp(0px, 4vw, 66px);
   }
 
   .home-hero__title {
@@ -233,6 +241,7 @@
 
   .home-hero__content {
     max-width: none;
+    margin-left: 0;
     text-align: center;
   }
 
@@ -262,6 +271,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 11px;
+    margin-right: 0;
   }
 
   .home-hero__primary,
