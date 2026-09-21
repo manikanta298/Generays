@@ -21,8 +21,7 @@
   position: relative;
   z-index: 2;
   max-width: 640px;
-  
-  margin:25px
+  margin-left:70px; 
 }
 
 .home-hero__eyebrow {
