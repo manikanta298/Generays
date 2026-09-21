@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import {
   ArrowRight,
   BadgeCheck,
-  BarChart3,
   BellRing,
   Blocks,
   Bot,
@@ -41,7 +40,6 @@ import {
   Store,
   Tag,
   Target,
-  Truck,
   Users,
   Video,
   Wrench,
