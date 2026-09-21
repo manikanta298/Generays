@@ -15,7 +15,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5 lg:px-8 lg:pt-6">
+    <header className="sticky top-0 z-50 w-full bg-background/95 px-3 py-3 backdrop-blur-md sm:px-5 sm:py-4 lg:px-8 lg:py-5">
       <div className="site-header-shell mx-auto flex h-14 w-full max-w-6xl items-center justify-between rounded-full border border-white/70 bg-white/65 px-3 shadow-[0_10px_30px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl sm:h-[66px] sm:px-5 lg:h-[72px] lg:px-6">
         <Link to="/" className="shrink-0 rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" onClick={() => setOpen(false)} aria-label="Generays home">
           <img src="/Generays.png" alt="Generays" className="h-auto w-[112px] sm:w-[132px] lg:w-[150px]" />
