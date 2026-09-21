@@ -210,7 +210,7 @@
 @media (max-width: 1024px) {
   .home-hero__container {
     width: min(100% - 40px, 960px);
-    grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr);
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
     gap: 24px;
     padding-block: 40px 52px;
   }
