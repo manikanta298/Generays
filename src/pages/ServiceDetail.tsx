@@ -200,7 +200,7 @@ export default function ServiceDetailPage() {
 
       <section className={`service-included service-included--${service.letter} relative overflow-hidden border-b border-border bg-background`} data-service={service.slug}>
         <div className={`service-included__wash service-included__wash--${service.letter}`} aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-18 lg:py-20">
+        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-16 lg:py-20">
           <div className="service-included__layout">
             <div className="service-included__intro">
               <div className="service-included__eyebrow-row">
@@ -237,19 +237,17 @@ export default function ServiceDetailPage() {
                     className="service-included__card group"
                     role="listitem"
                     tabIndex={0}
-                    style={{ "--card-index": index } as React.CSSProperties}
                   >
                     <div className="service-included__card-glow" aria-hidden="true" />
-                    <div className="service-included__card-top">
-                      <span className="service-included__number">{String(index + 1).padStart(2, "0")}</span>
+                    <div className="service-included__card-content">
                       <span className="service-included__icon" aria-hidden="true">
                         <Icon className="h-5 w-5" strokeWidth={1.8} />
                       </span>
-                    </div>
-
-                    <div className="service-included__card-copy">
-                      <h3>{item}</h3>
-                      <p>{getCapabilityDescription(item)}</p>
+                      <div className="service-included__card-copy">
+                        <span className="service-included__number">{String(index + 1).padStart(2, "0")}</span>
+                        <h3>{item}</h3>
+                        <p>{getCapabilityDescription(item)}</p>
+                      </div>
                     </div>
                   </article>
                 );
