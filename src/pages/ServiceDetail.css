@@ -3,8 +3,8 @@
    Content stays data-driven; only the visual treatment changes per service accent.
 */
 .service-included {
-  --service-accent: #2563eb;
-  --service-accent-rgb: 37, 99, 235;
+  --service-accent: #10388F;
+  --service-accent-rgb: 16, 56, 143;
   --service-soft: rgba(37, 99, 235, .10);
   --service-soft-strong: rgba(37, 99, 235, .16);
   --service-line: rgba(37, 99, 235, .15);
@@ -13,17 +13,17 @@
     linear-gradient(180deg, #fbfcff 0%, #ffffff 54%, #f8fbff 100%);
 }
 
-.service-included--A { --service-accent: #2563eb; --service-accent-rgb: 37,99,235; --service-soft: rgba(37,99,235,.10); }
-.service-included--B { --service-accent: #7c3aed; --service-accent-rgb: 124,58,237; --service-soft: rgba(124,58,237,.10); }
-.service-included--C { --service-accent: #f97316; --service-accent-rgb: 249,115,22; --service-soft: rgba(249,115,22,.10); }
-.service-included--D { --service-accent: #0284c7; --service-accent-rgb: 2,132,199; --service-soft: rgba(2,132,199,.10); }
-.service-included--E { --service-accent: #059669; --service-accent-rgb: 5,150,105; --service-soft: rgba(5,150,105,.10); }
-.service-included--F { --service-accent: #4f46e5; --service-accent-rgb: 79,70,229; --service-soft: rgba(79,70,229,.10); }
-.service-included--G { --service-accent: #db2777; --service-accent-rgb: 219,39,119; --service-soft: rgba(219,39,119,.10); }
-.service-included--H { --service-accent: #ea580c; --service-accent-rgb: 234,88,12; --service-soft: rgba(234,88,12,.10); }
-.service-included--I { --service-accent: #0891b2; --service-accent-rgb: 8,145,178; --service-soft: rgba(8,145,178,.10); }
-.service-included--J { --service-accent: #475569; --service-accent-rgb: 71,85,105; --service-soft: rgba(71,85,105,.10); }
-.service-included--K { --service-accent: #0f766e; --service-accent-rgb: 15,118,110; --service-soft: rgba(15,118,110,.10); }
+.service-included--A { --service-accent: #10388F; --service-accent-rgb: 16,56,143; --service-soft: rgba(16,56,143,.10); }
+.service-included--B { --service-accent: #1749A8; --service-accent-rgb: 23,73,168; --service-soft: rgba(23,73,168,.10); }
+.service-included--C { --service-accent: #2857B8; --service-accent-rgb: 40,87,184; --service-soft: rgba(40,87,184,.10); }
+.service-included--D { --service-accent: #3568C7; --service-accent-rgb: 53,104,199; --service-soft: rgba(53,104,199,.10); }
+.service-included--E { --service-accent: #2450A0; --service-accent-rgb: 36,80,160; --service-soft: rgba(36,80,160,.10); }
+.service-included--F { --service-accent: #3D5FC0; --service-accent-rgb: 61,95,192; --service-soft: rgba(61,95,192,.10); }
+.service-included--G { --service-accent: #1B4A9E; --service-accent-rgb: 27,74,158; --service-soft: rgba(27,74,158,.10); }
+.service-included--H { --service-accent: #2F63B5; --service-accent-rgb: 47,99,181; --service-soft: rgba(47,99,181,.10); }
+.service-included--I { --service-accent: #214F9F; --service-accent-rgb: 33,79,159; --service-soft: rgba(33,79,159,.10); }
+.service-included--J { --service-accent: #526FAF; --service-accent-rgb: 82,111,175; --service-soft: rgba(82,111,175,.10); }
+.service-included--K { --service-accent: #10388F; --service-accent-rgb: 16,56,143; --service-soft: rgba(16,56,143,.10); }
 
 .service-included__wash {
   position: absolute;
@@ -106,7 +106,7 @@
   min-height: 34px;
   align-items: center;
   padding: 7px 13px;
-  border: 1px solid rgba(37,99,235,.13);
+  border: 1px solid rgba(16,56,143,.13);
   border-radius: 999px;
   background: rgba(255,255,255,.82);
   color: #52617e;
@@ -219,8 +219,8 @@
 }
 
 .service-included__card:nth-child(3n + 1) { --card-accent: var(--service-accent); }
-.service-included__card:nth-child(3n + 2) { --card-accent: #4f46e5; }
-.service-included__card:nth-child(3n) { --card-accent: #06b6d4; }
+.service-included__card:nth-child(3n + 2) { --card-accent: #2F5FBE; }
+.service-included__card:nth-child(3n) { --card-accent: #6A86C9; }
 
 .service-included__card-glow {
   position: absolute;
@@ -236,11 +236,11 @@
 }
 
 .service-included__card:nth-child(3n + 2) .service-included__card-glow {
-  background: radial-gradient(circle, rgba(124,58,237,.11), transparent 68%);
+  background: radial-gradient(circle, rgba(47,95,190,.11), transparent 68%);
 }
 
 .service-included__card:nth-child(3n) .service-included__card-glow {
-  background: radial-gradient(circle, rgba(6,182,212,.11), transparent 68%);
+  background: radial-gradient(circle, rgba(106,134,201,.11), transparent 68%);
 }
 
 .service-included__card-content {
