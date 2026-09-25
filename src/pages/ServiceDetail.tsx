@@ -136,23 +136,6 @@ const getCapabilityDescription = (label: string) => {
   return "A focused capability shaped to support the service outcome and the wider brand system.";
 };
 
-const getSectionVariant = (letter: string) => {
-  const variants = {
-    A: "from-indigo-50 via-white to-sky-50",
-    B: "from-violet-50 via-white to-fuchsia-50",
-    C: "from-amber-50 via-white to-orange-50",
-    D: "from-sky-50 via-white to-cyan-50",
-    E: "from-emerald-50 via-white to-teal-50",
-    F: "from-blue-50 via-white to-indigo-50",
-    G: "from-pink-50 via-white to-rose-50",
-    H: "from-orange-50 via-white to-yellow-50",
-    I: "from-cyan-50 via-white to-blue-50",
-    J: "from-slate-100 via-white to-slate-50",
-    K: "from-green-50 via-white to-lime-50",
-  } as const;
-  return variants[letter as keyof typeof variants] ?? "from-indigo-50 via-white to-sky-50";
-};
-
 export default function ServiceDetailPage() {
   const { slug = "" } = useParams<{ slug: string }>();
   const service = services.find((item) => item.slug === slug);
@@ -161,7 +144,6 @@ export default function ServiceDetailPage() {
 
   const media = getServiceMedia(service.slug);
   const others = services.filter((item) => item.slug !== service.slug).slice(0, 3);
-  const sectionVariant = getSectionVariant(service.letter);
 
   return (
     <>
