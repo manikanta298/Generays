@@ -9,7 +9,6 @@ import {
   Building2,
   CalendarCheck2,
   Camera,
-  Check,
   Cloud,
   Code2,
   CreditCard,
@@ -115,21 +114,26 @@ const getItemIcon = (label: string) => {
   return match?.[1] ?? BadgeCheck;
 };
 
-const getSectionVariant = (letter: string) => {
-  const variants = {
-    A: "from-indigo-50 via-white to-sky-50",
-    B: "from-violet-50 via-white to-fuchsia-50",
-    C: "from-amber-50 via-white to-orange-50",
-    D: "from-sky-50 via-white to-cyan-50",
-    E: "from-emerald-50 via-white to-teal-50",
-    F: "from-blue-50 via-white to-indigo-50",
-    G: "from-pink-50 via-white to-rose-50",
-    H: "from-orange-50 via-white to-yellow-50",
-    I: "from-cyan-50 via-white to-blue-50",
-    J: "from-slate-100 via-white to-slate-50",
-    K: "from-green-50 via-white to-lime-50",
-  } as const;
-  return variants[letter as keyof typeof variants] ?? "from-indigo-50 via-white to-sky-50";
+const getCapabilityDescription = (label: string) => {
+  const value = label.toLowerCase();
+
+  if (value.includes("logo") || value.includes("mark") || value.includes("emblem")) return "A distinctive visual mark designed to stay recognisable across every touchpoint.";
+  if (value.includes("brand") || value.includes("identity") || value.includes("guideline")) return "A clear brand system that keeps every customer-facing detail consistent.";
+  if (value.includes("strategy") || value.includes("positioning")) return "A focused direction that clarifies your audience, message and market position.";
+  if (value.includes("colour") || value.includes("color") || value.includes("typography")) return "A considered visual choice that strengthens recognition and communicates personality.";
+  if (value.includes("voice") || value.includes("content") || value.includes("copy")) return "Clear, consistent communication shaped around your audience and brand personality.";
+  if (value.includes("website") || value.includes("landing") || value.includes("portal") || value.includes("cms")) return "A responsive digital experience structured around usability, clarity and conversion.";
+  if (value.includes("shopify") || value.includes("woocommerce") || value.includes("magento") || value.includes("commerce") || value.includes("store")) return "A commerce-ready experience designed to make browsing, buying and managing orders easier.";
+  if (value.includes("payment") || value.includes("billing") || value.includes("order") || value.includes("inventory")) return "A reliable business workflow that keeps day-to-day operations organised and connected.";
+  if (value.includes("social") || value.includes("instagram") || value.includes("facebook") || value.includes("linkedin") || value.includes("youtube") || value.includes("pinterest") || value.includes("snapchat") || value.includes("twitter") || value.includes("whatsapp")) return "Channel-ready creative and communication built for consistent audience engagement.";
+  if (value.includes("marketing") || value.includes("advertising") || value.includes("campaign") || value.includes("lead") || value.includes("remarketing") || value.includes("growth")) return "A measurable growth activity focused on visibility, qualified demand and stronger conversion.";
+  if (value.includes("amazon") || value.includes("marketplace") || value.includes("listing") || value.includes("seller") || value.includes("a+")) return "Marketplace-ready optimisation that helps products present clearly and compete effectively.";
+  if (value.includes("email") || value.includes("workspace") || value.includes("microsoft")) return "Professional communication infrastructure configured for reliability, security and everyday use.";
+  if (value.includes("security") || value.includes("backup") || value.includes("maintenance") || value.includes("monitoring") || value.includes("support") || value.includes("speed") || value.includes("upgrade") || value.includes("plugin")) return "Ongoing technical care that keeps the digital experience secure, healthy and dependable.";
+  if (value.includes("automation") || value.includes("chatbot") || value.includes("notification") || value.includes("reminder") || value.includes("broadcast") || value.includes("integration")) return "A connected workflow that reduces repetitive work and keeps customer communication moving.";
+  if (value.includes("application") || value.includes("erp") || value.includes("crm") || value.includes("dashboard") || value.includes("admin") || value.includes("software") || value.includes("pos")) return "A purpose-built digital system that turns complex business processes into usable workflows.";
+  if (value.includes("packaging") || value.includes("flyer") || value.includes("banner") || value.includes("brochure") || value.includes("profile") || value.includes("catalogue") || value.includes("card") || value.includes("letterhead") || value.includes("presentation") || value.includes("certificate") || value.includes("invitation") || value.includes("menu") || value.includes("cover")) return "A polished creative asset designed to communicate clearly and strengthen the brand experience.";
+  return "A focused capability shaped to support the service outcome and the wider brand system.";
 };
 
 export default function ServiceDetailPage() {
@@ -140,7 +144,6 @@ export default function ServiceDetailPage() {
 
   const media = getServiceMedia(service.slug);
   const others = services.filter((item) => item.slug !== service.slug).slice(0, 3);
-  const sectionVariant = getSectionVariant(service.letter);
 
   return (
     <>
@@ -178,48 +181,55 @@ export default function ServiceDetailPage() {
       </section>
 
       <section className={`service-included service-included--${service.letter} relative overflow-hidden border-b border-border bg-background`} data-service={service.slug}>
-        <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${sectionVariant}`} aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 py-12 md:py-16">
-          <div className="service-included__layout grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
-            <div className="service-included__intro lg:sticky lg:top-28">
-              <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary text-sm font-bold text-primary-foreground shadow-[0_12px_28px_-14px_hsl(var(--primary))]">
-                  {service.letter}
-                </span>
-                <span className="font-display text-xs font-bold uppercase tracking-[0.2em] text-primary">What's included</span>
+        <div className={`service-included__wash service-included__wash--${service.letter}`} aria-hidden="true" />
+        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-16 lg:py-20">
+          <div className="service-included__layout">
+            <div className="service-included__intro">
+              <div className="service-included__eyebrow-row">
+                <span className="service-included__letter">{service.letter}</span>
+                <span className="service-included__eyebrow">What's included</span>
               </div>
-              <h2 className="mt-5 max-w-sm font-display text-3xl font-bold leading-tight text-foreground md:text-4xl">
-                Everything needed to make {service.title.toLowerCase()} work.
+
+              <h2 className="service-included__heading">
+                Everything needed to make <span>{service.title.toLowerCase()}</span> work.
               </h2>
-              <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
-                A focused set of capabilities, arranged for quick scanning and easy decision-making.
+
+              <p className="service-included__description">
+                {service.intro}
               </p>
-              <div className="mt-7 flex flex-wrap gap-2">
-                <span className="rounded-full border border-primary/15 bg-white/80 px-3 py-1.5 text-xs font-semibold text-muted-foreground">{service.items.length} capabilities</span>
-                <span className="rounded-full border border-primary/15 bg-white/80 px-3 py-1.5 text-xs font-semibold text-muted-foreground">Built around your goals</span>
+
+              <div className="service-included__meta">
+                <span>{service.items.length} capabilities</span>
+                <span>Built around your goals</span>
+              </div>
+
+              <div className="service-included__visual" aria-hidden="true">
+                <img src={media.image} alt="" />
+                <div className="service-included__visual-wash" />
+                <div className="service-included__visual-label">{service.letter} / {service.title}</div>
               </div>
             </div>
 
-            <div className="service-included__grid grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="service-included__grid" role="list" aria-label={`What's included in ${service.title}`}>
               {service.items.map((item, index) => {
                 const Icon = getItemIcon(item);
                 return (
                   <article
                     key={item}
-                    className="service-included__card group relative flex min-h-[104px] items-center overflow-hidden rounded-2xl border border-border/80 bg-white/90 p-4 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_40px_-24px_rgba(37,99,235,0.28)]"
+                    className="service-included__card group"
+                    role="listitem"
+                    tabIndex={0}
                   >
-                    <div className="absolute right-0 top-0 h-16 w-16 rounded-bl-[2rem] bg-primary/[0.04] transition-colors group-hover:bg-primary/[0.09]" aria-hidden="true" />
-                    <div className="relative flex items-start gap-3">
-                      <span className="service-included__icon grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
+                    <div className="service-included__card-glow" aria-hidden="true" />
+                    <div className="service-included__card-content">
+                      <span className="service-included__icon" aria-hidden="true">
+                        <Icon className="h-5 w-5" strokeWidth={1.8} />
                       </span>
-                      <div className="min-w-0">
-                        <span className="text-[11px] font-bold tracking-wider text-primary/60">{String(index + 1).padStart(2, "0")}</span>
-                        <h3 className="mt-0.5 text-sm font-semibold leading-5 text-foreground">{item}</h3>
+                      <div className="service-included__card-copy">
+                        <span className="service-included__number">{String(index + 1).padStart(2, "0")}</span>
+                        <h3>{item}</h3>
+                        <p>{getCapabilityDescription(item)}</p>
                       </div>
-                      <span className="ml-auto grid h-7 w-7 shrink-0 place-items-center self-center rounded-full border border-primary/15 bg-primary/5 text-primary/55 transition-all group-hover:border-primary/25 group-hover:bg-primary/10 group-hover:text-primary" aria-hidden="true">
-                        <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
-                      </span>
                     </div>
                   </article>
                 );
