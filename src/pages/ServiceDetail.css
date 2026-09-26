@@ -33,7 +33,7 @@
 .service-included__header {
   position:relative;
   display:grid;
-  grid-template-columns:minmax(0, 1.08fr) minmax(330px, .92fr);
+  grid-template-columns:minmax(0, 1fr);
   gap:clamp(2rem, 5vw, 5rem);
   align-items:center;
 }
@@ -216,7 +216,7 @@
 
 @media (max-width:1100px) {
   .service-included__header {
-    grid-template-columns:minmax(0,1fr) minmax(290px,.8fr);
+    grid-template-columns:1fr;
     gap:2rem;
   }
 
@@ -229,7 +229,7 @@
 @media (max-width:800px) {
   .service-included__header {
     grid-template-columns:1fr;
-    gap:22px;
+    gap:0;
   }
 
   .service-included__heading { max-width:760px; }
