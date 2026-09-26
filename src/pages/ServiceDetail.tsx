@@ -204,12 +204,6 @@ export default function ServiceDetailPage() {
               </div>
             </div>
 
-            <div className="service-included__visual" aria-hidden="true">
-              <div className="service-included__visual-orbit service-included__visual-orbit--one" />
-              <div className="service-included__visual-orbit service-included__visual-orbit--two" />
-              <div className="service-included__visual-wash" />
-              <span className="service-included__visual-label">{service.letter} / {service.title}</span>
-            </div>
           </div>
 
           <div className="service-included__grid" role="list" aria-label={`What's included in ${service.title}`}>
