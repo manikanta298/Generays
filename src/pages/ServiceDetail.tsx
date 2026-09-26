@@ -47,6 +47,7 @@ import {
 import { framework, services } from "@/content/site";
 import { getServiceMedia } from "@/content/media";
 import { IconChip } from "@/components/futuristic";
+import { LogoPortfolio } from "@/components/LogoPortfolio";
 import NotFoundPage from "@/pages/NotFound";
 import "./ServiceDetail.css";
 
@@ -233,6 +234,8 @@ export default function ServiceDetailPage() {
           </div>
         </div>
       </section>
+
+      {service.slug === "logo-design" && <LogoPortfolio />}
 
       <section className="border-b border-border bg-primary-soft">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
