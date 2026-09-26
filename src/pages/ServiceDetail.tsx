@@ -181,9 +181,9 @@ export default function ServiceDetailPage() {
       </section>
 
       <section className={`service-included service-included--${service.letter} relative overflow-hidden border-b border-border bg-background`} data-service={service.slug}>
-        <div className={`service-included__wash service-included__wash--${service.letter}`} aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-16 lg:py-20">
-          <div className="service-included__layout">
+        <div className="service-included__wash service-included__wash--top" aria-hidden="true" />
+        <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-18 lg:py-20">
+          <div className="service-included__header">
             <div className="service-included__intro">
               <div className="service-included__eyebrow-row">
                 <span className="service-included__letter">{service.letter}</span>
@@ -202,39 +202,41 @@ export default function ServiceDetailPage() {
                 <span>{service.items.length} capabilities</span>
                 <span>Built around your goals</span>
               </div>
-
-              <div className="service-included__visual" aria-hidden="true">
-                <img src={media.image} alt="" />
-                <div className="service-included__visual-wash" />
-                <div className="service-included__visual-label">{service.letter} / {service.title}</div>
-              </div>
             </div>
 
-            <div className="service-included__grid" role="list" aria-label={`What's included in ${service.title}`}>
-              {service.items.map((item, index) => {
-                const Icon = getItemIcon(item);
-                return (
-                  <article
-                    key={item}
-                    className="service-included__card group"
-                    role="listitem"
-                    tabIndex={0}
-                  >
-                    <div className="service-included__card-glow" aria-hidden="true" />
-                    <div className="service-included__card-content">
-                      <span className="service-included__icon" aria-hidden="true">
-                        <Icon className="h-5 w-5" strokeWidth={1.8} />
-                      </span>
-                      <div className="service-included__card-copy">
-                        <span className="service-included__number">{String(index + 1).padStart(2, "0")}</span>
-                        <h3>{item}</h3>
-                        <p>{getCapabilityDescription(item)}</p>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+            <div className="service-included__visual" aria-hidden="true">
+              <div className="service-included__visual-orbit service-included__visual-orbit--one" />
+              <div className="service-included__visual-orbit service-included__visual-orbit--two" />
+              <img src={media.image} alt="" />
+              <div className="service-included__visual-wash" />
+              <span className="service-included__visual-label">{service.letter} / {service.title}</span>
             </div>
+          </div>
+
+          <div className="service-included__grid" role="list" aria-label={`What's included in ${service.title}`}>
+            {service.items.map((item, index) => {
+              const Icon = getItemIcon(item);
+              return (
+                <article
+                  key={item}
+                  className="service-included__card group"
+                  role="listitem"
+                  tabIndex={0}
+                >
+                  <div className="service-included__card-glow" aria-hidden="true" />
+                  <div className="service-included__card-top">
+                    <span className="service-included__icon" aria-hidden="true">
+                      <Icon className="h-5 w-5" strokeWidth={1.8} />
+                    </span>
+                    <span className="service-included__number">{String(index + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="service-included__card-copy">
+                    <h3>{item}</h3>
+                    <p>{getCapabilityDescription(item)}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
