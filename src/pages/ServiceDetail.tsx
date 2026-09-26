@@ -207,7 +207,6 @@ export default function ServiceDetailPage() {
             <div className="service-included__visual" aria-hidden="true">
               <div className="service-included__visual-orbit service-included__visual-orbit--one" />
               <div className="service-included__visual-orbit service-included__visual-orbit--two" />
-              <img src={media.image} alt="" />
               <div className="service-included__visual-wash" />
               <span className="service-included__visual-label">{service.letter} / {service.title}</span>
             </div>
