@@ -188,9 +188,14 @@
 .service-included__grid {
   position:relative;
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(100%, 248px),1fr));
   gap:16px;
   margin-top:28px;
+  align-items:stretch;
+}
+
+.service-included__card {
+  height:100%;
 }
 
 .service-included__card {
@@ -298,7 +303,9 @@
   }
 
   .service-included__heading { font-size:clamp(2.2rem,5vw,3.6rem); }
-  .service-included__grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .service-included__grid {
+    grid-template-columns:repeat(auto-fit,minmax(min(100%, 260px),1fr));
+  }
 }
 
 @media (max-width:800px) {
