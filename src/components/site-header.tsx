@@ -31,7 +31,7 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <div className="site-header-mobile-menu absolute left-3 right-3 top-[4.5rem] overflow-hidden rounded-[24px] border shadow-lg sm:left-5 sm:right-5 lg:hidden">
+        <div className="site-header-mobile-menu absolute left-3 right-3 top-[4.5rem] overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-lg backdrop-blur-xl sm:left-5 sm:right-5 lg:hidden">
           <nav className="mx-auto flex w-full flex-col p-3 sm:p-4" aria-label="Mobile navigation">
             {nav.map((item) => <Link key={item.href} to={item.href} onClick={() => setOpen(false)} className="nav-link flex min-h-12 items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors">{item.label}</Link>)}
             <Link to="/contact" onClick={() => setOpen(false)} className="nav-action mt-2 flex min-h-11 items-center justify-center rounded-full border border-primary bg-primary px-4 py-2.5 text-center text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-primary/90">Build My Brand</Link>
