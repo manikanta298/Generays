@@ -167,7 +167,7 @@ export default function ServiceDetailPage() {
             <p className="rise-in mt-5 max-w-2xl font-display text-lg font-semibold text-primary">{service.tagline}</p>
             <p className="rise-in mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{service.intro}</p>
           </div>
-          <div className="scanline group relative overflow-hidden rounded-2xl border border-primary/25 shadow-[var(--shadow-glow)]">
+          <div className="scanline group relative overflow-hidden rounded-2xl border border-primary/25">
             <img
               src={media.image}
               alt={media.alt}
