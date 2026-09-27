@@ -27,9 +27,9 @@ import websiteCareAmc from "@/assets/10_Website_Care_AMC.png";
 import whatsappAutomation from "@/assets/11_Customer_Engagement_WhatsApp_Automation.png";
 
 export { default as heroBlueprint } from "@/assets/12_Services_Architecture_Overview.png";
-export { default as aboutImage } from "@/assets/section-about.jpg";
-export { default as processImage } from "@/assets/section-process.jpg";
-export { default as contactImage } from "@/assets/section-contact.jpg";
+export { default as aboutImage } from "@/assets/01_Brand_Foundation.png";
+export { default as processImage } from "@/assets/12_Services_Architecture_Overview.png";
+export { default as contactImage } from "@/assets/09_Business_Communication.png";
 
 /** Accent utility classes — colours resolve from design tokens, never hardcoded hex. */
 export type AccentClass =
