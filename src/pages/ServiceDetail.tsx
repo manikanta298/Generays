@@ -167,16 +167,14 @@ export default function ServiceDetailPage() {
             <p className="rise-in mt-5 max-w-2xl font-display text-lg font-semibold text-primary">{service.tagline}</p>
             <p className="rise-in mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{service.intro}</p>
           </div>
-          <div className="scanline group relative overflow-hidden rounded-2xl border border-primary/25">
+          <div className="overflow-hidden rounded-2xl">
             <img
               src={media.image}
               alt={media.alt}
               loading="eager"
               fetchPriority="high"
-              className="aspect-[4/3] w-full object-cover saturate-[0.75] transition-all duration-700 group-hover:scale-105 group-hover:saturate-150"
+              className="aspect-[4/3] w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/35 via-transparent to-neon-violet/20 mix-blend-screen" />
-            <div className="blueprint-grid-fine absolute inset-0 opacity-30" />
           </div>
         </div>
       </section>
