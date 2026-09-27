@@ -28,7 +28,7 @@ export function PageHero({
         </div>
 
         {image ? (
-          <div className="scanline group relative hidden overflow-hidden rounded-2xl border border-primary/25 bg-card shadow-[var(--shadow-glow)] md:block">
+          <div className="scanline group relative hidden overflow-hidden rounded-2xl border border-primary/25 bg-card md:block">
             <img
               src={image}
               alt={imageAlt ?? ""}
