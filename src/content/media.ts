@@ -14,19 +14,19 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import brandFoundation from "@/assets/svc-brand-foundation.jpg";
-import logoDesign from "@/assets/svc-logo-design.jpg";
-import creativeStudio from "@/assets/svc-creative-studio.jpg";
-import websiteDevelopment from "@/assets/svc-website-development.jpg";
-import ecommerceDevelopment from "@/assets/svc-ecommerce-development.jpg";
-import webApplications from "@/assets/svc-web-applications.jpg";
-import digitalMarketing from "@/assets/svc-digital-marketing.jpg";
-import marketplaceGrowth from "@/assets/svc-marketplace-growth.jpg";
-import businessCommunication from "@/assets/svc-business-communication.jpg";
-import websiteCareAmc from "@/assets/svc-website-care-amc.jpg";
-import whatsappAutomation from "@/assets/svc-whatsapp-automation.jpg";
+import brandFoundation from "@/assets/01_Brand_Foundation.png";
+import logoDesign from "@/assets/02_Logo_Design.png";
+import creativeStudio from "@/assets/03_Creative_Studio.png";
+import websiteDevelopment from "@/assets/04_Website_Development.png";
+import ecommerceDevelopment from "@/assets/05_Ecommerce_Development.png";
+import webApplications from "@/assets/06_Web_Applications.png";
+import digitalMarketing from "@/assets/07_Digital_Marketing_Social_Media.png";
+import marketplaceGrowth from "@/assets/08_Amazon_Marketplace_Growth.png";
+import businessCommunication from "@/assets/09_Business_Communication.png";
+import websiteCareAmc from "@/assets/10_Website_Care_AMC.png";
+import whatsappAutomation from "@/assets/11_Customer_Engagement_WhatsApp_Automation.png";
 
-export { default as heroBlueprint } from "@/assets/hero-blueprint.jpg";
+export { default as heroBlueprint } from "@/assets/12_Services_Architecture_Overview.png";
 export { default as aboutImage } from "@/assets/section-about.jpg";
 export { default as processImage } from "@/assets/section-process.jpg";
 export { default as contactImage } from "@/assets/section-contact.jpg";
