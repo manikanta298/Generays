@@ -10,65 +10,65 @@ import {
   Settings,
   BarChart3,
 } from "lucide-react";
-import logoWithoutIdentity from "@/assets/A logo without identity.png";
-import websiteWithoutStrategy from "@/assets/A website without strategy.png";
-import socialMediaWithoutConsistency from "@/assets/Social media without consistency.png";
-import advertisingWithoutBranding from "@/assets/Advertising without branding.png";
+// import logoWithoutIdentity from "@/assets/A logo without identity.png";
+// import websiteWithoutStrategy from "@/assets/A website without strategy.png";
+// import socialMediaWithoutConsistency from "@/assets/Social media without consistency.png";
+// import advertisingWithoutBranding from "@/assets/Advertising without branding.png";
 
-const cards = [
-  {
-    icon: Sparkles,
-    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-500",
-    title: "A logo without identity",
-    desc: "is decoration.",
-    art: (
-      <img
-        src={logoWithoutIdentity}
-        alt="A logo without identity"
-        className="h-full w-full object-cover"
-      />
-    ),
-  },
-  {
-    icon: Monitor,
-    iconBg: "bg-gradient-to-br from-blue-500 to-sky-500",
-    title: "A website without strategy",
-    desc: "is a brochure.",
-    art: (
-      <img
-        src={websiteWithoutStrategy}
-        alt="A website without strategy"
-        className="h-full w-full object-cover"
-      />
-    ),
-  },
-  {
-    icon: Users,
-    iconBg: "bg-gradient-to-br from-teal-400 to-emerald-500",
-    title: "Social media without consistency",
-    desc: "is noise.",
-    art: (
-      <img
-        src={socialMediaWithoutConsistency}
-        alt="Social media without consistency"
-        className="h-full w-full object-cover"
-      />
-    ),
-  },
-  {
-    icon: Megaphone,
-    iconBg: "bg-gradient-to-br from-sky-500 to-blue-600",
-    title: "Advertising without branding",
-    desc: "is expense.",
-    art: (
-      <img
-        src={advertisingWithoutBranding}
-        alt="Advertising without branding"
-        className="h-full w-full object-cover"
-      />
-    ),
-  },
-];
+// const cards = [
+//   {
+//     icon: Sparkles,
+//     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-500",
+//     title: "A logo without identity",
+//     desc: "is decoration.",
+//     art: (
+//       <img
+//         src={logoWithoutIdentity}
+//         alt="A logo without identity"
+//         className="h-full w-full object-cover"
+//       />
+//     ),
+//   },
+//   {
+//     icon: Monitor,
+//     iconBg: "bg-gradient-to-br from-blue-500 to-sky-500",
+//     title: "A website without strategy",
+//     desc: "is a brochure.",
+//     art: (
+//       <img
+//         src={websiteWithoutStrategy}
+//         alt="A website without strategy"
+//         className="h-full w-full object-cover"
+//       />
+//     ),
+//   },
+//   {
+//     icon: Users,
+//     iconBg: "bg-gradient-to-br from-teal-400 to-emerald-500",
+//     title: "Social media without consistency",
+//     desc: "is noise.",
+//     art: (
+//       <img
+//         src={socialMediaWithoutConsistency}
+//         alt="Social media without consistency"
+//         className="h-full w-full object-cover"
+//       />
+//     ),
+//   },
+//   {
+//     icon: Megaphone,
+//     iconBg: "bg-gradient-to-br from-sky-500 to-blue-600",
+//     title: "Advertising without branding",
+//     desc: "is expense.",
+//     art: (
+//       <img
+//         src={advertisingWithoutBranding}
+//         alt="Advertising without branding"
+//         className="h-full w-full object-cover"
+//       />
+//     ),
+//   },
+// ];
 
 const steps = [
   { icon: FileText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-indigo-500", text: "text-indigo-600" },
@@ -114,7 +114,7 @@ export function CorePositioningSection() {
           ))}
         </div>
 
-        <div className="mb-10 flex items-start gap-3 rounded-2xl bg-white px-4 py-5 shadow-sm sm:items-center sm:gap-4 sm:px-6">
+        {/* <div className="mb-10 flex items-start gap-3 rounded-2xl bg-white px-4 py-5 shadow-sm sm:items-center sm:gap-4 sm:px-6">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-blue-500">
             <Check className="text-lg text-white" />
           </div>
@@ -122,7 +122,7 @@ export function CorePositioningSection() {
             At GeneRays, every service connects together to create{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text font-semibold text-transparent">one powerful business ecosystem.</span>
           </p>
-        </div>
+        </div> */}
 
         <div className="rounded-2xl bg-white px-4 py-8 shadow-sm sm:px-6 sm:py-10">
           <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-2">
