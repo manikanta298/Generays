@@ -8,7 +8,7 @@ import { ecosystem, framework } from "@/content/site";
 export default function ProcessPage() {
   return (
     <>
-      <PageHero eyebrow="Brand engineering framework" title="The blueprint, stage by stage." subtitle="Marketing begins only after your foundation is strong. Here is the exact order we work in — and why it protects your budget." image={processImage} imageAlt="Futuristic five-stage GeneRays process visualization" />
+      <PageHero eyebrow="Brand engineering framework" title="The blueprint, stage by stage." subtitle="Marketing begins only after your foundation is strong. Here is the exact order we work in — and why it protects your budget." image={processImage} imageAlt="Futuristic five-stage GeneRays process visualization" transparentImage />
       <section className="border-b border-border">
         <div className="mx-auto max-w-4xl px-5 py-20">
           <ol className="relative border-l border-border pl-8 md:pl-12">
