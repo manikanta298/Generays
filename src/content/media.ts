@@ -26,7 +26,6 @@ import businessCommunication from "@/assets/09_Business_Communication.png";
 import websiteCareAmc from "@/assets/10_Website_Care_AMC.png";
 import whatsappAutomation from "@/assets/11_Customer_Engagement_WhatsApp_Automation.png";
 
-export { default as heroBlueprint } from "@/assets/12_Services_Architecture_Overview.png";
 export { default as heroBlueprint } from "@/assets/Futuristic Digital Services Hub.png";
 export { default as aboutImage } from "@/assets/about-header.png";
 export { default as processImage } from "@/assets/Futuristic Tech Workflow Roadmap.png";
