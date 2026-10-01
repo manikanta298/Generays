@@ -55,15 +55,7 @@ export function CorePositioningSection() {
           ))}
         </div>
 
-        {/* <div className="mb-10 flex items-start gap-3 rounded-2xl bg-white px-4 py-5 shadow-sm sm:items-center sm:gap-4 sm:px-6">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-blue-500">
-            <Check className="text-lg text-white" />
-          </div>
-          <p className="text-sm leading-relaxed text-slate-700 sm:text-[15px] md:text-base">
-            At GeneRays, every service connects together to create{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text font-semibold text-transparent">one powerful business ecosystem.</span>
-          </p>
-        </div> */}
+       
 
         <div className="rounded-2xl bg-white px-4 py-8 shadow-sm sm:px-6 sm:py-10">
           <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-2">
