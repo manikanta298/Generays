@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Sparkles,
   Monitor,
   Users,
   Megaphone,
@@ -10,37 +9,6 @@ import {
   Settings,
   BarChart3,
 } from "lucide-react";
-
-const cards = [
-  {
-    icon: Sparkles,
-    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-500",
-    title: "A logo without identity",
-    desc: "is decoration.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-violet-100 via-white to-indigo-100"><Sparkles className="h-16 w-16 text-indigo-500 opacity-80" /></div>,
-  },
-  {
-    icon: Monitor,
-    iconBg: "bg-gradient-to-br from-blue-500 to-sky-500",
-    title: "A website without strategy",
-    desc: "is a brochure.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-blue-100 via-white to-sky-100"><Monitor className="h-16 w-16 text-blue-500 opacity-80" /></div>,
-  },
-  {
-    icon: Users,
-    iconBg: "bg-gradient-to-br from-teal-400 to-emerald-500",
-    title: "Social media without consistency",
-    desc: "is noise.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-teal-100 via-white to-emerald-100"><Users className="h-16 w-16 text-teal-500 opacity-80" /></div>,
-  },
-  {
-    icon: Megaphone,
-    iconBg: "bg-gradient-to-br from-sky-500 to-blue-600",
-    title: "Advertising without branding",
-    desc: "is expense.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-100 via-white to-blue-100"><Megaphone className="h-16 w-16 text-sky-500 opacity-80" /></div>,
-  },
-];
 
 const steps = [
   { icon: FileText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-indigo-500", text: "text-indigo-600" },
@@ -68,23 +36,6 @@ export function CorePositioningSection() {
           <br />
           Connected strategy creates growth.
         </p>
-
-        <div className="core-positioning__cards mb-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((c, i) => (
-            <article key={i} className="core-positioning__card flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1">
-              <div className="core-positioning__card-art relative h-36 shrink-0 bg-gradient-to-br from-indigo-50 to-blue-100 sm:h-40">
-                {c.art}
-                <div className={`absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-full border-4 border-white ${c.iconBg} shadow-md`}>
-                  <c.icon className="text-lg text-white" />
-                </div>
-              </div>
-              <div className="core-positioning__card-copy flex min-h-[96px] flex-1 flex-col justify-start px-5 pb-5 pt-8">
-                <h3 className="text-[15px] font-bold leading-snug text-slate-900">{c.title}</h3>
-                <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
-              </div>
-            </article>
-          ))}
-        </div>
 
        
 
