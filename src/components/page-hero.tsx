@@ -28,14 +28,16 @@ export function PageHero({
         </div>
 
         {image ? (
-          <div className="group relative hidden min-h-[360px] items-center justify-center md:flex">
+          <div className="scanline group relative hidden overflow-hidden rounded-2xl border border-primary/25 bg-card md:block">
             <img
               src={image}
               alt={imageAlt ?? ""}
               loading="eager"
               fetchPriority="high"
-              className="h-auto max-h-[460px] w-full object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.18)] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="aspect-[4/3] h-full w-full object-cover saturate-[0.7] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.02] group-hover:saturate-150 group-hover:brightness-100"
             />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/45 via-transparent to-neon-violet/25 mix-blend-screen transition-opacity duration-700 group-hover:opacity-70" />
+            <div className="blueprint-grid-fine absolute inset-0 opacity-40" />
           </div>
         ) : null}
       </div>
