@@ -13,38 +13,15 @@ import { useHomeMotion } from "@/hooks/use-home-motion";
 const testimonials = [
   {
     quote:
-      "The GeneRays team turned our vision into a clear, high-converting digital presence. Every detail feels intentional.",
-    name: "Sarah Chen",
-    designation: "Founder, GrowthBrand",
-    src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop",
+      "Thank u madhav Garu for giving a superb logo design in just two hours for our new firm. As logo should be printed on our machine mold in very short time and the way you responded and given logo design in just two hours was awesome. Even I think I asked you nearly 50 changes but the quality and the patience you had is superb. I strongly appreciate and refer undoubtedly. Thank you for your fabulous work ...",
+    name: "Sai Manoj Marneedi",
+    designation: "BNI Amigos, Eshwari Roofing Industry",
   },
   {
     quote:
-      "From strategy to launch, the process was seamless. Our new website finally represents the quality of our business.",
-    name: "Michael Rodriguez",
-    designation: "Director, InnovateSphere",
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    quote:
-      "GeneRays made complex digital work feel simple. The result is a stronger brand and a much better customer experience.",
-    name: "Emily Watson",
-    designation: "Operations Lead, CloudScale",
-    src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    quote:
-      "The combination of creative thinking and technical execution gave us exactly the digital foundation we needed.",
-    name: "James Kim",
-    designation: "Engineering Lead, DataPro",
-    src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    quote:
-      "Our brand now feels consistent across every touchpoint. GeneRays helped us turn ideas into a system that can scale.",
-    name: "Lisa Thompson",
-    designation: "VP of Technology, FutureNet",
-    src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=1200&auto=format&fit=crop",
+      "GeneRays having excellent skills in website marketing n designing websites. Me n my brother observed his skills n appreciated him and we have given our website marketing to him, posting ads of our website in Facebook n Twitter promotions. He is doing our work with attractive designs helpful in promotions. Thanking u Prabhas garu for ur dedication on our work n treating our work as your own web site n helpful in our growth.",
+    name: "Ramesh Kumar Nemani",
+    designation: "Client",
   },
 ];
 
