@@ -10,36 +10,6 @@ import {
   Settings,
   BarChart3,
 } from "lucide-react";
-const cards = [
-  {
-    icon: Sparkles,
-    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-500",
-    title: "A logo without identity",
-    desc: "is decoration.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-violet-100 via-white to-indigo-100"><Sparkles className="h-16 w-16 text-indigo-500 opacity-80" /></div>,
-  },
-  {
-    icon: Monitor,
-    iconBg: "bg-gradient-to-br from-blue-500 to-sky-500",
-    title: "A website without strategy",
-    desc: "is a brochure.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-blue-100 via-white to-sky-100"><Monitor className="h-16 w-16 text-blue-500 opacity-80" /></div>,
-  },
-  {
-    icon: Users,
-    iconBg: "bg-gradient-to-br from-teal-400 to-emerald-500",
-    title: "Social media without consistency",
-    desc: "is noise.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-teal-100 via-white to-emerald-100"><Users className="h-16 w-16 text-teal-500 opacity-80" /></div>,
-  },
-  {
-    icon: Megaphone,
-    iconBg: "bg-gradient-to-br from-sky-500 to-blue-600",
-    title: "Advertising without branding",
-    desc: "is expense.",
-    art: <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-100 via-white to-blue-100"><Megaphone className="h-16 w-16 text-sky-500 opacity-80" /></div>,
-  },
-];
 
 const steps = [
   { icon: FileText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-indigo-500", text: "text-indigo-600" },
