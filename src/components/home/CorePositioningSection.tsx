@@ -1,9 +1,7 @@
 import React from "react";
 import {
   Monitor,
-  Users,
   Megaphone,
-  Check,
   FileText,
   IdCard,
   Settings,
@@ -36,8 +34,6 @@ export function CorePositioningSection() {
           <br />
           Connected strategy creates growth.
         </p>
-
-       
 
         <div className="rounded-2xl bg-white px-4 py-8 shadow-sm sm:px-6 sm:py-10">
           <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-2">
