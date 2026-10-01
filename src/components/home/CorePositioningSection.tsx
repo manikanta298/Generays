@@ -19,24 +19,24 @@ const steps = [
 
 export function CorePositioningSection() {
   return (
-    <section className="w-full bg-[#F4F6FB] py-14 font-sans sm:py-16 lg:py-20">
+    <section className="w-full bg-white py-12 font-sans sm:py-14 lg:py-16">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-4 text-xs font-bold tracking-[0.2em] text-indigo-600">CORE POSITIONING</p>
-        <h2 className="mb-6 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl md:text-5xl">
-          We don't sell services.
+        <p className="mb-3 text-xs font-bold tracking-[0.2em] text-indigo-600">CORE POSITIONING</p>
+        <h2 className="mb-5 text-3xl font-extrabold leading-tight text-slate-950 sm:text-4xl md:text-5xl">
+          We don&apos;t sell services.
           <br />
           We build{" "}
           <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">business ecosystems.</span>
         </h2>
-        <div className="mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400" />
-        <p className="mb-10 max-w-xl text-base text-slate-500 sm:mb-12 md:text-lg">
+        <div className="mb-5 h-1 w-20 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400" />
+        <p className="mb-8 max-w-xl text-base text-slate-600 sm:mb-10 md:text-lg">
           Isolated solutions create gaps.
           <br />
           Connected strategy creates growth.
         </p>
 
-        <div className="rounded-2xl bg-white px-4 py-8 shadow-sm sm:px-6 sm:py-10">
-          <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-2">
+        <div className="rounded-2xl bg-white px-4 py-7 shadow-sm ring-1 ring-slate-100 sm:px-6 sm:py-9">
+          <div className="relative flex flex-col gap-7 md:flex-row md:items-start md:justify-between md:gap-2">
             <div className="absolute bottom-8 left-7 top-8 w-px bg-slate-200 md:hidden" aria-hidden="true" />
             {steps.map((s, i) => (
               <React.Fragment key={i}>
