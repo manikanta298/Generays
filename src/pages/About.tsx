@@ -8,7 +8,7 @@ import { AboutOriginality } from "@/components/about-originality";
 export default function AboutPage() {
   return (
     <>
-      <PageHero eyebrow="About GeneRays" title="We don't market businesses. We build brands that people remember." subtitle="Every successful business is built from a blueprint. Before a building, product or startup takes shape, there is a plan. We use the same philosophy for brands." image={aboutImage} imageAlt="Futuristic GeneRays brand identity blueprint and digital ecosystem" />
+      <PageHero eyebrow="About GeneRays" title="We don't market businesses. We build brands that people remember." subtitle="Every successful business is built from a blueprint. Before a building, product or startup takes shape, there is a plan. We use the same philosophy for brands." image={aboutImage} imageAlt="Futuristic GeneRays brand identity blueprint and digital ecosystem" transparentImage />
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2">
           <SectionHeading eyebrow="The philosophy" title="Blueprint first. Everything else second." subtitle="Create the strategic blueprint first, then build identity, digital presence, marketing and growth around it. That order is what turns spending into compounding brand equity." />
