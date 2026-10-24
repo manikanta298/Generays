@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react';
-import { testimonialRequest, type TestimonialRecord } from '@/services/testimonials';
+import { testimonialRequest, TestimonialApiError, type TestimonialRecord } from '@/services/testimonials';
 
-export default function AdminTestimonials() {
+export default function AdminTestimonials({ onLogout, onSessionExpired }: { onLogout?: () => void; onSessionExpired?: () => void }) {
   const [status, setStatus] = useState('pending');
   const [page, setPage] = useState(1);
   const [items, setItems] = useState<TestimonialRecord[]>([]);
@@ -12,9 +12,9 @@ export default function AdminTestimonials() {
   const load = useCallback(async () => {
     setLoading(true); setError(''); setItems([]);
     try { setItems((await testimonialRequest(`/api/admin/testimonials?status=${status}&page=${page}`)).items); }
-    catch (e) { setError((e as Error).message); }
+    catch (e) { if (e instanceof TestimonialApiError && e.status === 401) onSessionExpired?.(); setError((e as Error).message); }
     finally { setLoading(false); }
-  }, [status, page]);
+  }, [status, page, onSessionExpired]);
   useEffect(() => { void load(); }, [load]);
   async function mutate(method: string, id?: string, body?: object) {
     setBusy(true); setError('');
@@ -23,7 +23,7 @@ export default function AdminTestimonials() {
         method, headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined,
       });
       setEditing(null); await load();
-    } catch (e) { setError((e as Error).message); }
+    } catch (e) { if (e instanceof TestimonialApiError && e.status === 401) onSessionExpired?.(); setError((e as Error).message); }
     finally { setBusy(false); }
   }
   function save(event: FormEvent<HTMLFormElement>) {
@@ -32,7 +32,8 @@ export default function AdminTestimonials() {
     void mutate(editing?._id ? 'PATCH' : 'POST', editing?._id, Object.fromEntries(data));
   }
   return <div className="mx-auto max-w-4xl px-6 py-32">
-    <h1 className="mb-6 text-3xl font-bold">Manage testimonials</h1>
+    <h1 className="mb-6 text-3xl font-bold">Master admin dashboard</h1>
+    {onLogout && <button className="mb-6 rounded border px-4 py-2" onClick={onLogout}>Log out</button>}
     <div className="mb-6 flex flex-wrap gap-4">
       <label>Status <select disabled={busy || loading} value={status} onChange={e => { setStatus(e.target.value); setPage(1); setEditing(null); }}>
         <option value="pending">Pending</option><option value="approved">Approved</option>

@@ -1,24 +1,59 @@
-# Testimonial moderation
+# Customer testimonials and master admin
 
-This patch fits this repository's React/Vite + Vercel Functions architecture. It does not require a separate Express server. MongoDB is accessed only by server functions.
+## Routes
 
-## Structure
+| Route | Purpose |
+| --- | --- |
+| `/submit-testimonial` | Separate public customer submission form |
+| `/admin` | Master admin login and testimonial dashboard |
+| `/admin/testimonials` | Alias for the same protected dashboard |
+| `/#testimonials` | Homepage strip containing approved testimonials only |
 
-- `server/testimonials.ts`: MongoDB connection reuse, field validation, Basic admin authentication and shared handlers.
-- `api/testimonials.ts`: approved-only public GET feed and pending-only customer POST submissions.
-- `api/admin/testimonials.ts`: authenticated moderation and pending entry creation.
-- `src/pages/AdminTestimonials.tsx`: admin UI at `/admin/testimonials`.
-- `src/components/home/TestimonialsSection.tsx`: sole public renderer, mounted on Home at `#testimonials`.
-- `src/services/testimonials.ts`: request helper and browser types.
-- `tests/testimonials.test.ts`: API behavior tests using an injected database double.
+The header and homepage section link to the separate submission page. The submission form is not embedded in the homepage.
 
-## Configure and run
+## Configuration
 
-1. Run `npm ci`.
-2. Configure `MONGODB_URI`, `MONGODB_DB`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` in Vercel server environment variables, then redeploy. Never prefix these with `VITE_`. Basic auth must be used over HTTPS. If an existing session auth system is used, replace `isAdmin` with verified server-side session and admin-role checks; do not trust a browser role or arbitrary header.
-3. For local full-stack testing, use Vercel CLI `vercel dev` with matching environment variables; Vite alone does not serve API functions. Set `APP_ORIGIN` to the exact local origin, such as `http://localhost:3000`. Production same-host HTTPS origins are accepted automatically.
-4. Visit `/admin/testimonials`. The API challenges for Basic credentials. Add entries, review pending, approve, edit or delete.
-5. Create this index once in the selected MongoDB database:
+Configure these server-only Vercel variables for the target environment, then redeploy:
+
+- `MONGODB_URI`: MongoDB connection string.
+- `MONGODB_DB`: explicit database name, for example `generays`.
+- `ADMIN_USERNAME`: master admin username.
+- `ADMIN_PASSWORD`: a long, unique master admin password.
+
+Never prefix these with `VITE_`. The optional browser variable `VITE_SITE_URL` can be set to `https://generays.vercel.app`. For local full-stack testing, use `vercel dev` and set `APP_ORIGIN` to its exact local origin, such as `http://localhost:3000`. Vite alone does not serve Vercel API functions.
+
+No additional session secret is required. The configured admin password signs eight-hour session cookies. Login credentials are checked on the server. Cookies are HTTP-only, SameSite Strict, scoped to `/api/admin`, and Secure on Vercel/production. The browser stores no credentials in localStorage. Logout clears its session cookie; existing signed tokens expire within eight hours. Changing either configured admin credential invalidates existing tokens after redeployment. The admin APIs enforce authentication independently of the UI. Basic authentication remains supported for programmatic API clients; the dashboard uses session cookies and no browser Basic-auth prompt.
+
+## Behavior
+
+1. A customer enters their name, designation/company and quote at `/submit-testimonial`.
+2. `POST /api/testimonials` validates the input and saves it in MongoDB with `status: "pending"`. A customer-supplied status or ID cannot grant approval.
+3. An admin signs in at `/admin` using the configured credentials, reviews Pending entries, and approves, edits or deletes them. Deletion requires confirmation in the UI.
+4. The homepage fetches only approved records. Its horizontal testimonial strip scrolls automatically, pauses on hover/focus, has pause/resume and manual scroll controls, and respects reduced-motion preferences.
+5. Editing an approved testimonial returns it to pending until reapproved. Deleting removes it. Open homepage tabs refresh on focus and every 30 seconds; offline tabs cannot be remotely cleared.
+
+Public fields: name up to 120 characters, designation up to 200, quote up to 2000. Fields must be nonempty after trimming. Text renders literally; HTML is not executed. The customer form retains content on failure and clears it only after successful submission.
+
+Existing hardcoded quotes are not automatically seeded or approved. Existing MongoDB records must have an explicit approved status to appear. The latest 50 approved records are displayed; the admin lists support 50 records per page.
+
+## API
+
+| Method | Endpoint | Behavior |
+| --- | --- | --- |
+| GET | `/api/testimonials` | Approved-only public feed; caller cannot select pending |
+| POST | `/api/testimonials` | Public JSON `{name, designation, quote}`, always pending |
+| GET | `/api/admin/session` | Checks the HTTP-only session |
+| POST | `/api/admin/session` | JSON `{username, password}`, issues session cookie |
+| DELETE | `/api/admin/session` | Clears session cookie |
+| GET | `/api/admin/testimonials?status=pending&page=1` | Pending moderation list |
+| GET | `/api/admin/testimonials?status=approved&page=1` | Approved moderation list |
+| POST | `/api/admin/testimonials` | Creates pending record |
+| PATCH | `/api/admin/testimonials?id=<ObjectId>` | `{status:"approved"}` approves; content fields edit and reset pending |
+| DELETE | `/api/admin/testimonials?id=<ObjectId>` | Deletes record |
+
+API responses are non-cacheable. Mutations reject foreign browser origins. Public POST and login require JSON. Public endpoints reject update/delete methods. The public feed projects only ID, name, designation and quote; admin metadata stays in admin responses.
+
+Create this index once in the selected MongoDB database:
 
 ```js
 db.testimonials.createIndex({ status: 1, createdAt: -1, _id: -1 });
@@ -31,91 +66,39 @@ Document shape:
   name: 'Client name',
   designation: 'Founder, Company',
   quote: 'Client feedback',
-  status: 'pending', // or 'approved'
+  status: 'pending',
   createdAt: new Date(),
   updatedAt: new Date()
 }
 ```
 
-Existing documents without an explicit approved status are not published. Review legacy records before assigning a status. The previous two hardcoded homepage quotes were removed; add them through the dashboard if desired. There is no automatic seed or automatic approval.
+## Source structure
 
-## API
+- `server/testimonials.ts`: database access, validation, public/admin handlers.
+- `server/admin-session.ts`: session signing and verification.
+- `api/testimonials.ts`, `api/admin/testimonials.ts`, `api/admin/session.ts`: Vercel endpoints.
+- `src/pages/SubmitTestimonial.tsx`: separate submission page.
+- `src/components/TestimonialSubmissionForm.tsx`: validated form and feedback states.
+- `src/pages/Admin.tsx`: login/session/logout gate.
+- `src/pages/AdminTestimonials.tsx`: approve, edit, delete and pagination.
+- `src/components/home/TestimonialsSection.tsx`: homepage-only public data loading.
+- `src/components/ScrollingTestimonials.tsx`: horizontal accessible scrolling strip.
+- `tests/`: API, session and React DOM regression tests.
 
-| Method | Endpoint | Behavior |
-| --- | --- | --- |
-| GET | `/api/testimonials` | Latest 50 approved entries, public fields only |
-| POST | `/api/testimonials` | Public JSON `{name, designation, quote}`; status forced pending |
-| GET | `/api/admin/testimonials?status=pending&page=1` | 50 pending entries per page (default status) |
-| GET | `/api/admin/testimonials?status=approved&page=1` | Approved moderation list |
-| POST | `/api/admin/testimonials` | Body `{name, designation, quote}`; status forced pending |
-| PATCH | `/api/admin/testimonials?id=<ObjectId>` | Body `{status:"approved"}` approves |
-| PATCH | `/api/admin/testimonials?id=<ObjectId>` | Body `{name, designation, quote}` edits and resets pending |
-| DELETE | `/api/admin/testimonials?id=<ObjectId>` | Permanently deletes after UI confirmation |
+## Verification
 
-All admin methods require authentication. Text lengths: name 120, designation 200, quote 2000; whitespace-only content is rejected. MongoDB operators cannot be supplied as field values. React renders quotes as text rather than HTML. API responses use `Cache-Control: no-store`. Existing homepage tabs refresh on focus and every 30 seconds, so a delete/edit can remain visible in an already-open tab until its next refresh. Offline tabs cannot be remotely cleared.
+Run `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, and `npm run build`.
 
-Only the homepage Testimonials section imports the public feed renderer. The admin page necessarily shows records for management. No API can prevent someone who receives public testimonials from copying them elsewhere; the placement guarantee concerns this application's components.
+Local tests use an injected MongoDB collection double and JSDOM. They cover submission-to-pending, attempted public approval, validation, pending/approved isolation, moderation lifecycle, admin authentication, login/logout cookies, tampering/expiration checks, credential rotation, foreign origins, form success/error handling, login gating, separate form placement, scrolling controls, and stale response races. They do not prove live MongoDB writes or actual browser layout.
 
-## QA results and remaining checks
+Production acceptance still requires deployment of this branch, then:
 
-Automated commands: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`.
+1. Submit a uniquely identifiable test entry at `/submit-testimonial`.
+2. Confirm it is absent from the public feed and present in the admin Pending list.
+3. Log in at `/admin`, approve it and check homepage appearance after refresh.
+4. Edit it; confirm it returns to pending and disappears from public results. Reapprove if desired.
+5. Delete the test record using the dashboard and confirm removal after refresh.
+6. Check logout, wrong credentials, session expiry and keyboard/mobile/reduced-motion behavior.
+7. Verify MongoDB persistence and index usage in the configured database.
 
-API tests cover authentication, pending creation despite a supplied approved status, pending vs approved filtering, approval, edit returning pending, deletion, missing IDs, invalid fields/status/page, cross-origin mutation rejection, public response projection and generic database failures. They use an injected database double, not a live MongoDB server.
-
-Two existing TypeScript issues were corrected: the portfolio lightbox tuple type and unused gallery props not supported by CircularGallery. The lint configuration now recognizes Node globals in the existing JavaScript API.
-
-Production acceptance checks (not performed without deployed credentials/database):
-
-- Anonymous admin GET/POST/PATCH/DELETE return 401; wrong credentials fail.
-- Add a uniquely named pending entry; confirm MongoDB persistence and absence from public GET and all public pages.
-- Approve; confirm the entry appears inside `#testimonials` only on Home, including after a reload/new tab.
-- Check About, Process, Services, service details, Portfolio, Contact and 404 pages for absence of testimonial content.
-- Edit an approved entry; confirm it becomes pending and disappears from public GET. Reapprove and verify the edit.
-- Delete; confirm MongoDB removal and disappearance after refresh in existing public tabs.
-- Test keyboard navigation, loading, empty states, retry after API failure and mobile layout at 375px and desktop 1440px.
-- Test pagination with 51+ pending entries, long quotes and HTML-like text (displayed literally).
-- Verify production Vercel routes execute the API functions rather than SPA rewrites and confirm the MongoDB index with explain.
-
-## Continued QA — 24 October 2026
-
-All 11 automated tests pass. TypeScript, ESLint, the production build and `git diff --check` pass.
-
-Additional coverage includes every admin method with missing/wrong/malformed credentials, stable page-two pagination, switching edit targets, starting a blank add form, approval requests and list refresh, API error/retry recovery, literal HTML rendering, carousel list shrinkage, and out-of-order public responses.
-
-Two additional defects were fixed:
-
-- Switching between Edit buttons reused uncontrolled input values from the first entry. The edit form now remounts when the target changes, preventing accidental overwriting of a different testimonial with stale content.
-- Overlapping public refreshes could restore stale content after a newer refresh removed it. Only the latest request may update the section.
-
-UI tests use React Testing Library and JSDOM. They verify DOM behavior; they do not establish actual browser layout, mobile rendering, or live MongoDB correctness.
-
-A read-only cloud browser check loaded the deployed homepage successfully. Its existing carousel still showed the original two testimonials. This confirms public site accessibility in that browser, not deployment of the new moderation code.
-
-The workspace has no configured `MONGODB_URI`, `MONGODB_DB`, `ADMIN_USERNAME`, or `ADMIN_PASSWORD`. Live persistence, index/explain verification, deployed admin route/authentication and production moderation remain blocked on those settings and deployment. Configure secrets in the deployment environment rather than sharing them in chat.
-
-No production deployment, production database mutation, or complete live browser QA is claimed.
-
-## Apply the deliverable
-
-The complete patch targets repository base commit `d8443d92f55d338503c9257af50c1e62bdcd566b`. It includes the initial implementation and continued QA fixes. Apply it once on a clean checkout of that base:
-
-```sh
-git apply --check /path/to/generays-testimonials.patch
-git apply /path/to/generays-testimonials.patch
-npm ci
-npm test
-npm run typecheck
-npm run lint
-npm run build
-```
-
-If the initial patch is already applied, use the updated source files from the ZIP or compare the diff; do not reapply the complete patch over it. The ZIP contains changed source files at repository-relative paths and this guide, not a complete replacement repository.
-
-
-## Customer submission form
-
-`src/components/TestimonialSubmissionForm.tsx` is mounted inside the existing homepage Testimonials section. Customers provide a name, designation/company and quote. The form sends JSON to `POST /api/testimonials`; the server validates the same length limits as the admin flow and always stores pending status. It never accepts approval from a customer. The existing admin pending list receives these submissions.
-
-The public POST accepts JSON only and rejects foreign browser origins. No admin credentials are required or exposed. Success clears the form and explains moderation; errors retain entered text. The public display remains approved-only.
-
-Continued local QA: 14 tests pass, including customer submission, injected approved status, invalid fields, forbidden public mutations, success reset and failure retention. This addition is provided on the `feat/customer-testimonial-submission` branch; production deployment and live submission QA are separate steps. Public submission is not yet tested against production MongoDB. There is no CAPTCHA or distributed rate limiter in this implementation.
+Public database reads were previously verified against production. No production customer submissions or admin writes have been made by this implementation workflow. Production credentials were not read or exposed. There is no CAPTCHA or distributed request rate limiter in this code; configure appropriate platform controls for the deployment.

@@ -38,7 +38,7 @@ export function TestimonialSubmissionForm() {
 
   const inputClass = 'mt-2 block w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950';
   return <form onSubmit={submit} aria-labelledby="submit-testimonial-title" aria-busy={busy} className="mx-auto mt-10 max-w-xl px-5 text-slate-950">
-    <h3 id="submit-testimonial-title" className="text-2xl font-bold">Share your experience</h3>
+    <h1 id="submit-testimonial-title" className="text-2xl font-bold">Share your experience</h1>
     <p className="mt-2 text-sm text-slate-600">Your feedback will appear here after our team reviews and approves it. Your name and designation will be public if approved.</p>
     <fieldset disabled={busy} className="mt-5 grid min-w-0 gap-4">
       <label className="text-sm font-medium">Your name

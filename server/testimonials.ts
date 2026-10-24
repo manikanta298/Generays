@@ -1,3 +1,4 @@
+import { validSession } from './admin-session.js';
 import { MongoClient, ObjectId, type Collection } from 'mongodb';
 import { timingSafeEqual, createHash } from 'node:crypto';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -23,6 +24,7 @@ function equal(a: string, b: string) {
   return timingSafeEqual(createHash('sha256').update(a).digest(), createHash('sha256').update(b).digest());
 }
 export function isAdmin(req: VercelRequest) {
+  if (validSession(req)) return true;
   const user = process.env.ADMIN_USERNAME;
   const password = process.env.ADMIN_PASSWORD;
   if (!user || !password) return false;
@@ -46,7 +48,6 @@ export function createHandler(admin: boolean, getCollection: () => Promise<Colle
   return async (req: VercelRequest, res: VercelResponse) => {
     res.setHeader('Cache-Control', 'no-store');
     if (admin && !isAdmin(req)) {
-      res.setHeader('WWW-Authenticate', 'Basic realm="GeneRays admin", charset="UTF-8"');
       return res.status(401).json({ error: 'Admin authentication required' });
     }
     const allowed = admin ? ['GET', 'POST', 'PATCH', 'DELETE'] : ['GET', 'POST'];
