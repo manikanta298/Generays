@@ -9,6 +9,7 @@ const nav = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact" },
+  { href: "/submit-testimonial", label: "Share feedback" },
 ] as const;
 
 export function SiteHeader() {

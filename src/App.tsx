@@ -14,7 +14,8 @@ import ContactPage from "@/pages/Contact";
 import NotFoundPage from "@/pages/NotFound";
 import ErrorPage from "@/pages/Error";
 
-import AdminTestimonials from "@/pages/AdminTestimonials";
+import AdminPage from "@/pages/Admin";
+import SubmitTestimonial from "@/pages/SubmitTestimonial";
 
 function RouteSeo() {
   const location = useLocation();
@@ -25,6 +26,8 @@ function RouteSeo() {
       "/process": "Our Brand Engineering Process — GeneRays",
       "/services": "Services — Brand, Web, Commerce, Marketing & Automation",
       "/portfolio": "Portfolio — Selected GeneRays Work",
+      "/admin": "Master Admin — GeneRays",
+      "/submit-testimonial": "Share Your Experience — GeneRays",
       "/contact": "Contact GeneRays — Start Your Brand Journey",
     };
     document.title = titles[location.pathname] ?? "GeneRays — Brand Engineering";
@@ -45,7 +48,9 @@ export default function App() {
       <main className="min-h-[70vh]">
         <RouteSeo />
         <Routes>
-          <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/testimonials" element={<AdminPage />} />
+          <Route path="/submit-testimonial" element={<SubmitTestimonial />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/process" element={<ProcessPage />} />
