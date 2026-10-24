@@ -14,6 +14,8 @@ import ContactPage from "@/pages/Contact";
 import NotFoundPage from "@/pages/NotFound";
 import ErrorPage from "@/pages/Error";
 
+import AdminTestimonials from "@/pages/AdminTestimonials";
+
 function RouteSeo() {
   const location = useLocation();
   useEffect(() => {
@@ -43,6 +45,7 @@ export default function App() {
       <main className="min-h-[70vh]">
         <RouteSeo />
         <Routes>
+          <Route path="/admin/testimonials" element={<AdminTestimonials />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/process" element={<ProcessPage />} />

@@ -23,7 +23,7 @@ const logos = [
 ] as const;
 
 export function LogoPortfolio() {
-  const [selected, setSelected] = useState<(typeof logos)[number] | null>(null);
+  const [selected, setSelected] = useState<readonly [string, string] | null>(null);
 
   useEffect(() => {
     if (!selected) return;
