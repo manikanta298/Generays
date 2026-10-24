@@ -75,3 +75,32 @@ test('older public requests cannot restore content removed by a newer refresh', 
   await act(async () => { resolvers[0](await response({ items: [records[0]] })); });
   assert.equal(ui.queryByText('Alice'), null);
 });
+
+test('customer form submits content without status and confirms pending review', async () => {
+  const { TestimonialSubmissionForm } = await import('../src/components/TestimonialSubmissionForm.js');
+  let payload: unknown;
+  globalThis.fetch = ((_url, options) => {
+    payload = JSON.parse(String(options?.body));
+    return response({ status: 'pending' }, 201);
+  }) as typeof fetch;
+  const ui = render(React.createElement(TestimonialSubmissionForm));
+  fireEvent.change(ui.getByLabelText('Your name'), { target: { value: ' Customer ' } });
+  fireEvent.change(ui.getByLabelText('Designation / company'), { target: { value: 'Founder' } });
+  fireEvent.change(ui.getByLabelText('Your testimonial'), { target: { value: 'Great work' } });
+  fireEvent.click(ui.getByText('Submit testimonial'));
+  await ui.findByText('Thank you! Your testimonial is pending approval.');
+  assert.deepEqual(payload, { name: 'Customer', designation: 'Founder', quote: 'Great work' });
+  assert.equal((ui.getByLabelText('Your name') as HTMLInputElement).value, '');
+});
+
+test('customer form retains entered content when submission fails', async () => {
+  const { TestimonialSubmissionForm } = await import('../src/components/TestimonialSubmissionForm.js');
+  globalThis.fetch = (() => response({ error: 'Please retry later' }, 503)) as typeof fetch;
+  const ui = render(React.createElement(TestimonialSubmissionForm));
+  fireEvent.change(ui.getByLabelText('Your name'), { target: { value: 'Customer' } });
+  fireEvent.change(ui.getByLabelText('Designation / company'), { target: { value: 'Founder' } });
+  fireEvent.change(ui.getByLabelText('Your testimonial'), { target: { value: 'Great work' } });
+  fireEvent.click(ui.getByText('Submit testimonial'));
+  await ui.findByText('Please retry later');
+  assert.equal((ui.getByLabelText('Your testimonial') as HTMLTextAreaElement).value, 'Great work');
+});

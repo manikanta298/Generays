@@ -31,12 +31,12 @@ const db = {
 async function call(admin: boolean, method: string, body?: unknown, query = {}, authorized = true, origin?: string) {
   let code = 200; let data: unknown; const headers: Record<string, unknown> = {};
   const res = { setHeader(k: string, v: unknown) { headers[k] = v; }, status(n: number) { code = n; return this; }, json(v: unknown) { data = v; return this; } } as unknown as VercelResponse;
-  await createHandler(admin, async () => db)({ method, body, query, headers: { host: 'example.com', ...(authorized ? { authorization: auth } : {}), ...(origin ? { origin } : {}) } } as VercelRequest, res);
+  await createHandler(admin, async () => db)({ method, body, query, headers: { host: 'example.com', 'content-type': 'application/json', ...(authorized ? { authorization: auth } : {}), ...(origin ? { origin } : {}) } } as VercelRequest, res);
   return { code, data, headers };
 }
 test('moderation lifecycle and public isolation', async () => {
   assert.equal((await call(true, 'GET', undefined, {}, false)).code, 401);
-  assert.equal((await call(false, 'POST', content)).code, 405);
+  assert.equal((await call(false, 'DELETE', undefined, { id: String(id) })).code, 405);
   assert.equal((await call(true, 'POST', { ...content, status: 'approved' })).code, 201);
   assert.equal(row?.status, 'pending');
   await call(false, 'GET', undefined, { status: 'pending' });
@@ -103,4 +103,13 @@ test('page two skips fifty records with a stable sort', async () => {
   await createHandler(true, async () => collection)({ method: 'GET', query: { page: '2' }, headers: { authorization: auth } } as VercelRequest, res);
   assert.equal(skipped, 50);
   assert.deepEqual(sort, { createdAt: -1, _id: -1 });
+});
+
+test('anonymous submissions are always pending and cannot mutate existing entries', async () => {
+  assert.equal((await call(false, 'POST', { ...content, status: 'approved', _id: 'attacker' }, {}, false)).code, 201);
+  assert.equal(row?.status, 'pending');
+  assert.deepEqual((await call(false, 'GET')).data, { items: [] });
+  assert.equal((await call(false, 'PATCH', { status: 'approved' }, { id: String(id) }, false)).code, 405);
+  assert.equal((await call(false, 'POST', { ...content, quote: ' ' }, {}, false)).code, 400);
+  assert.equal((await call(false, 'POST', content, {}, false, 'https://evil.example')).code, 403);
 });

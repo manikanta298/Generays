@@ -5,7 +5,7 @@ This patch fits this repository's React/Vite + Vercel Functions architecture. It
 ## Structure
 
 - `server/testimonials.ts`: MongoDB connection reuse, field validation, Basic admin authentication and shared handlers.
-- `api/testimonials.ts`: approved-only public GET feed; never accepts a caller-selected status.
+- `api/testimonials.ts`: approved-only public GET feed and pending-only customer POST submissions.
 - `api/admin/testimonials.ts`: authenticated moderation and pending entry creation.
 - `src/pages/AdminTestimonials.tsx`: admin UI at `/admin/testimonials`.
 - `src/components/home/TestimonialsSection.tsx`: sole public renderer, mounted on Home at `#testimonials`.
@@ -44,6 +44,7 @@ Existing documents without an explicit approved status are not published. Review
 | Method | Endpoint | Behavior |
 | --- | --- | --- |
 | GET | `/api/testimonials` | Latest 50 approved entries, public fields only |
+| POST | `/api/testimonials` | Public JSON `{name, designation, quote}`; status forced pending |
 | GET | `/api/admin/testimonials?status=pending&page=1` | 50 pending entries per page (default status) |
 | GET | `/api/admin/testimonials?status=approved&page=1` | Approved moderation list |
 | POST | `/api/admin/testimonials` | Body `{name, designation, quote}`; status forced pending |
@@ -109,3 +110,12 @@ npm run build
 ```
 
 If the initial patch is already applied, use the updated source files from the ZIP or compare the diff; do not reapply the complete patch over it. The ZIP contains changed source files at repository-relative paths and this guide, not a complete replacement repository.
+
+
+## Customer submission form
+
+`src/components/TestimonialSubmissionForm.tsx` is mounted inside the existing homepage Testimonials section. Customers provide a name, designation/company and quote. The form sends JSON to `POST /api/testimonials`; the server validates the same length limits as the admin flow and always stores pending status. It never accepts approval from a customer. The existing admin pending list receives these submissions.
+
+The public POST accepts JSON only and rejects foreign browser origins. No admin credentials are required or exposed. Success clears the form and explains moderation; errors retain entered text. The public display remains approved-only.
+
+Continued local QA: 14 tests pass, including customer submission, injected approved status, invalid fields, forbidden public mutations, success reset and failure retention. This addition is provided on the `feat/customer-testimonial-submission` branch; production deployment and live submission QA are separate steps. Public submission is not yet tested against production MongoDB. There is no CAPTCHA or distributed rate limiter in this implementation.

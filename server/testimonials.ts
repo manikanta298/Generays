@@ -49,7 +49,7 @@ export function createHandler(admin: boolean, getCollection: () => Promise<Colle
       res.setHeader('WWW-Authenticate', 'Basic realm="GeneRays admin", charset="UTF-8"');
       return res.status(401).json({ error: 'Admin authentication required' });
     }
-    const allowed = admin ? ['GET', 'POST', 'PATCH', 'DELETE'] : ['GET'];
+    const allowed = admin ? ['GET', 'POST', 'PATCH', 'DELETE'] : ['GET', 'POST'];
     if (!allowed.includes(req.method || '')) {
       res.setHeader('Allow', allowed.join(', '));
       return res.status(405).json({ error: 'Method not allowed' });
@@ -71,6 +71,9 @@ export function createHandler(admin: boolean, getCollection: () => Promise<Colle
         return res.status(200).json({ items });
       }
       if (req.method === 'POST') {
+        if (!admin && !req.headers['content-type']?.toLowerCase().startsWith('application/json')) {
+          return res.status(415).json({ error: 'Content-Type must be application/json' });
+        }
         const content = fields(req.body);
         if (!content) return res.status(400).json({ error: 'Name, designation and quote are required and must fit their limits' });
         const now = new Date();
