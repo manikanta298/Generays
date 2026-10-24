@@ -41,13 +41,10 @@ export function GallerySection() {
             <CircularGallery
               items={galleryImages.map((item) => ({ image: item.src, text: item.text }))}
               bend={3}
-              textColor="oklch(0.19 0.01 265)"
               borderRadius={0.04}
               scrollSpeed={4.8}
               scrollEase={0.06}
               autoRotateSpeed={0.132}
-              fontUrl="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"
-              font="600 26px Space Grotesk"
               onSelect={(item) => {
                 const image = galleryImages.find((galleryItem) => galleryItem.src === item.image);
                 if (image) setSelectedImage(image);

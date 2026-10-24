@@ -30,7 +30,8 @@ export function AnimatedTestimonials({
 
   if (!testimonials.length) return null;
 
-  const testimonial = testimonials[active];
+  const safeActive = active % testimonials.length;
+  const testimonial = testimonials[safeActive];
 
   const goToPrevious = () => {
     setActive((current) => (current - 1 + testimonials.length) % testimonials.length);
@@ -73,7 +74,7 @@ export function AnimatedTestimonials({
           </button>
 
           <span className="min-w-[72px] text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-950">
-            {String(active + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+            {String(safeActive + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
           </span>
 
           <button
