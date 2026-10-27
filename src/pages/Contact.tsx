@@ -9,7 +9,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Start your brand journey"
         title="Let's create the brand people remember."
-        subtitle="Tell us where your business is today. We'll come back with a clear blueprint of what to build first."
+        subtitle="Share your goals, current challenges and timeline. A free consultation helps us discuss priorities, scope and the right starting point."
         image={contactImage}
         imageAlt="Futuristic GeneRays communication and contact visualization"
       />

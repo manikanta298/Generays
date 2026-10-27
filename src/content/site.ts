@@ -14,7 +14,7 @@ export const services: Service[] = [
     title: "Brand Foundation",
     tagline: "Every memorable brand starts with identity.",
     intro:
-      "We define who you are before we design how you look. Strategy, positioning and voice come first, so every asset built later carries the same intent.",
+      "Clarify your audience, market position and brand voice before design begins. We connect strategy, identity and guidelines so your team can communicate consistently.",
     items: [
       "Brand Identity",
       "Brand Strategy",
@@ -31,7 +31,7 @@ export const services: Service[] = [
     title: "Logo Design",
     tagline: "Your logo is the signature people remember.",
     intro:
-      "Every logo begins with a blank page — never a template. We craft marks that stay recognisable at any size, in any medium.",
+      "Create an original logo that reflects your brand and stays recognisable across web, print and packaging. Explore the right style for your identity and applications.",
     items: [
       "Minimal Logos",
       "Lettermark Logos",
@@ -53,7 +53,7 @@ export const services: Service[] = [
     title: "Creative Studio",
     tagline: "Because first impressions happen in seconds.",
     intro:
-      "Print, packaging and campaign creative built on one consistent visual system — so your brand looks the same everywhere it appears.",
+      "Bring sales materials, campaign assets and packaging into one visual language. We create practical designs that communicate your offer clearly across customer touchpoints.",
     items: [
       "Corporate Profiles",
       "Company Brochures",
@@ -88,7 +88,7 @@ export const services: Service[] = [
     title: "Website Development",
     tagline: "Your website is your best salesperson.",
     intro:
-      "Fast, responsive, search-ready websites engineered around how your customers actually decide — not around a theme demo.",
+      "Build a responsive website around your audience, content and enquiry journey. We connect clear navigation, content management and the features your business needs.",
     items: [
       "Corporate Websites",
       "Business Websites",
@@ -112,7 +112,7 @@ export const services: Service[] = [
     title: "E-Commerce Development",
     tagline: "Turn digital attention into transactions.",
     intro:
-      "Storefronts, marketplaces and B2B portals built to sell — with the payments, inventory and order plumbing handled properly.",
+      "Create an online store with clear product discovery, checkout and order workflows. Platform, payment and inventory requirements shape the scope of your commerce build.",
     items: [
       "WordPress / WooCommerce",
       "Magento",
@@ -134,7 +134,7 @@ export const services: Service[] = [
     title: "Web Applications",
     tagline: "If your business runs on a process, we can build the system behind it.",
     intro:
-      "Custom software that replaces spreadsheets and manual follow-ups with dashboards, workflows and reporting your team will actually use.",
+      "Turn everyday business processes into usable web applications. We plan roles, workflows and reporting around the people who manage your operations and serve customers.",
     items: [
       "Custom Web Applications",
       "ERP Solutions",
@@ -157,7 +157,7 @@ export const services: Service[] = [
     title: "Digital Marketing & Social Media",
     tagline: "Visibility is earned. Growth is engineered.",
     intro:
-      "Organic and paid programmes run against numbers, not vibes — content, campaigns and remarketing tied to leads and revenue.",
+      "Connect audience research, content, paid campaigns and reporting around your goals. We focus on relevant engagement, qualified enquiries and learning from campaign performance.",
     items: [
       "Facebook",
       "Instagram",
@@ -187,7 +187,7 @@ export const services: Service[] = [
     title: "Amazon & Marketplace Growth",
     tagline: "Don't just list a product. Build a storefront that sells it.",
     intro:
-      "Listings, imagery and A+ content optimised for the way marketplace shoppers search, compare and buy.",
+      "Make your products easier to discover and compare on Amazon and other marketplaces. We support listings, product visuals, store content and account operations.",
     items: [
       "Amazon Seller Registration / Onboarding",
       "Product Listing",
@@ -205,7 +205,7 @@ export const services: Service[] = [
     title: "Business Communication",
     tagline: "A serious business deserves a serious digital address.",
     intro:
-      "Professional email on your own domain, configured securely and migrated without downtime or lost mail.",
+      "Set up professional email on your business domain with the right configuration and access. Migration, security and integration requirements are reviewed for your team.",
     items: [
       "Professional / Corporate Email Setup",
       "Google Workspace",
@@ -222,7 +222,7 @@ export const services: Service[] = [
     title: "Website Care — AMC",
     tagline: "Launch day is not the finish line.",
     intro:
-      "Annual maintenance that keeps your site fast, patched, backed up and monitored — so problems get fixed before customers notice.",
+      "Keep your website maintained after launch through updates, backups, monitoring and technical support. We help identify performance issues and prioritise the fixes your site needs.",
     items: [
       "Website AMC",
       "Performance Monitoring",
@@ -241,7 +241,7 @@ export const services: Service[] = [
     title: "Customer Engagement — WhatsApp Automation",
     tagline: "Turn conversations into systems.",
     intro:
-      "WhatsApp Business API journeys that qualify leads, confirm orders and remind customers — automatically, at scale.",
+      "Connect WhatsApp messaging with customer journeys, reminders and lead follow-up. We plan automated conversations and CRM connections around your business processes.",
     items: [
       "WhatsApp Business API",
       "Automated Messaging",
@@ -260,27 +260,27 @@ export const framework = [
   {
     step: "01",
     title: "Discover",
-    body: "Every successful brand begins with understanding. We learn your business, audience, competitors and goals before creating anything.",
+    body: "We review your goals, audience, competitors and existing materials to identify priorities and define a practical project brief.",
   },
   {
     step: "02",
     title: "Design",
-    body: "We create the personality your business deserves. Not just beautiful. Recognizable.",
+    body: "We translate the agreed direction into identity, messaging and customer experiences, with clear feedback and review points.",
   },
   {
     step: "03",
     title: "Build",
-    body: "Websites, applications, automation and digital infrastructure — everything works together.",
+    body: "We develop the agreed website, application or digital assets, connecting the content and workflows your business needs.",
   },
   {
     step: "04",
     title: "Launch",
-    body: "Marketing begins only after your foundation is strong. Now your business is ready to scale.",
+    body: "We check the agreed journeys, prepare assets and coordinate the rollout so your team knows what is ready and what comes next.",
   },
   {
     step: "05",
     title: "Grow",
-    body: "We continuously optimize your brand through data, creativity, campaigns and technology.",
+    body: "We review performance, learn from customer behaviour and prioritise improvements across content, campaigns and technology.",
   },
 ];
 

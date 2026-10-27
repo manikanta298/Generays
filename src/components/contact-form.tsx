@@ -75,7 +75,7 @@ export default function ContactPageContent() {
                   <div><label className={labelClass} htmlFor="phone">Phone / WhatsApp</label><input id="phone" name="phone" className={fieldClass} placeholder="+91 00000 00000" /></div>
                 </div>
                 <div><label className={labelClass} htmlFor="service">What do you need?</label><select id="service" name="service" className={fieldClass} defaultValue=""><option value="" disabled>Select a service</option>{services.map((service) => <option key={service.slug} value={service.slug}>{service.title}</option>)}<option value="not-sure">Not sure yet — advise me</option></select></div>
-                <div><label className={labelClass} htmlFor="message">Tell us about your business</label><textarea id="message" name="message" rows={5} required className={fieldClass} placeholder="What you do, who you sell to, and what's not working today." /></div>
+                <div><label className={labelClass} htmlFor="message">Tell us about your business</label><textarea id="message" name="message" rows={5} required className={fieldClass} placeholder="Your business, audience, goals, current challenges and timeline." /></div>
                 {error ? <p className="text-sm font-medium text-destructive" role="alert">{error}</p> : null}
                 <button type="submit" disabled={sending} className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
                   {sending ? "Sending…" : "Build My Brand"}
@@ -86,7 +86,7 @@ export default function ContactPageContent() {
           </div>
 
           <aside className="space-y-8 border-t border-border pt-10 md:border-l md:border-t-0 md:pl-14 md:pt-0">
-            <div><p className="eyebrow">What happens next</p><ol className="mt-5 space-y-4 text-sm text-muted-foreground"><li>1. We read your enquiry and study your market.</li><li>2. A free consultation call to map the gaps.</li><li>3. A written brand blueprint with priorities and scope.</li></ol></div>
+            <div><p className="eyebrow">What happens next</p><ol className="mt-5 space-y-4 text-sm text-muted-foreground"><li>1. We review your goals, current presence and requirements.</li><li>2. A free consultation to discuss priorities and options.</li><li>3. A written brand blueprint with priorities and scope.</li></ol></div>
             <div className="rounded-sm border border-border p-6"><p className="font-display text-base font-semibold text-foreground">We won&apos;t sell you what you don&apos;t need.</p><p className="mt-2 text-sm text-muted-foreground">If the answer is one landing page instead of a full rebuild, that&apos;s what we&apos;ll tell you.</p></div>
             <RazorpayCheckout />
           </aside>

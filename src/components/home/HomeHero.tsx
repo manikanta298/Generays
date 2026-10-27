@@ -20,8 +20,8 @@ export function HomeHero() {
           </h1>
 
           <p className="home-hero__description">
-            Generays is a digital growth partner for forward-thinking businesses.
-            We blend strategy, creativity, and technology to deliver measurable success.
+            GeneRays connects brand strategy, websites and digital marketing for growing businesses.
+            We bring your identity, customer experience and campaigns together.
           </p>
 
           <div className="home-hero__actions">

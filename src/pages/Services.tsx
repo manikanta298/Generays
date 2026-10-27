@@ -12,7 +12,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services architecture"
         title="Everything your brand needs. Under one roof."
-        subtitle="Eleven connected capabilities. Take one, or let them compound into a single business ecosystem."
+        subtitle="Branding, websites, commerce, marketing and business systems. Explore what each service covers and where it fits your goals."
         image={heroBlueprint}
         imageAlt="Futuristic GeneRays services and technology architecture"
         transparentImage
