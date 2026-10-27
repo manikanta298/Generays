@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-
 export function PageHero({
   eyebrow,
   title,
@@ -18,54 +17,47 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-background">
-      <div className="blueprint-grid grid-drift pointer-events-none absolute inset-0 opacity-70" />
-      <div className="aurora-bloom pointer-events-none absolute -right-24 -top-32 h-96 w-96 rounded-full" />
-      <div className={`relative mx-auto max-w-6xl gap-12 px-5 py-20 md:py-24 ${image ? "grid md:grid-cols-[1.05fr_0.95fr] md:items-center" : ""}`}>
+    <section className="gr-page-hero">
+      <div
+        className={`gr-container gr-page-hero-inner ${image ? "gr-page-hero-with-image" : ""}`}
+      >
         <div>
-          <p className="eyebrow rise-in">{eyebrow}</p>
-          <h1 className="rise-in mt-5 max-w-3xl text-4xl font-bold leading-[1.08] text-foreground md:text-5xl">{title}</h1>
-          {subtitle ? <p className="rise-in mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">{subtitle}</p> : null}
+          <p className="gr-eyebrow">{eyebrow}</p>
+          <h1>{title}</h1>
+          {subtitle && <p className="gr-page-subtitle">{subtitle}</p>}
           {children}
         </div>
-
-        {image ? (
-          transparentImage ? (
-            <div className="group relative hidden min-h-[320px] items-center justify-center md:flex">
-              <img
-                src={image}
-                alt={imageAlt ?? ""}
-                loading="eager"
-                fetchPriority="high"
-                className="h-auto max-h-[460px] w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-              />
-            </div>
-          ) : (
-            <div className="scanline group relative hidden overflow-hidden rounded-2xl border border-primary/25 bg-card md:block">
-              <img
-                src={image}
-                alt={imageAlt ?? ""}
-                loading="eager"
-                fetchPriority="high"
-                className="aspect-[4/3] h-full w-full object-cover saturate-[0.7] brightness-[0.8] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.02] group-hover:saturate-150 group-hover:brightness-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/45 via-transparent to-neon-violet/25 mix-blend-screen transition-opacity duration-700 group-hover:opacity-70" />
-              <div className="blueprint-grid-fine absolute inset-0 opacity-40" />
-            </div>
-          )
-        ) : null}
+        {image && (
+          <div
+            className={`gr-page-hero-image ${transparentImage ? "gr-image-transparent" : ""}`}
+          >
+            <img
+              src={image}
+              alt={imageAlt ?? ""}
+              width="700"
+              height="525"
+              fetchPriority="high"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
 }
-
-export function SectionHeading({ eyebrow, title, subtitle }: { eyebrow?: string; title: string; subtitle?: string }) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+}) {
   return (
-    <div className="max-w-2xl">
-      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h2 className="mt-3 text-3xl font-bold leading-tight text-foreground md:text-4xl">{title}</h2>
-      <div className="mt-5 h-px w-16 rounded-full bg-gradient-to-r from-primary via-neon-violet to-neon-cyan" />
-      {subtitle ? <p className="mt-5 text-base leading-relaxed text-muted-foreground">{subtitle}</p> : null}
+    <div className="gr-section-heading">
+      {eyebrow && <p className="gr-eyebrow">{eyebrow}</p>}
+      <h2>{title}</h2>
+      {subtitle && <p>{subtitle}</p>}
     </div>
   );
 }

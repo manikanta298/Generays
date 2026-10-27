@@ -1,26 +1,29 @@
-import { Code2, Cpu, Cloud, Database, Smartphone, Rocket } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
-import { heroBlueprint } from "@/content/media";
-import { services, technologies } from "@/content/site";
-import LogoLoop from "@/components/LogoLoop";
-import { TechnologySection } from "@/components/home/TechnologySection";
-import { ServiceBento } from "@/components/ServiceBento";
-
+import { ServiceCatalogue } from "@/components/agency/ServiceCatalogue";
+import { AgencyCallToAction } from "@/components/agency/AgencySections";
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services architecture"
-        title="Everything your brand needs. Under one roof."
-        subtitle="Eleven connected capabilities. Take one, or let them compound into a single business ecosystem."
-        image={heroBlueprint}
-        imageAlt="Futuristic GeneRays services and technology architecture"
-        transparentImage
+        eyebrow="Our capabilities"
+        title={
+          <>
+            Everything your brand needs.
+            <br />
+            <span>Under one roof.</span>
+          </>
+        }
+        subtitle="Eleven connected capabilities. Start with one, or bring them together into a complete business ecosystem."
       />
-
-      <ServiceBento services={services} />
-      <TechnologySection/>
-      
+      <section
+        className="gr-section gr-services"
+        aria-label="Explore our services"
+      >
+        <div className="gr-container">
+          <ServiceCatalogue />
+        </div>
+      </section>
+      <AgencyCallToAction />
     </>
   );
 }

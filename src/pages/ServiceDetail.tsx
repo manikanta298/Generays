@@ -148,7 +148,7 @@ export default function ServiceDetailPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="gr-service-hero relative overflow-hidden border-b border-border">
         <div className="blueprint-grid fade-mask-b pointer-events-none absolute inset-0" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-20">
           <div>
@@ -166,6 +166,7 @@ export default function ServiceDetailPage() {
             </h1>
             <p className="rise-in mt-5 max-w-2xl font-display text-lg font-semibold text-primary">{service.tagline}</p>
             <p className="rise-in mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{service.intro}</p>
+            <Link className="gr-button gr-service-hero-cta" to={`/contact?service=${service.slug}`}>Discuss your project <ArrowRight size={18} aria-hidden="true" /></Link>
           </div>
           <div className="overflow-hidden rounded-2xl">
             <img
@@ -213,7 +214,6 @@ export default function ServiceDetailPage() {
                   key={item}
                   className="service-included__card group"
                   role="listitem"
-                  tabIndex={0}
                 >
                   <div className="service-included__card-glow" aria-hidden="true" />
                   <div className="service-included__card-top">
@@ -285,7 +285,7 @@ export default function ServiceDetailPage() {
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/70">Next step</span>
                 <h2 className="mt-2 max-w-2xl text-2xl font-bold leading-snug md:text-3xl">Ready to build {service.title.toLowerCase()} that actually works?</h2>
               </div>
-              <Link to="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-background px-6 py-3.5 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5">
+              <Link to={`/contact?service=${service.slug}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-background px-6 py-3.5 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5">
                 Schedule a Free Brand Consultation <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
