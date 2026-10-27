@@ -8,7 +8,7 @@ export function ServicesSection() {
         services={services}
         eyebrow="Services architecture"
         heading="Everything your brand needs. Under one roof."
-        description="Eleven connected capabilities, designed to work together instead of becoming isolated deliverables."
+        description="Explore eleven services across branding, websites, commerce, marketing and automation. Start with your business priorities."
       />
     </section>
   );

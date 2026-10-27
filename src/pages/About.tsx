@@ -32,7 +32,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About GeneRays"
         title="We don't market businesses. We build brands that people remember."
-        subtitle="Every successful business is built from a blueprint. Before a building, product or startup takes shape, there is a plan. We use the same philosophy for brands."
+        subtitle="GeneRays brings brand strategy, design, websites and marketing together. We start with your business goals and connect the work around your customers."
         image={aboutImage}
         imageAlt="Futuristic GeneRays brand identity blueprint and digital ecosystem"
         transparentImage
@@ -44,7 +44,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="The philosophy"
               title="Blueprint first. Everything else second."
-              subtitle="Create the strategic blueprint first, then build identity, digital presence, marketing and growth around it. That order is what turns spending into compounding brand equity."
+              subtitle="Understand your audience, clarify your positioning and agree the priorities. Then connect your identity, website and campaigns around that shared direction."
             />
             <button
               type="button"
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
           <div className="space-y-6 text-base leading-relaxed text-muted-foreground">
             <p>A logo without identity is decoration. A website without strategy is a brochure. Social media without consistency is noise. Advertising without branding is expense.</p>
-            <p>At GeneRays, every service connects together to create one powerful business ecosystem — so each deliverable makes the next one stronger instead of starting over.</p>
+            <p>At GeneRays, brand identity, websites, creative communication and marketing share one direction. Each service supports the next, with your goals guiding the work.</p>
             <p className="font-display text-lg font-semibold text-foreground">Because your business deserves more than outsourced creativity. It deserves ownership.</p>
           </div>
         </div>
