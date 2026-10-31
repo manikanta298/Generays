@@ -29,7 +29,7 @@ export function HomeHero() {
               Explore Services
               <ArrowRight aria-hidden="true" />
             </a>
-            <a className="home-hero__secondary" href="/services">
+            <a className="home-hero__secondary" href="/portfolio">
               See Our Work
             </a>
           </div>

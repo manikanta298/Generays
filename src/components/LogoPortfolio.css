@@ -1,7 +1,7 @@
 .logo-portfolio {
-  --logo-blue: #10388f;
+  --logo-blue: #002b8e;
   --logo-cream: #f6f5f1;
-  --logo-text: #101828;
+  --logo-text: #002b8e;
   width: 100%;
   padding: 88px 0 112px;
   overflow: hidden;
@@ -30,7 +30,7 @@
 
 .logo-portfolio__heading h2 {
   margin: 0;
-  color: #0e1835;
+  color: #002b8e;
   font: 700 clamp(2.5rem, 5vw, 4.25rem)/1 var(--font-space-grotesk), sans-serif;
   letter-spacing: -.055em;
 }
@@ -60,10 +60,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid rgba(16,56,143,.08);
+  border: 1px solid rgba(0, 43, 142,.08);
   border-radius: 20px;
   background: #ebe9e3;
-  box-shadow: 0 18px 42px -34px rgba(15,35,80,.5);
+  box-shadow: 0 18px 42px -34px rgba(0, 43, 142,.5);
   transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease, box-shadow .35s ease;
 }
 
@@ -88,8 +88,8 @@
 .logo-portfolio__item:hover .logo-portfolio__media,
 .logo-portfolio__item:focus-visible .logo-portfolio__media {
   transform: translateY(-4px);
-  border-color: rgba(16,56,143,.2);
-  box-shadow: 0 26px 46px -30px rgba(16,56,143,.34);
+  border-color: rgba(0, 43, 142,.2);
+  box-shadow: 0 26px 46px -30px rgba(0, 43, 142,.34);
 }
 
 .logo-portfolio__item:hover .logo-portfolio__media::after,
@@ -103,7 +103,7 @@
 }
 
 .logo-portfolio__item:focus-visible .logo-portfolio__media {
-  outline: 3px solid rgba(16,56,143,.24);
+  outline: 3px solid rgba(0, 43, 142,.24);
   outline-offset: 4px;
 }
 
@@ -115,7 +115,7 @@
   align-items: center;
   justify-content: center;
   padding: 30px;
-  background: rgba(7,10,18,.94);
+  background: rgba(0, 43, 142,.94);
   backdrop-filter: blur(12px);
   opacity: 0;
   visibility: hidden;

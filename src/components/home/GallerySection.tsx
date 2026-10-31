@@ -76,7 +76,7 @@ export function GallerySection() {
             </div>
 
             <div className="flex w-full shrink-0 flex-col justify-center p-6 sm:p-8 md:w-[320px]">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-indigo-600">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
                 GeneRays Gallery
               </p>
               <h3 className="mt-3 text-2xl font-extrabold text-slate-900">
@@ -89,7 +89,7 @@ export function GallerySection() {
               <button
                 type="button"
                 onClick={() => setSelectedImage(null)}
-                className="mt-6 inline-flex w-fit items-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+                className="mt-6 inline-flex w-fit items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary"
               >
                 Close
               </button>

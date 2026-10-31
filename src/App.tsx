@@ -1,7 +1,10 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { websiteProjects } from "@/content/projects";
+import { services } from "@/content/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { EnquiryPopup } from "@/components/EnquiryPopup";
 import SplashCursor from "@/components/SplashCursor";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import HomePage from "@/pages/Home";
@@ -10,6 +13,7 @@ import ProcessPage from "@/pages/Process";
 import ServicesPage from "@/pages/Services";
 import ServiceDetailPage from "@/pages/ServiceDetail";
 import PortfolioPage from "@/pages/Portfolio";
+import ProjectDetailPage from "@/pages/ProjectDetail";
 import ContactPage from "@/pages/Contact";
 import NotFoundPage from "@/pages/NotFound";
 import ErrorPage from "@/pages/Error";
@@ -30,7 +34,10 @@ function RouteSeo() {
       "/submit-testimonial": "Share Your Experience — GeneRays",
       "/contact": "Contact GeneRays — Start Your Brand Journey",
     };
-    document.title = titles[location.pathname] ?? "GeneRays — Brand Engineering";
+    const project = websiteProjects.find(item => location.pathname === `/portfolio/${item.slug}`);
+    const service = services.find(item => location.pathname === `/services/${item.slug}`);
+    document.title = project ? `${project.title} — GeneRays Portfolio` : service ? `${service.title} — GeneRays` : titles[location.pathname] ?? "GeneRays — Brand Engineering";
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     const canonical = document.querySelector('link[rel="canonical"]') ?? document.createElement("link");
     canonical.setAttribute("rel","canonical");
     canonical.setAttribute("href", `${window.location.origin}${location.pathname}`);
@@ -40,6 +47,7 @@ function RouteSeo() {
 }
 
 export default function App() {
+  const location = useLocation();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <LoadingScreen />
@@ -57,12 +65,14 @@ export default function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServiceDetailPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/portfolio/:slug" element={<ProjectDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <SiteFooter />
+      {!location.pathname.startsWith("/admin") && <EnquiryPopup />}
     </div>
   );
 }

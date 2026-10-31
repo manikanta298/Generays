@@ -16,7 +16,7 @@
 
 .home-transform {
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, #fbfcff 0%, #f3f7ff 100%);
+  background: linear-gradient(180deg, #fbfcff 0%, color-mix(in srgb, var(--brand-blue) 3%, white) 100%);
 }
 
 .home-transform__inner {
@@ -39,16 +39,16 @@
 }
 
 .home-transform__panel--before {
-  border: 1px solid rgba(58, 76, 111, .12);
-  box-shadow: 0 16px 45px rgba(26, 39, 74, .06);
+  border: 1px solid rgba(0, 43, 142, .12);
+  box-shadow: 0 16px 45px rgba(0, 43, 142, .06);
 }
 
 .home-transform__panel--after {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(61, 109, 242, .24);
+  border: 1px solid rgba(0, 43, 142, .24);
   background: linear-gradient(160deg, rgba(255,255,255,.92), rgba(244,249,255,.95));
-  box-shadow: 0 18px 55px rgba(36, 89, 204, .10);
+  box-shadow: 0 18px 55px rgba(0, 43, 142, .10);
 }
 
 .home-transform__panel--after::after {
@@ -58,7 +58,7 @@
   right: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(180deg, #39d6ff, #3164ff, #7f54ff);
+  background: linear-gradient(180deg, #002b8e, #002b8e, #002b8e);
 }
 
 .home-transform__panel-head {
@@ -71,7 +71,7 @@
 
 .home-transform__panel-head h3 {
   margin: 0;
-  color: #122047;
+  color: #002b8e;
   font: 700 20px/1.1 var(--font-space-grotesk), sans-serif;
 }
 
@@ -93,8 +93,8 @@
 
 .home-transform__badge--active {
   color: white;
-  background: linear-gradient(90deg, #1e62ed, #5a4af4);
-  box-shadow: 0 10px 25px rgba(54, 89, 224, .18);
+  background: linear-gradient(90deg, #002b8e, #002b8e);
+  box-shadow: 0 10px 25px rgba(0, 43, 142, .18);
 }
 
 .home-transform__row {
@@ -105,7 +105,7 @@
   min-height: 62px;
   margin-top: 8px;
   padding: 10px 12px;
-  border: 1px solid rgba(58, 76, 111, .08);
+  border: 1px solid rgba(0, 43, 142, .08);
   border-radius: 11px;
   color: #4f5c73;
   background: rgba(248,250,253,.85);
@@ -115,16 +115,16 @@
 
 .home-transform__row:hover {
   transform: translateY(-2px);
-  border-color: rgba(64, 91, 164, .18);
-  box-shadow: 0 10px 22px rgba(26, 42, 80, .07);
+  border-color: rgba(0, 43, 142, .18);
+  box-shadow: 0 10px 22px rgba(0, 43, 142, .07);
 }
 
 .home-transform__row--after {
   position: relative;
   margin-right: 2px;
-  color: #15234b;
+  color: #002b8e;
   background: rgba(255,255,255,.9);
-  border-color: rgba(57, 108, 233, .11);
+  border-color: rgba(0, 43, 142, .11);
   font-weight: 700;
 }
 
@@ -144,18 +144,18 @@
 .home-transform__icon--muted {
   color: #5d677b;
   background: linear-gradient(145deg, #f6f7fa, #e7ebf2);
-  border: 1px solid rgba(81, 96, 121, .1);
+  border: 1px solid rgba(0, 43, 142, .1);
 }
 
 .home-transform__icon--active {
-  color: #1f5be4;
-  background: linear-gradient(145deg, #eef5ff, #d9e9ff);
-  border: 1px solid rgba(43, 101, 234, .14);
-  box-shadow: inset 0 0 16px rgba(83, 153, 255, .12);
+  color: #002b8e;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--brand-blue) 5%, white), color-mix(in srgb, var(--brand-blue) 12%, white));
+  border: 1px solid rgba(0, 43, 142, .14);
+  box-shadow: inset 0 0 16px rgba(0, 43, 142, .12);
 }
 
 .home-transform__chevron {
-  color: #5a66ef;
+  color: #002b8e;
   font-size: 22px;
   line-height: 1;
 }
@@ -172,11 +172,11 @@
   width: 32px;
   height: 32px;
   place-items: center;
-  color: #3971e9;
-  border: 1px solid rgba(58, 114, 235, .18);
+  color: #002b8e;
+  border: 1px solid rgba(0, 43, 142, .18);
   border-radius: 50%;
   background: rgba(255,255,255,.82);
-  box-shadow: 0 8px 20px rgba(56, 91, 177, .08);
+  box-shadow: 0 8px 20px rgba(0, 43, 142, .08);
 }
 
 .home-transform__arrow svg {
@@ -208,7 +208,7 @@
     width: 60px;
     height: 1px;
     align-self: center;
-    background: linear-gradient(90deg, transparent, rgba(54, 103, 223, .25));
+    background: linear-gradient(90deg, transparent, rgba(0, 43, 142, .25));
   }
 
   .home-transform__arrow {
@@ -265,7 +265,7 @@
   place-items: center;
   border-radius: 50%;
   background: white;
-  box-shadow: 0 8px 20px rgba(23, 45, 110, .1);
+  box-shadow: 0 8px 20px rgba(0, 43, 142, .1);
 }
 
 .tech-marquee__fade {

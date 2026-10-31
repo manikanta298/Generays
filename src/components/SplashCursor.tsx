@@ -13,8 +13,8 @@ type SplashCursorProps = {
 };
 
 export default function SplashCursor({
-  color = '#65e6ff',
-  secondaryColor = '#8b5cf6',
+  color = '#002b8e',
+  secondaryColor = '#002b8e',
   strength = 0.55,
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
