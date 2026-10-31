@@ -1,24 +1,24 @@
 .service-included {
-  --service-accent: #10388F;
-  --service-accent-rgb: 16,56,143;
-  --service-soft: rgba(16,56,143,.09);
-  --service-line: rgba(16,56,143,.14);
+  --service-accent: #002b8e;
+  --service-accent-rgb:0,43,142;
+  --service-soft: rgba(0, 43, 142,.09);
+  --service-line: rgba(0, 43, 142,.14);
   background:
     radial-gradient(circle at 78% 12%, rgba(var(--service-accent-rgb), .07), transparent 27rem),
     linear-gradient(180deg, #fbfcff 0%, #ffffff 62%, #f8fbff 100%);
 }
 
-.service-included--A { --service-accent:#10388F; --service-accent-rgb:16,56,143; }
-.service-included--B { --service-accent:#1749A8; --service-accent-rgb:23,73,168; }
-.service-included--C { --service-accent:#2857B8; --service-accent-rgb:40,87,184; }
-.service-included--D { --service-accent:#3568C7; --service-accent-rgb:53,104,199; }
-.service-included--E { --service-accent:#2450A0; --service-accent-rgb:36,80,160; }
-.service-included--F { --service-accent:#3D5FC0; --service-accent-rgb:61,95,192; }
-.service-included--G { --service-accent:#1B4A9E; --service-accent-rgb:27,74,158; }
-.service-included--H { --service-accent:#2F63B5; --service-accent-rgb:47,99,181; }
-.service-included--I { --service-accent:#214F9F; --service-accent-rgb:33,79,159; }
-.service-included--J { --service-accent:#526FAF; --service-accent-rgb:82,111,175; }
-.service-included--K { --service-accent:#10388F; --service-accent-rgb:16,56,143; }
+.service-included--A { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--B { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--C { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--D { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--E { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--F { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--G { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--H { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--I { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--J { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
+.service-included--K { --service-accent:#002b8e; --service-accent-rgb:0,43,142; }
 
 .service-included__wash {
   position:absolute;
@@ -27,7 +27,7 @@
   pointer-events:none;
   background:
     radial-gradient(circle at 78% 8%, rgba(var(--service-accent-rgb), .12), transparent 21rem),
-    radial-gradient(circle at 16% 18%, rgba(147,197,253,.07), transparent 19rem);
+    radial-gradient(circle at 16% 18%, rgba(0, 43, 142,.07), transparent 19rem);
 }
 
 .service-included__header {
@@ -60,7 +60,7 @@
 }
 
 .service-included__eyebrow {
-  color:#263c70;
+  color:#002b8e;
   font:800 11px/1.2 var(--font-space-grotesk),sans-serif;
   letter-spacing:.2em;
   text-transform:uppercase;
@@ -69,7 +69,7 @@
 .service-included__heading {
   max-width:780px;
   margin:1.4rem 0 0;
-  color:#0e1835;
+  color:#002b8e;
   font:700 clamp(2.25rem,4.6vw,4.6rem)/1.02 var(--font-space-grotesk),sans-serif;
   letter-spacing:-.055em;
 }
@@ -98,9 +98,9 @@
   border:1px solid rgba(var(--service-accent-rgb),.13);
   border-radius:999px;
   background:rgba(255,255,255,.78);
-  color:#50617f;
+  color:#002b8e;
   font:700 11px/1.1 var(--font-space-grotesk),sans-serif;
-  box-shadow:0 8px 24px -22px rgba(15,23,42,.55);
+  box-shadow:0 8px 24px -22px rgba(0, 43, 142,.55);
 }
 
 .service-included__grid {
@@ -125,17 +125,17 @@
   flex-direction:column;
   padding:23px 22px 21px;
   overflow:hidden;
-  border:1px solid rgba(36,57,96,.12);
+  border:1px solid rgba(0, 43, 142,.12);
   border-radius:22px;
   background:rgba(255,255,255,.91);
-  box-shadow:0 18px 38px -32px rgba(25,48,90,.55);
+  box-shadow:0 18px 38px -32px rgba(0, 43, 142,.55);
   outline:none;
   isolation:isolate;
   transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,box-shadow .3s ease;
 }
 
-.service-included__card:nth-child(3n + 2) { --card-accent:#2F5FBE; }
-.service-included__card:nth-child(3n) { --card-accent:#6A86C9; }
+.service-included__card:nth-child(3n + 2) { --card-accent:#002b8e; }
+.service-included__card:nth-child(3n) { --card-accent:#002b8e; }
 
 .service-included__card-glow {
   position:absolute;
@@ -183,7 +183,7 @@
 
 .service-included__card h3 {
   margin:0;
-  color:#14203d;
+  color:#002b8e;
   font:700 18px/1.2 var(--font-space-grotesk),sans-serif;
   letter-spacing:-.025em;
   overflow-wrap:anywhere;

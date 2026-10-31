@@ -18,7 +18,7 @@ export default function ServicesPage() {
         transparentImage
       />
 
-      <ServiceBento services={services} />
+      <ServiceBento services={services} filterable />
       <TechnologySection/>
       
     </>

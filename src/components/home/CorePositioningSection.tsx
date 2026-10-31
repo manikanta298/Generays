@@ -9,10 +9,10 @@ import {
 } from "lucide-react";
 
 const steps = [
-  { icon: FileText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-indigo-500", text: "text-indigo-600" },
-  { icon: IdCard, title: "2. Identity", desc: "We craft a unique visual identity that represents your brand.", color: "from-blue-500 to-blue-600", text: "text-blue-600" },
-  { icon: Monitor, title: "3. Website", desc: "We build strategic, high-performing websites that convert.", color: "from-sky-500 to-blue-500", text: "text-sky-600" },
-  { icon: Megaphone, title: "4. Marketing", desc: "We create consistent content and campaigns that engage.", color: "from-teal-400 to-cyan-500", text: "text-teal-600" },
+  { icon: FileText, title: "1. Brand Blueprint", desc: "We define your purpose, positioning and brand foundation.", color: "from-violet-500 to-primary", text: "text-primary" },
+  { icon: IdCard, title: "2. Identity", desc: "We craft a unique visual identity that represents your brand.", color: "from-primary to-primary", text: "text-primary" },
+  { icon: Monitor, title: "3. Website", desc: "We build strategic, high-performing websites that convert.", color: "from-primary to-primary", text: "text-primary" },
+  { icon: Megaphone, title: "4. Marketing", desc: "We create consistent content and campaigns that engage.", color: "from-teal-400 to-primary", text: "text-teal-600" },
   { icon: Settings, title: "5. Automation", desc: "We automate workflows to save time and increase efficiency.", color: "from-amber-400 to-orange-500", text: "text-amber-600" },
   { icon: BarChart3, title: "6. Growth", desc: "We analyze, optimize and scale for long-term, sustainable growth.", color: "from-green-500 to-emerald-500", text: "text-green-600" },
 ];
@@ -21,14 +21,14 @@ export function CorePositioningSection() {
   return (
     <section className="w-full bg-white py-12 font-sans sm:py-14 lg:py-16">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-3 text-xs font-bold tracking-[0.2em] text-indigo-600">CORE POSITIONING</p>
+        <p className="mb-3 text-xs font-bold tracking-[0.2em] text-primary">CORE POSITIONING</p>
         <h2 className="mb-5 text-3xl font-extrabold leading-tight text-slate-950 sm:text-4xl md:text-5xl">
           We don&apos;t sell services.
           <br />
           We build{" "}
-          <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">business ecosystems.</span>
+          <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">business ecosystems.</span>
         </h2>
-        <div className="mb-5 h-1 w-20 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400" />
+        <div className="mb-5 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-primary" />
         <p className="mb-8 max-w-xl text-base text-slate-600 sm:mb-10 md:text-lg">
           Isolated solutions create gaps.
           <br />

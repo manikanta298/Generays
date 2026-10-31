@@ -94,7 +94,7 @@ const stages: Stage[] = [
 ];
 
 const accentClasses: Record<string, { chip: string; badge: string }> = {
-  blue: { chip: "bg-blue-600", badge: "bg-blue-600" },
+  blue: { chip: "bg-primary", badge: "bg-primary" },
   violet: { chip: "bg-violet-600", badge: "bg-violet-600" },
   orange: { chip: "bg-orange-500", badge: "bg-orange-500" },
   emerald: { chip: "bg-emerald-500", badge: "bg-emerald-500" },

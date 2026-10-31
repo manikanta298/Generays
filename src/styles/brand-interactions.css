@@ -1,0 +1,333 @@
+/* Logo source: public/Generays.png, solid RGB(0, 43, 142). Existing page geometry is retained. */
+:root {
+  --brand-blue: #002b8e;
+  --brand-blue-soft: color-mix(in srgb, var(--brand-blue) 6%, white);
+}
+.brand-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 20px;
+  border: 1px solid var(--brand-blue);
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.brand-button:hover {
+  background: color-mix(in srgb, var(--brand-blue) 88%, black);
+}
+.brand-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.brand-button--secondary {
+  background: white;
+  color: var(--brand-blue);
+}
+.brand-button--secondary:hover {
+  background: var(--brand-blue-soft);
+}
+.brand-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 14px;
+}
+.brand-filters button {
+  border: 1px solid color-mix(in srgb, var(--brand-blue) 22%, white);
+  padding: 10px 16px;
+  background: white;
+  color: var(--brand-blue);
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.brand-filters button[aria-pressed="true"] {
+  background: var(--brand-blue);
+  border-color: var(--brand-blue);
+  color: white;
+}
+.brand-result-count {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin: 0 0 20px;
+}
+.enquiry-side-trigger {
+  position: fixed;
+  z-index: 60;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  writing-mode: vertical-rl;
+  border: 0;
+  border-radius: 10px 0 0 10px;
+  padding: 17px 12px;
+  background: var(--brand-blue);
+  color: white;
+  box-shadow: 0 5px 20px #002b8e30;
+  cursor: pointer;
+}
+.enquiry-side-trigger span {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.brand-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0 0 0 / 0.65);
+  padding: 20px;
+}
+.brand-modal {
+  width: min(100%, 650px);
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  border-radius: 20px;
+  background: white;
+  color: var(--foreground);
+  box-shadow: 0 30px 90px rgb(0 0 0 / 0.3);
+  overscroll-behavior: contain;
+}
+.brand-modal--wide {
+  width: min(100%, 1180px);
+}
+.brand-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: white;
+}
+.brand-modal-header h2 {
+  color: var(--brand-blue);
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+}
+.brand-modal-header button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: white;
+  color: var(--brand-blue);
+  cursor: pointer;
+}
+.brand-modal-body {
+  padding: 28px;
+}
+.enquiry-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+}
+.enquiry-steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.enquiry-steps li > span {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  flex: 0 0 26px;
+}
+.enquiry-steps li[aria-current="step"],
+.enquiry-steps li[data-complete="true"] {
+  color: var(--brand-blue);
+}
+.enquiry-steps li[aria-current="step"] > span,
+.enquiry-steps li[data-complete="true"] > span {
+  background: var(--brand-blue);
+  color: white;
+  border-color: var(--brand-blue);
+}
+.enquiry-form h3,
+.enquiry-success h3 {
+  font-size: 25px;
+  line-height: 1.25;
+  font-weight: 700;
+  margin: 0;
+  color: var(--brand-blue);
+}
+.enquiry-intro {
+  margin: 12px 0 24px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+.enquiry-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.enquiry-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-blue);
+}
+.enquiry-fields input,
+.enquiry-fields select,
+.enquiry-fields textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  font-size: 14px;
+  color: var(--foreground);
+  border: 1px solid var(--input);
+  border-radius: 7px;
+  background: white;
+  font-weight: 400;
+}
+.enquiry-fields textarea {
+  resize: vertical;
+}
+.enquiry-full {
+  grid-column: 1/-1;
+}
+.enquiry-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 26px;
+}
+.enquiry-privacy {
+  font-size: 11px;
+  color: var(--muted-foreground);
+  margin: 18px 0 0;
+  line-height: 1.6;
+}
+.enquiry-review {
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.enquiry-review > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.enquiry-review > div:last-child {
+  border: 0;
+}
+.enquiry-review dt {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.enquiry-review dd {
+  font-size: 14px;
+  margin: 5px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.enquiry-error {
+  font-size: 13px;
+  color: var(--destructive);
+  margin: 18px 0;
+}
+.enquiry-success {
+  padding: 20px 0;
+  text-align: center;
+}
+.enquiry-success > svg {
+  color: var(--brand-blue);
+  margin: 0 auto 20px;
+}
+.enquiry-success p {
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  margin: 18px 0 24px;
+  overflow-wrap: anywhere;
+}
+.portfolio-live-frame {
+  width: 100%;
+  height: min(65dvh, 750px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+/* Preserve contrast when logo accents sit inside the site's existing dark primary sections. */
+.bg-primary
+  :is(.text-primary, .text-neon-cyan, .text-neon-blue, .text-neon-violet) {
+  color: var(--primary-foreground);
+}
+@media (max-width: 640px) {
+  .enquiry-side-trigger {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    padding: 14px 10px;
+  }
+  .enquiry-side-trigger span {
+    display: none;
+  }
+  .brand-modal-backdrop {
+    padding: 10px;
+  }
+  .brand-modal {
+    max-height: calc(100dvh - 20px);
+    border-radius: 14px;
+  }
+  .brand-modal-header {
+    padding: 18px;
+  }
+  .brand-modal-header h2 {
+    font-size: 16px;
+  }
+  .brand-modal-body {
+    padding: 20px;
+  }
+  .enquiry-fields {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .enquiry-steps {
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .enquiry-steps li {
+    flex-direction: column;
+    font-size: 10px;
+    gap: 6px;
+    text-align: center;
+  }
+  .enquiry-actions {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-button {
+    transition: none;
+  }
+}
