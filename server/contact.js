@@ -7,6 +7,8 @@ const limits = {
   message: 6000,
   website: 500,
   timeline: 120,
+  goal: 120,
+  budget: 120,
 };
 
 export function validateContact(body) {
@@ -21,7 +23,10 @@ export function validateContact(body) {
     if (key !== "message" && /[\r\n\x00]/.test(values[key]))
       return { error: `Check the ${key} field and try again.` };
   }
-  if (!values.name || !values.email || !values.message)
+  const estimate = body.kind === "estimate";
+  if (estimate && (!values.name || !values.email || !values.phone || !values.goal || !values.budget || !values.timeline))
+    return { error: "Complete every step before requesting an estimate." };
+  if (!estimate && (!values.name || !values.email || !values.message))
     return { error: "Name, email and message are required." };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))
     return { error: "Enter a valid email address." };
@@ -35,7 +40,7 @@ export function validateContact(body) {
       };
     }
   }
-  return { values };
+  return { values, estimate };
 }
 
 export function createContactHandler(deliver, getConfig = () => process.env) {
@@ -52,7 +57,7 @@ export function createContactHandler(deliver, getConfig = () => process.env) {
       return res.status(403).json({ error: "Origin not allowed" });
     if (!req.headers?.["content-type"]?.startsWith("application/json"))
       return res.status(415).json({ error: "Send the enquiry as JSON." });
-    const { values, error } = validateContact(req.body);
+    const { values, estimate, error } = validateContact(req.body);
     if (error) return res.status(400).json({ error });
     const required = [
       "SMTP_HOST",
@@ -79,8 +84,15 @@ export function createContactHandler(deliver, getConfig = () => process.env) {
           from: config.SMTP_FROM,
           to: config.CONTACT_TO,
           replyTo: values.email,
-          subject: `New GeneRays enquiry from ${values.name}`,
-          text: [
+          subject: estimate ? `New GeneRays estimate request from ${values.name}` : `New GeneRays enquiry from ${values.name}`,
+          text: estimate ? [
+            `Primary goal: ${values.goal}`,
+            `Expected budget: ${values.budget}`,
+            `Preferred start: ${values.timeline}`,
+            `Name: ${values.name}`,
+            `Business email: ${values.email}`,
+            `Phone number: ${values.phone}`,
+          ].join("\n") : [
             `Name: ${values.name}`,
             `Company: ${values.company || "Not provided"}`,
             `Email: ${values.email}`,

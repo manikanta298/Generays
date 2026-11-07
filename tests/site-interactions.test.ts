@@ -32,26 +32,22 @@ afterEach(() => {
   cleanup();
   globalThis.fetch = originalFetch;
 });
-function fillContact(ui) {
-  fireEvent.change(ui.getByLabelText("Your name *"), {
-    target: { value: "Customer" },
-  });
-  fireEvent.change(ui.getByLabelText("Email *"), {
-    target: { value: "customer@example.test" },
-  });
+function choose(ui, option) {
+  fireEvent.click(ui.getByRole("radio", { name: option }));
   fireEvent.click(ui.getByText("Continue"));
 }
-function fillProject(ui) {
-  fireEvent.change(ui.getByLabelText("What do you need? *"), {
-    target: { value: "website-development" },
-  });
-  fireEvent.change(ui.getByLabelText("Tell us about your project *"), {
-    target: { value: "My project brief" },
-  });
-  fireEvent.click(ui.getByText("Continue"));
+function fillEstimate(ui) {
+  choose(ui, "Website Redesign");
+  choose(ui, "₹25,000–₹49,999");
+  choose(ui, "Immediately");
+  for (const [label, value] of [
+    ["Name", "Customer"],
+    ["Business Email", "customer@example.test"],
+    ["Phone Number", "+91 1234567890"],
+  ]) fireEvent.change(ui.getByLabelText(label), { target: { value } });
 }
 
-test("popup validates steps, preserves data on back, and emails the reviewed payload", async () => {
+test("popup validates steps, preserves data on back, and sends the complete estimate request", async () => {
   let payload;
   let calls = 0;
   globalThis.fetch = ((_url, options) => {
@@ -66,19 +62,20 @@ test("popup validates steps, preserves data on back, and emails the reviewed pay
   fireEvent.click(trigger);
   assert.ok(ui.getByRole("dialog"));
   fireEvent.click(ui.getByText("Continue"));
-  assert.ok(ui.getByRole("heading", { name: "Your details" }));
-  fillContact(ui);
-  assert.ok(ui.getByRole("heading", { name: "Your project" }));
+  assert.ok(ui.getByRole("heading", { name: "What's your primary goal?" }));
+  choose(ui, "Website Redesign");
   fireEvent.click(ui.getByText("Back"));
-  assert.equal(ui.getByLabelText("Your name *").value, "Customer");
-  fireEvent.click(ui.getByText("Continue"));
-  fillProject(ui);
-  assert.ok(ui.getByText("My project brief"));
+  assert.ok(ui.getByRole("radio", { name: "Website Redesign" }).checked);
+  fillEstimate(ui);
   assert.equal(calls, 0);
-  fireEvent.click(ui.getByText("Send enquiry"));
+  fireEvent.click(ui.getByText("Get My Custom Estimate"));
   await ui.findByText("Your enquiry has been sent.");
   assert.equal(calls, 1);
-  assert.equal(payload.service, "website-development");
+  assert.equal(payload.kind, "estimate");
+  assert.equal(payload.goal, "Website Redesign");
+  assert.equal(payload.budget, "₹25,000–₹49,999");
+  assert.equal(payload.timeline, "Immediately");
+  assert.equal(payload.phone, "+91 1234567890");
   assert.equal(payload.email, "customer@example.test");
   fireEvent.click(ui.getByText("Done"));
   assert.equal(ui.queryByRole("dialog"), null);
@@ -88,7 +85,7 @@ test("popup validates steps, preserves data on back, and emails the reviewed pay
   );
 });
 
-test("popup retains the brief on email failure and can retry successfully", async () => {
+test("popup retains contact details on email failure and can retry successfully", async () => {
   let fail = true;
   globalThis.fetch = (() =>
     Promise.resolve(
@@ -101,13 +98,12 @@ test("popup retains the brief on email failure and can retry successfully", asyn
     )) as typeof fetch;
   const ui = render(React.createElement(EnquiryPopup));
   fireEvent.click(ui.getByLabelText("Open project enquiry"));
-  fillContact(ui);
-  fillProject(ui);
-  fireEvent.click(ui.getByText("Send enquiry"));
+  fillEstimate(ui);
+  fireEvent.click(ui.getByText("Get My Custom Estimate"));
   assert.equal((await ui.findByRole("alert")).textContent, "Email unavailable");
-  assert.ok(ui.getByText("My project brief"));
+  assert.equal(ui.getByLabelText("Business Email").value, "customer@example.test");
   fail = false;
-  fireEvent.click(ui.getByText("Send enquiry"));
+  fireEvent.click(ui.getByText("Get My Custom Estimate"));
   await ui.findByText("Your enquiry has been sent.");
 });
 
