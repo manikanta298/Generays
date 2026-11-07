@@ -1,4 +1,4 @@
-import { technologies } from "@/content/site";
+import { TechnologyLoop } from "@/components/home/TechnologyLoop";
 import { SectionHeading } from "@/components/page-hero";
 import { TechMarquee } from "@/components/home/TechMarquee";
 
@@ -10,9 +10,7 @@ export function TechnologySection() {
         <div className="mt-12 rounded-2xl ">
           <TechMarquee />
         </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-          {technologies.map((tech) => <span key={tech} className="rounded-full border border-border bg-background px-3.5 py-2 text-xs font-medium text-muted-foreground">{tech}</span>)}
-        </div>
+        <div className="mt-8"><TechnologyLoop variant="expertise" /></div>
       </div>
     </section>
   );

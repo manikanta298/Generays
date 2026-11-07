@@ -245,7 +245,7 @@
 
 .tech-marquee__track {
   display: flex;
-  gap: 22px;
+  gap: var(--tech-marquee-gap);
   width: max-content;
 }
 
@@ -258,12 +258,16 @@
 }
 
 .tech-marquee__badge {
-  display: grid;
-  flex-shrink: 0;
-  width: 56px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  width: auto;
   height: 56px;
-  place-items: center;
-  border-radius: 50%;
+  padding-inline: 14px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
   background: white;
   box-shadow: 0 8px 20px rgba(0, 43, 142, .1);
 }
@@ -289,11 +293,11 @@
 
 @keyframes tech-marquee-left {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(calc(-50% - var(--tech-marquee-gap) / 2)); }
 }
 
 @keyframes tech-marquee-right {
-  from { transform: translateX(-50%); }
+  from { transform: translateX(calc(-50% - var(--tech-marquee-gap) / 2)); }
   to { transform: translateX(0); }
 }
 
@@ -301,5 +305,11 @@
   .tech-marquee__track--left,
   .tech-marquee__track--right {
     animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .tech-marquee__badge[aria-hidden="true"] {
+    display: none;
   }
 }

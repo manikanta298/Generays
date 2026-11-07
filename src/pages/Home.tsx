@@ -1,3 +1,4 @@
+import { TechnologyLoop } from "@/components/home/TechnologyLoop";
 import { GallerySection } from "@/components/home/GallerySection";
 import { HomeHero } from "@/components/home/HomeHero";
 import { CorePositioningSection } from "@/components/home/CorePositioningSection";
@@ -16,6 +17,11 @@ export default function HomePage() {
   return (
     <div className="home-page bg-white">
       <HomeHero />
+      <div className="border-b border-border bg-background">
+        <div className="mx-auto max-w-6xl px-5 py-6">
+          <TechnologyLoop variant="stack" />
+        </div>
+      </div>
       <FrameworkSection />
       <ServicesSection />
       <GallerySection />
