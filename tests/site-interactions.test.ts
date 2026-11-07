@@ -10,8 +10,15 @@ Object.assign(globalThis, {
   window: dom.window,
   document: dom.window.document,
   HTMLElement: dom.window.HTMLElement,
+  MutationObserver: dom.window.MutationObserver,
   FormData: dom.window.FormData,
   IS_REACT_ACT_ENVIRONMENT: true,
+});
+dom.window.matchMedia = (media) => ({
+  media,
+  matches: media === "(prefers-reduced-motion: reduce)",
+  addEventListener() {},
+  removeEventListener() {},
 });
 const { render, fireEvent, cleanup, waitFor } =
   await import("@testing-library/react");

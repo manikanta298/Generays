@@ -1,4 +1,5 @@
 import { ArrowUpRight, Check } from "lucide-react";
+import { BeamCard } from "@/components/spectrumui/beam-card";
 import { Link } from "react-router-dom";
 import type { Service } from "@/content/site";
 import { getServiceIcon } from "@/content/service-icons";
@@ -88,63 +89,71 @@ export function ServiceBento({
             );
 
             return (
-              <Link
+              <BeamCard
                 key={service.slug}
-                to={`/services/${service.slug}`}
-                className={`service-bento__card service-bento__card--${service.letter}`}
-                aria-label={`Explore ${service.title} and its ${service.items.length} included capabilities`}
-                role="listitem"
-              >
-                <span className="service-bento__service-art" aria-hidden="true">
-                  <Icon size={116} strokeWidth={1} />
-                </span>
-                <div className="service-bento__scrim" />
-                <div className="service-bento__gridline" />
-
-                <div className="service-bento__top">
-                  <span className="service-bento__number">
-                    {service.letter}
-                  </span>
-                  <span className="service-bento__icon" aria-hidden="true">
-                    <Icon size={18} strokeWidth={1.8} />
-                  </span>
-                </div>
-
-                <div className="service-bento__content">
-                  <div className="service-bento__meta">
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <span>{service.items.length} included</span>
-                  </div>
-                  <h3>{service.title}</h3>
-                  <p className="service-bento__tagline">{service.tagline}</p>
-
-                  <div
-                    className="service-bento__included"
-                    aria-label={`Included in ${service.title}`}
+                wrapperClassName="service-bento__beam"
+                colorVariant="mono"
+                theme="dark"
+                strength={0.65}
+                surface={
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className={`service-bento__card service-bento__card--${service.letter}`}
+                    aria-label={`Explore ${service.title} and its ${service.items.length} included capabilities`}
+                    role="listitem"
                   >
-                    {previewItems.map((item) => (
-                      <span key={item}>
-                        <Check size={12} strokeWidth={2.5} aria-hidden="true" />
-                        {item}
-                      </span>
-                    ))}
-                    {extraCount > 0 && (
-                      <span className="service-bento__more">
-                        +{extraCount} more
-                      </span>
-                    )}
-                  </div>
+                    <span className="service-bento__service-art" aria-hidden="true">
+                      <Icon size={116} strokeWidth={1} />
+                    </span>
+                    <div className="service-bento__scrim" />
+                    <div className="service-bento__gridline" />
 
-                  <span className="service-bento__action">
-                    View what's included{" "}
-                    <ArrowUpRight size={15} aria-hidden="true" />
-                  </span>
-                </div>
+                    <div className="service-bento__top">
+                      <span className="service-bento__number">
+                        {service.letter}
+                      </span>
+                      <span className="service-bento__icon" aria-hidden="true">
+                        <Icon size={18} strokeWidth={1.8} />
+                      </span>
+                    </div>
 
-                <span className="service-bento__glow" aria-hidden="true">
-                  <Icon size={30} strokeWidth={1.1} />
-                </span>
-              </Link>
+                    <div className="service-bento__content">
+                      <div className="service-bento__meta">
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <span>{service.items.length} included</span>
+                      </div>
+                      <h3>{service.title}</h3>
+                      <p className="service-bento__tagline">{service.tagline}</p>
+
+                      <div
+                        className="service-bento__included"
+                        aria-label={`Included in ${service.title}`}
+                      >
+                        {previewItems.map((item) => (
+                          <span key={item}>
+                            <Check size={12} strokeWidth={2.5} aria-hidden="true" />
+                            {item}
+                          </span>
+                        ))}
+                        {extraCount > 0 && (
+                          <span className="service-bento__more">
+                            +{extraCount} more
+                          </span>
+                        )}
+                      </div>
+
+                      <span className="service-bento__action">
+                        View what's included{" "}
+                        <ArrowUpRight size={15} aria-hidden="true" />
+                      </span>
+                    </div>
+
+                    <span className="service-bento__glow" aria-hidden="true">
+                      <Icon size={30} strokeWidth={1.1} />
+                    </span>
+                  </Link>
+                }
+              />
             );
           })}
         </div>

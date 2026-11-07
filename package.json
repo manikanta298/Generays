@@ -15,6 +15,7 @@
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^2.0.8",
     "@tailwindcss/vite": "^4.2.1",
+    "border-beam": "^1.4.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.575.0",
     "mongodb": "^7.7.0",

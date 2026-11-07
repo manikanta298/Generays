@@ -84,12 +84,17 @@
   box-shadow: 0 26px 70px -48px rgba(0, 43, 142, .45);
 }
 
+.service-bento__beam {
+  min-width: 0;
+  flex: 0 0 25%;
+}
+
 .service-bento__card {
   --accent: var(--brand-blue);
   --accent-rgb: 0, 43, 142;
   position: relative;
   min-width: 0;
-  flex: 0 0 25%;
+  width: 100%;
   height: 315px;
   overflow: hidden;
   isolation: isolate;
@@ -117,11 +122,11 @@
 .service-bento__card--J { --accent: var(--brand-blue); --accent-rgb: 0, 43, 142; }
 .service-bento__card--K { --accent: var(--brand-blue); --accent-rgb: 0, 43, 142; }
 
-.service-bento__card:nth-child(1),
-.service-bento__card:nth-child(5),
-.service-bento__card:nth-child(9),
-.service-bento__card:nth-child(10),
-.service-bento__card:nth-child(11) {
+.service-bento__beam:nth-of-type(1),
+.service-bento__beam:nth-of-type(5),
+.service-bento__beam:nth-of-type(9),
+.service-bento__beam:nth-of-type(10),
+.service-bento__beam:nth-of-type(11) {
   flex-basis: 50%;
 }
 
@@ -324,16 +329,18 @@
     padding: 64px 0 76px;
   }
 
-  .service-bento__card,
-  .service-bento__card:nth-child(n) {
+  .service-bento__beam:nth-of-type(n) {
     flex-basis: 50%;
+  }
+
+  .service-bento__card {
     height: 300px;
   }
 
-  .service-bento__card:nth-child(1),
-  .service-bento__card:nth-child(4),
-  .service-bento__card:nth-child(7),
-  .service-bento__card:nth-child(10) {
+  .service-bento__beam:nth-of-type(1),
+  .service-bento__beam:nth-of-type(4),
+  .service-bento__beam:nth-of-type(7),
+  .service-bento__beam:nth-of-type(10) {
     flex-basis: 100%;
   }
 }
@@ -352,13 +359,15 @@
     border-radius: 18px;
   }
 
-  .service-bento__card,
-  .service-bento__card:nth-child(n),
-  .service-bento__card:nth-child(1),
-  .service-bento__card:nth-child(4),
-  .service-bento__card:nth-child(7),
-  .service-bento__card:nth-child(10) {
+  .service-bento__beam:nth-of-type(n),
+  .service-bento__beam:nth-of-type(1),
+  .service-bento__beam:nth-of-type(4),
+  .service-bento__beam:nth-of-type(7),
+  .service-bento__beam:nth-of-type(10) {
     flex-basis: 50%;
+  }
+
+  .service-bento__card {
     height: 286px;
   }
 
@@ -392,13 +401,15 @@
     border-radius: 16px;
   }
 
-  .service-bento__card,
-  .service-bento__card:nth-child(n),
-  .service-bento__card:nth-child(1),
-  .service-bento__card:nth-child(4),
-  .service-bento__card:nth-child(7),
-  .service-bento__card:nth-child(10) {
+  .service-bento__beam:nth-of-type(n),
+  .service-bento__beam:nth-of-type(1),
+  .service-bento__beam:nth-of-type(4),
+  .service-bento__beam:nth-of-type(7),
+  .service-bento__beam:nth-of-type(10) {
     flex-basis: 100%;
+  }
+
+  .service-bento__card {
     height: 270px;
   }
 
