@@ -41,9 +41,6 @@ export function ServiceBento({
           <div className="service-bento__intro-copy">
             <div className="service-bento__eyebrow-row">
               <p className="service-bento__eyebrow">{eyebrow}</p>
-              <span className="service-bento__count">
-                {services.length} connected services
-              </span>
             </div>
             <h2 id={headingId} className="service-bento__heading">
               Everything your brand needs,{" "}
