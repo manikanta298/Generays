@@ -45,6 +45,7 @@ export interface BeamCardProps {
   /** Existing card surface, such as a linked service card. */
   surface?: React.ReactElement;
   wrapperClassName?: string;
+  borderRadius?: number;
 }
 
 export function BeamCard({
@@ -60,6 +61,7 @@ export function BeamCard({
   className,
   surface,
   wrapperClassName,
+  borderRadius,
 }: BeamCardProps) {
   const resolved = useSurfaceTheme(theme);
   return (
@@ -70,7 +72,7 @@ export function BeamCard({
       active={active}
       strength={strength}
       className={wrapperClassName ?? "w-full"}
-      borderRadius={surface ? 0 : undefined}
+      borderRadius={borderRadius}
     >
       {surface ?? (
         <div

@@ -26,6 +26,8 @@ export function ServiceBento({
 }: ServiceBentoProps) {
   const [category, setCategory] = useState("All");
   const headingId = useId();
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [focused, setFocused] = useState<string | null>(null);
   const visibleServices = services.filter(
     (service) =>
       !filterable ||
@@ -82,6 +84,7 @@ export function ServiceBento({
           {visibleServices.map((service) => {
             const index = services.indexOf(service);
             const Icon = getServiceIcon(service.slug);
+            const gradientId = `${headingId}-icon-${index}`;
             const previewItems = service.items.slice(0, 4);
             const extraCount = Math.max(
               service.items.length - previewItems.length,
@@ -92,34 +95,43 @@ export function ServiceBento({
               <BeamCard
                 key={service.slug}
                 wrapperClassName="service-bento__beam"
-                colorVariant="mono"
-                theme="dark"
-                strength={0.65}
+                colorVariant="ocean"
+                theme="light"
+                borderRadius={14}
+                active={hovered === service.slug || focused === service.slug}
                 surface={
                   <Link
                     to={`/services/${service.slug}`}
-                    className={`service-bento__card service-bento__card--${service.letter}`}
+                    className="service-bento__card"
+                    onPointerEnter={(event) => {
+                      if (event.pointerType !== "touch") setHovered(service.slug);
+                    }}
+                    onPointerLeave={() => setHovered(null)}
+                    onFocus={(event) => {
+                      if (event.currentTarget.matches(":focus-visible")) setFocused(service.slug);
+                    }}
+                    onBlur={() => setFocused(null)}
                     aria-label={`Explore ${service.title} and its ${service.items.length} included capabilities`}
                     role="listitem"
                   >
-                    <span className="service-bento__service-art" aria-hidden="true">
-                      <Icon size={116} strokeWidth={1} />
-                    </span>
-                    <div className="service-bento__scrim" />
-                    <div className="service-bento__gridline" />
-
                     <div className="service-bento__top">
-                      <span className="service-bento__number">
-                        {service.letter}
-                      </span>
                       <span className="service-bento__icon" aria-hidden="true">
-                        <Icon size={18} strokeWidth={1.8} />
+                        <Icon size={23} strokeWidth={1.9} color={`url(#${gradientId})`}>
+                          <defs>
+                            <linearGradient id={gradientId} x2="1" y2="1">
+                              <stop stopColor="#002b8e" />
+                              <stop offset="1" stopColor="#357cde" />
+                            </linearGradient>
+                          </defs>
+                        </Icon>
+                      </span>
+                      <span className="service-bento__number">
+                        {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
 
                     <div className="service-bento__content">
                       <div className="service-bento__meta">
-                        <span>{String(index + 1).padStart(2, "0")}</span>
                         <span>{service.items.length} included</span>
                       </div>
                       <h3>{service.title}</h3>
@@ -148,9 +160,6 @@ export function ServiceBento({
                       </span>
                     </div>
 
-                    <span className="service-bento__glow" aria-hidden="true">
-                      <Icon size={30} strokeWidth={1.1} />
-                    </span>
                   </Link>
                 }
               />
