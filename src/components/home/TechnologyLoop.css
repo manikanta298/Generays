@@ -1,22 +1,57 @@
-.technology-loop__row--paused .logoloop__track {
-  transform: none !important;
+.technology-loop {
+  padding-block: clamp(16px, 3vw, 32px);
 }
 
-.technology-loop__row--paused {
-  overflow-x: auto;
+.technology-loop__heading {
+  margin: 0 18px 12px;
+  color: #002b8e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.technology-loop__row--paused .logoloop__list[aria-hidden="true"] {
-  display: none;
+.technology-loop__row {
+  padding-block: 4px 8px;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.technology-loop__tile {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.technology-loop__tile img {
+  width: 30px;
+  flex: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .technology-loop__control {
-    display: none;
+  .technology-loop__row {
+    padding-inline: 16px;
+    mask-image: none;
   }
 
-  .technology-loop__row {
-    overflow-x: auto;
+  .technology-loop__row .logoloop__track {
+    width: 100%;
+  }
+
+  .technology-loop__row .logoloop__list {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .technology-loop__row .logoloop__item {
+    margin: 0;
   }
 
   .technology-loop__row .logoloop__list[aria-hidden="true"] {

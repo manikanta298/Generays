@@ -17,10 +17,8 @@ export default function HomePage() {
   return (
     <div className="home-page bg-white">
       <HomeHero />
-      <div className="border-b border-border bg-background">
-        <div className="mx-auto max-w-6xl px-5 py-6">
-          <TechnologyLoop variant="stack" />
-        </div>
+      <div className="mx-auto max-w-6xl px-5 pb-4">
+        <TechnologyLoop />
       </div>
       <FrameworkSection />
       <ServicesSection />
