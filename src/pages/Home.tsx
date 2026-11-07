@@ -19,7 +19,7 @@ export default function HomePage() {
       <HomeHero />
       <div className="border-b border-border bg-background">
         <div className="mx-auto max-w-6xl px-5 py-6">
-          <TechnologyLoop variant="stack" />
+          <TechnologyLoop />
         </div>
       </div>
       <FrameworkSection />

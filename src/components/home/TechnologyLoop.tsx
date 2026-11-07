@@ -1,77 +1,40 @@
-import { useState, type ReactNode } from "react";
-import { Braces, PanelsTopLeft } from "lucide-react";
 import LogoLoop, { type LogoItem } from "@/components/LogoLoop";
-import { technologies } from "@/content/site";
 import "./TechnologyLoop.css";
 
-const stack = ["React", "TypeScript", "Vite", "Tailwind CSS", "MongoDB", "Vercel"];
-const icons: Record<string, string> = {
-  React: "react",
-  TypeScript: "typescript",
-  Vite: "vite",
-  "Tailwind CSS": "tailwindcss",
-  MongoDB: "mongodb",
-  Vercel: "vercel",
-  PHP: "php",
-  HTML5: "html5",
-  CSS3: "css3",
-  Laravel: "laravel",
-  WordPress: "wordpress",
-  Magento: "magento",
-  Joomla: "joomla",
-  Shopify: "shopify",
-  JavaScript: "javascript",
-  Bootstrap: "bootstrap",
-  MySQL: "mysql",
-};
-const categoryIcons: Record<string, ReactNode> = {
-  "REST APIs": <Braces />,
-  "Responsive Web Development": <PanelsTopLeft />,
-};
+const stack = [
+  { name: "React", icon: "react" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "Vite", icon: "vite" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "MongoDB", icon: "mongodb" },
+  { name: "Vercel", icon: "vercel" },
+];
 
-function logoItems(names: readonly string[], showLabels: boolean): LogoItem[] {
-  return names.map((name) => ({
-    node: (
-      <span className="inline-flex items-center gap-2.5 whitespace-nowrap" title={name}>
-        <span aria-hidden="true" className="inline-flex">
-          {icons[name] ? <img src={`/technology-logos/${icons[name]}.svg`} width="24" height="24" alt="" /> : categoryIcons[name]}
-        </span>
-        <span className={showLabels ? "text-sm font-medium text-muted-foreground" : "sr-only"}>{name}</span>
-      </span>
-    ),
-  }));
-}
+// Original brand artwork from https://github.com/devicons/devicon.
+const stackLogos: LogoItem[] = stack.map(({ name, icon }) => ({
+  node: (
+    <span className="technology-loop__tile">
+      <img src={`/technology-logos/${icon}.svg`} width="30" height="30" alt="" />
+      <span>{name}</span>
+    </span>
+  ),
+}));
 
-const stackLogos = logoItems(stack, false);
-const expertiseLogos = logoItems(technologies, true);
-
-export function TechnologyLoop({ variant }: { variant: "stack" | "expertise" }) {
-  const [paused, setPaused] = useState(false);
-  const isStack = variant === "stack";
-  const label = isStack ? "Technology stack and hosting" : "Technology expertise";
+export function TechnologyLoop() {
   return (
-    <div className="technology-loop">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        {isStack && <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{label}</h2>}
-        <button
-          type="button"
-          onClick={() => setPaused(!paused)}
-          className="technology-loop__control ml-auto rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-2"
-          aria-label={`${paused ? "Resume" : "Pause"} ${label.toLowerCase()} logos`}
-        >
-          {paused ? "Resume" : "Pause"}
-        </button>
-      </div>
+    <section className="technology-loop" aria-labelledby="technology-stack-heading">
+      <h2 id="technology-stack-heading" className="technology-loop__heading">
+        Technology stack and hosting
+      </h2>
       <LogoLoop
-        logos={isStack ? stackLogos : expertiseLogos}
-        ariaLabel={label}
-        className={paused ? "technology-loop__row technology-loop__row--paused" : "technology-loop__row"}
-        speed={paused ? 0 : isStack ? 38 : 30}
-        direction={isStack ? "left" : "right"}
-        logoHeight={isStack ? 30 : 22}
-        gap={isStack ? 54 : 32}
+        logos={stackLogos}
+        ariaLabel="Project technologies and hosting"
+        className="technology-loop__row"
+        speed={24}
+        logoHeight={30}
+        gap={14}
         pauseOnHover
       />
-    </div>
+    </section>
   );
 }
