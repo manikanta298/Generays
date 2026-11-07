@@ -1,12 +1,10 @@
 .technology-loop {
-  border: 1px solid #dbe6f5;
-  border-radius: 20px;
-  background: radial-gradient(ellipse at top, #eaf3ff, transparent 72%), #f8fbff;
-  padding: 20px 0;
+  padding-block: clamp(16px, 3vw, 32px);
+  background: radial-gradient(ellipse at center, #eef5ff, transparent 72%);
 }
 
 .technology-loop__heading {
-  margin: 0 18px 16px;
+  margin: 0 18px 12px;
   color: #002b8e;
   font-size: 0.75rem;
   font-weight: 700;
@@ -24,11 +22,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 16px;
-  border: 1px solid #dbe6f5;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 2px 6px #002b8e0a;
+  padding: 8px 16px;
   color: #111827;
   font-size: 0.875rem;
   font-weight: 600;
