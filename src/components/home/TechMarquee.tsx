@@ -1,5 +1,5 @@
 import { BrandIcon } from "@/components/home/BrandIcon";
-import type { BRAND_ICONS } from "@/data/brand-icons";
+import { BRAND_ICONS } from "@/data/brand-icons";
 
 type Slug = keyof typeof BRAND_ICONS;
 
@@ -31,8 +31,9 @@ function MarqueeRow({ slugs, direction }: { slugs: Slug[]; direction: "left" | "
   return (
     <div className={`tech-marquee__track tech-marquee__track--${direction}`}>
       {repeated(slugs).map((slug, index) => (
-        <div key={`${slug}-${index}`} className="tech-marquee__badge">
-          <BrandIcon slug={slug} size={26} />
+        <div key={`${slug}-${index}`} className="tech-marquee__badge" aria-hidden={index >= slugs.length}>
+          <span aria-hidden="true"><BrandIcon slug={slug} size={26} /></span>
+          <span>{BRAND_ICONS[slug].title}</span>
         </div>
       ))}
     </div>
