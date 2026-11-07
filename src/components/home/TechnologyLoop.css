@@ -1,0 +1,25 @@
+.technology-loop__row--paused .logoloop__track {
+  transform: none !important;
+}
+
+.technology-loop__row--paused {
+  overflow-x: auto;
+}
+
+.technology-loop__row--paused .logoloop__list[aria-hidden="true"] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technology-loop__control {
+    display: none;
+  }
+
+  .technology-loop__row {
+    overflow-x: auto;
+  }
+
+  .technology-loop__row .logoloop__list[aria-hidden="true"] {
+    display: none;
+  }
+}
