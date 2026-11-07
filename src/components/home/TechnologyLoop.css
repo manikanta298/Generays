@@ -1,6 +1,5 @@
 .technology-loop {
   padding-block: clamp(16px, 3vw, 32px);
-  background: radial-gradient(ellipse at center, #eef5ff, transparent 72%);
 }
 
 .technology-loop__heading {
