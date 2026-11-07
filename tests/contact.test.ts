@@ -66,7 +66,7 @@ async function call({
   return { status, data, delivered, count, headers };
 }
 
-test("the enquiry email includes all popup steps and uses only the configured recipient", async () => {
+test("the contact email includes all enquiry fields and uses only the configured recipient", async () => {
   const result = await call({
     body: { ...brief, to: "attacker@example.test" },
   });
@@ -127,4 +127,25 @@ test("missing SMTP settings and SMTP errors never report a successful delivery",
   const failure = await call({ fail: true });
   assert.equal(failure.status, 502);
   assert.equal(JSON.stringify(failure.data).includes("private"), false);
+});
+
+test("custom estimate emails all four steps and rejects incomplete requests", async () => {
+  const body = {
+    kind: "estimate",
+    name: "Customer",
+    email: brief.email,
+    phone: brief.phone,
+    goal: "Website Redesign",
+    budget: "₹1,50,000+",
+    timeline: "Immediately",
+  };
+  const result = await call({ body });
+  assert.equal(result.status, 200);
+  assert.equal(result.delivered.to, config.CONTACT_TO);
+  for (const value of Object.values(body).slice(1)) {
+    assert.ok(result.delivered.text.includes(value));
+  }
+  const incomplete = await call({ body: { ...body, budget: "" } });
+  assert.equal(incomplete.status, 400);
+  assert.equal(incomplete.count, 0);
 });

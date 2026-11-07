@@ -331,3 +331,36 @@
     transition: none;
   }
 }
+
+.enquiry-options {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.enquiry-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #dbe6f8;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.enquiry-options label:has(:checked) {
+  border-color: var(--brand-blue);
+  background: #edf4ff;
+}
+
+.enquiry-options input {
+  appearance: auto;
+  accent-color: var(--brand-blue);
+}
+
+.enquiry-form > .enquiry-fields {
+  margin-top: 16px;
+}
