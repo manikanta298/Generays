@@ -11,6 +11,7 @@ import {
   Gauge,
   MessagesSquare,
   Sparkles,
+  Search,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 export const serviceIcons: Record<string, LucideIcon> = {
@@ -21,6 +22,7 @@ export const serviceIcons: Record<string, LucideIcon> = {
   "ecommerce-development": ShoppingCart,
   "web-applications": Boxes,
   "digital-marketing": TrendingUp,
+  "search-engine-optimization": Search,
   "marketplace-growth": Store,
   "business-communication": Mail,
   "website-care-amc": Gauge,

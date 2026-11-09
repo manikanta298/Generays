@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { BeamCard } from "@/components/spectrumui/beam-card";
 import { Link } from "react-router-dom";
 import type { Service } from "@/content/site";
@@ -7,7 +7,7 @@ import {
   serviceCategories,
   serviceCategory,
 } from "@/content/service-categories";
-import { useId, useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
 
 type ServiceBentoProps = {
   services: Service[];
@@ -20,12 +20,22 @@ type ServiceBentoProps = {
 export function ServiceBento({
   services,
   filterable = false,
-  heading = "What's included",
+  heading = "Our Services",
   eyebrow = "Services architecture",
   description = "Explore every capability, from brand foundations to websites, growth, automation and ongoing care. Each service is built as a focused system that can stand alone or connect with the rest of your digital ecosystem.",
 }: ServiceBentoProps) {
   const [category, setCategory] = useState("All");
   const headingId = useId();
+  const dialogTitleId = useId();
+  const dialog = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const [selected, setSelected] = useState<Service | null>(null);
+  useLayoutEffect(() => {
+    if (selected && dialog.current && !dialog.current.open) {
+      dialog.current.showModal();
+    }
+  }, [selected]);
+  const SelectedIcon = selected && getServiceIcon(selected.slug);
   const [hovered, setHovered] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
   const visibleServices = services.filter(
@@ -43,8 +53,7 @@ export function ServiceBento({
               <p className="service-bento__eyebrow">{eyebrow}</p>
             </div>
             <h2 id={headingId} className="service-bento__heading">
-              Everything your brand needs,{" "}
-              <span>without the empty spaces.</span>
+              {heading}
             </h2>
             <p className="service-bento__description">{description}</p>
           </div>
@@ -75,18 +84,11 @@ export function ServiceBento({
         )}
         <div
           className="service-bento__grid"
-          role="list"
+          role="group"
           aria-label="GeneRays services"
         >
           {visibleServices.map((service) => {
-            const index = services.indexOf(service);
             const Icon = getServiceIcon(service.slug);
-            const gradientId = `${headingId}-icon-${index}`;
-            const previewItems = service.items.slice(0, 4);
-            const extraCount = Math.max(
-              service.items.length - previewItems.length,
-              0,
-            );
 
             return (
               <BeamCard
@@ -97,9 +99,10 @@ export function ServiceBento({
                 borderRadius={14}
                 active={hovered === service.slug || focused === service.slug}
                 surface={
-                  <Link
-                    to={`/services/${service.slug}`}
+                  <button
+                    type="button"
                     className="service-bento__card"
+                    aria-haspopup="dialog"
                     onPointerEnter={(event) => {
                       if (event.pointerType !== "touch") setHovered(service.slug);
                     }}
@@ -108,61 +111,49 @@ export function ServiceBento({
                       if (event.currentTarget.matches(":focus-visible")) setFocused(service.slug);
                     }}
                     onBlur={() => setFocused(null)}
-                    aria-label={`Explore ${service.title} and its ${service.items.length} included capabilities`}
-                    role="listitem"
+                    onClick={(event) => {
+                      trigger.current = event.currentTarget;
+                      setSelected(service);
+                    }}
                   >
-                    <div className="service-bento__top">
-                      <span className="service-bento__icon" aria-hidden="true">
-                        <Icon size={23} strokeWidth={1.9} color={`url(#${gradientId})`}>
-                          <defs>
-                            <linearGradient id={gradientId} x2="1" y2="1">
-                              <stop stopColor="#002b8e" />
-                              <stop offset="1" stopColor="#357cde" />
-                            </linearGradient>
-                          </defs>
-                        </Icon>
-                      </span>
-                      <span className="service-bento__number">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-
-                    <div className="service-bento__content">
-                      <div className="service-bento__meta">
-                        <span>{service.items.length} included</span>
-                      </div>
-                      <h3>{service.title}</h3>
-                      <p className="service-bento__tagline">{service.tagline}</p>
-
-                      <div
-                        className="service-bento__included"
-                        aria-label={`Included in ${service.title}`}
-                      >
-                        {previewItems.map((item) => (
-                          <span key={item}>
-                            <Check size={12} strokeWidth={2.5} aria-hidden="true" />
-                            {item}
-                          </span>
-                        ))}
-                        {extraCount > 0 && (
-                          <span className="service-bento__more">
-                            +{extraCount} more
-                          </span>
-                        )}
-                      </div>
-
-                      <span className="service-bento__action">
-                        View what's included{" "}
-                        <ArrowUpRight size={15} aria-hidden="true" />
-                      </span>
-                    </div>
-
-                  </Link>
+                    <Icon size={32} strokeWidth={1.8} aria-hidden="true" />
+                    <span>{service.title}</span>
+                  </button>
                 }
               />
             );
           })}
         </div>
+        <dialog
+          ref={dialog}
+          className="service-bento__dialog"
+          aria-labelledby={dialogTitleId}
+          onClose={() => {
+            setSelected(null);
+            trigger.current?.focus();
+          }}
+        >
+          <div className="service-bento__dialog-content">
+            <button type="button" className="service-bento__close" aria-label="Close service details" onClick={() => dialog.current?.close()}>
+              <X size={24} aria-hidden="true" />
+            </button>
+            {selected && SelectedIcon && (
+              <>
+                <SelectedIcon className="service-bento__dialog-icon" size={44} aria-hidden="true" />
+                <h3 id={dialogTitleId}>{selected.title}</h3>
+                <div className="service-bento__details">
+                  <h4>What’s Included</h4>
+                  <ul>
+                    {selected.items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </div>
+                <Link className="service-bento__more" to={`/services/${selected.slug}`} onClick={() => dialog.current?.close()}>
+                  More <ArrowRight size={18} aria-hidden="true" />
+                </Link>
+              </>
+            )}
+          </div>
+        </dialog>
       </div>
     </section>
   );

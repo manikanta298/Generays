@@ -28,6 +28,14 @@ const { ServiceBento } = await import("../src/components/ServiceBento.js");
 const { services } = await import("../src/content/site.js");
 const { default: Portfolio } = await import("../src/pages/Portfolio.js");
 const originalFetch = globalThis.fetch;
+// JSDOM does not implement the native dialog methods.
+Object.assign(dom.window.HTMLDialogElement.prototype, {
+  showModal() { this.open = true; },
+  close() {
+    this.open = false;
+    this.dispatchEvent(new dom.window.Event("close"));
+  },
+});
 afterEach(() => {
   cleanup();
   globalThis.fetch = originalFetch;
@@ -132,7 +140,7 @@ test("modal traps tab focus, closes with Escape and restores scrolling", () => {
   );
 });
 
-test("service filters preserve correct links and use icons without photos", () => {
+test("service filters and dialogs expose the correct details and links", async () => {
   const ui = render(
     React.createElement(
       MemoryRouter,
@@ -140,18 +148,23 @@ test("service filters preserve correct links and use icons without photos", () =
       React.createElement(ServiceBento, { services, filterable: true }),
     ),
   );
-  assert.equal(ui.container.querySelectorAll("a").length, 11);
+  const cards = () => ui.getAllByRole("button").filter((button) => button.getAttribute("aria-haspopup") === "dialog");
+  assert.equal(cards().length, 12);
+  assert.equal(cards().at(-1)?.textContent, "Search Engine Optimization");
   assert.equal(ui.container.querySelectorAll("img").length, 0);
   fireEvent.click(ui.getByRole("button", { name: "Design & Branding" }));
-  assert.equal(ui.container.querySelectorAll("a").length, 3);
-  assert.equal(
-    ui
-      .getByRole("listitem", { name: /Explore Logo Design/ })
-      .getAttribute("href"),
-    "/services/logo-design",
-  );
+  assert.equal(cards().length, 3);
   fireEvent.click(ui.getByRole("button", { name: "All", exact: true }));
-  assert.equal(ui.container.querySelectorAll("a").length, 11);
+  const seo = ui.getByRole("button", { name: "Search Engine Optimization" });
+  fireEvent.click(seo);
+  assert.ok(ui.getByRole("dialog", { name: "Search Engine Optimization" }));
+  assert.ok(ui.getByText("Technical SEO audit"));
+  assert.equal(ui.getByRole("link", { name: "More" }).getAttribute("href"), "/services/search-engine-optimization");
+  fireEvent.click(ui.getByRole("button", { name: "Close service details" }));
+  await waitFor(() => {
+    assert.equal(ui.queryByRole("dialog"), null);
+    assert.equal(document.activeElement, seo);
+  });
 });
 
 test("portfolio category filters retain previews and link to project detail routes", async () => {
