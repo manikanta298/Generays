@@ -254,6 +254,19 @@ export const services: Service[] = [
       "CRM Integration",
     ],
   },
+  {
+    slug: "search-engine-optimization",
+    letter: "L",
+    title: "Search Engine Optimization",
+    tagline: "Make it easier for customers to find your business.",
+    intro: "Improve organic search visibility by identifying technical issues, aligning pages with relevant searches, and tracking performance over time.",
+    items: [
+      "Technical SEO audit",
+      "Keyword research",
+      "On-page optimization",
+      "Performance reporting",
+    ],
+  },
 ];
 
 export const framework = [

@@ -13,6 +13,7 @@ export const serviceCategory: Record<string, string> = {
   "ecommerce-development": "Web & E-Commerce",
   "web-applications": "Web & E-Commerce",
   "digital-marketing": "Digital Marketing",
+  "search-engine-optimization": "Digital Marketing",
   "marketplace-growth": "Digital Marketing",
   "business-communication": "Business Systems",
   "website-care-amc": "Business Systems",
