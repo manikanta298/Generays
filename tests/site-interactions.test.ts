@@ -167,24 +167,13 @@ test("service filters and dialogs expose the correct details and links", async (
   });
 });
 
-test("portfolio category filters retain previews and link to project detail routes", async () => {
+test("portfolio restores the industry from the URL and links filtered cards to their case studies", () => {
   const ui = render(
-    React.createElement(MemoryRouter, null, React.createElement(Portfolio)),
+    React.createElement(MemoryRouter, { initialEntries: ["/portfolio?industry=Education"] }, React.createElement(Portfolio)),
   );
-  assert.equal(ui.container.querySelectorAll("article").length, 8);
-  fireEvent.click(ui.getByRole("button", { name: "Education", exact: true }));
   assert.equal(ui.container.querySelectorAll("article").length, 2);
-  assert.equal(
-    ui.getByRole("link", { name: "ZENAIZ", exact: true }).getAttribute("href"),
-    "/portfolio/zenaiz",
-  );
-  fireEvent.click(
-    ui.getAllByRole("button", { name: "Preview", exact: true })[0],
-  );
-  assert.ok(ui.getByRole("dialog"));
-  assert.ok(ui.getByRole("link", { name: /open ZENAIZ in a new tab/ }));
-  fireEvent.keyDown(document, { key: "Escape" });
-  await waitFor(() => assert.equal(ui.queryByRole("dialog"), null));
+  assert.equal(ui.getByRole("button", { name: "Education" }).getAttribute("aria-pressed"), "true");
+  assert.equal(ui.getByRole("link", { name: /ZENAIZ.*View Case Study/i }).getAttribute("href"), "/portfolio/zenaiz");
   fireEvent.click(ui.getByRole("button", { name: "All", exact: true }));
   assert.equal(ui.container.querySelectorAll("article").length, 8);
 });

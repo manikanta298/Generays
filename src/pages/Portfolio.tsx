@@ -1,147 +1,97 @@
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { websiteProjects, projectIndustries } from "@/content/projects";
-import { Modal } from "@/components/Modal";
-import { Link } from "react-router-dom";
+
+const pageSize = 12;
 
 export default function PortfolioPage() {
-  const [industry, setIndustry] = useState("All");
-  const filteredProjects = websiteProjects.filter(
+  const [params, setParams] = useSearchParams();
+  const requestedIndustry = params.get("industry") ?? "All";
+  const industry = projectIndustries.includes(requestedIndustry) ? requestedIndustry : "All";
+  const projects = websiteProjects.filter(
     (project) => industry === "All" || project.industry === industry,
   );
-  const [previewProject, setPreviewProject] = useState<
-    (typeof websiteProjects)[number] | null
-  >(null);
+  const pageCount = Math.max(1, Math.ceil(projects.length / pageSize));
+  const requestedPage = Number(params.get("page") ?? 1);
+  const page = Number.isInteger(requestedPage)
+    ? Math.min(pageCount, Math.max(1, requestedPage))
+    : 1;
+
+  function updateListing(nextIndustry: string, nextPage = 1) {
+    const updated = new URLSearchParams(params);
+    if (nextIndustry === "All") updated.delete("industry");
+    else updated.set("industry", nextIndustry);
+    if (nextPage === 1) updated.delete("page");
+    else updated.set("page", String(nextPage));
+    setParams(updated);
+  }
 
   return (
     <div className="bg-[#F4F6FB]">
-      <section className="border-b border-slate-200 bg-[#F4F6FB] py-20 sm:py-24 lg:py-28">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-4 text-xs font-bold tracking-[0.2em] text-primary">
-            PORTFOLIO
-          </p>
-          <h1 className="mb-6 max-w-4xl text-4xl font-extrabold leading-[1.08] text-slate-900 sm:text-5xl md:text-6xl">
-            Work that turns{" "}
-            <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
-              ideas into experiences.
-            </span>
-          </h1>
-          <div className="mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-primary to-primary" />
-          <p className="max-w-2xl text-base leading-relaxed text-slate-500 sm:text-lg">
-            Explore selected GeneRays creative work across brand campaigns,
-            digital experiences and visual communication.
-          </p>
-        </div>
-      </section>
-
-      <section
-        className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20"
-        aria-labelledby="website-projects-title"
-      >
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 sm:mb-10">
-            <p className="mb-3 text-xs font-bold tracking-[0.2em] text-primary">
-              WEB PROJECTS
+      <section className="blueprint-grid-fine px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="portfolio-heading">
+        <div className="mx-auto max-w-6xl">
+          <header className="mx-auto max-w-2xl text-center">
+            <p className="mb-3 text-xs font-bold tracking-widest text-primary">SELECTED PROJECTS</p>
+            <h1 id="portfolio-heading" className="text-4xl font-extrabold text-slate-950 sm:text-6xl">
+              Our Case Studies
+            </h1>
+            <p className="mt-5 text-base leading-relaxed text-slate-600">
+              Explore websites GeneRays built across healthcare, education, real estate, wellness, sports, and business services.
             </p>
-            <h2
-              id="website-projects-title"
-              className="text-3xl font-extrabold text-slate-900 sm:text-4xl"
-            >
-              Websites built for real businesses.
-            </h2>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-500">
-              Explore live website experiences created across healthcare,
-              education, real estate, wellness, sports and business services.
-            </p>
-          </div>
-
-          <div
-            className="brand-filters"
-            role="group"
-            aria-label="Filter projects by industry"
-          >
+          </header>
+          <div className="brand-filters justify-center" role="group" aria-label="Filter projects by industry">
             {projectIndustries.map((item) => (
-              <button
-                key={item}
-                type="button"
-                aria-pressed={industry === item}
-                onClick={() => setIndustry(item)}
-              >
+              <button key={item} type="button" aria-pressed={industry === item} onClick={() => updateListing(item)}>
                 {item}
               </button>
             ))}
           </div>
-          <p className="brand-result-count" role="status">
-            {filteredProjects.length} projects shown
-          </p>
-          <div className="flex flex-wrap gap-5">
-            {filteredProjects.map((project) => (
-              <article
-                key={project.title}
-                className="group flex min-w-0 flex-[1_1_calc(50%-0.625rem)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F6FB] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.5)] sm:flex-[1_1_calc(50%-0.625rem)]"
-              >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
-                  <iframe
-                    src={project.url}
-                    title={`${project.title} live website preview`}
-                    className="absolute inset-0 h-full w-full border-0 bg-white"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                  />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-950/20 to-transparent" />
-                </div>
-
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
-                    {project.category}
-                  </p>
-                  <h3 className="mt-2 text-xl font-bold text-slate-900">
-                    <Link
-                      to={`/portfolio/${project.slug}`}
-                      className="hover:text-primary"
-                    >
-                      {project.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    <Link
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary"
-                      to={`/portfolio/${project.slug}`}
-                    >
-                      View project details{" "}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => setPreviewProject(project)}
-                      className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
-                    >
-                      Preview
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:border-primary-soft hover:text-primary"
-                    >
-                      Open website
-                    </a>
+          <p className="brand-result-count text-center" role="status">{projects.length} projects shown</p>
+          <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.slice((page - 1) * pageSize, page * pageSize).map((project) => (
+              <article key={project.slug} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <Link
+                  to={`/portfolio/${project.slug}`}
+                  className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                    <iframe
+                      src={project.url}
+                      title={`${project.title} website preview`}
+                      className="pointer-events-none absolute inset-0 size-full border-0"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      loading="lazy"
+                      sandbox="allow-scripts allow-same-origin"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                    <span className="absolute top-4 left-4 rounded-md bg-slate-950 px-2.5 py-1 text-xs font-semibold text-white">
+                      {project.industry}
+                    </span>
                   </div>
-                </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="mb-1 text-xs font-bold tracking-wide text-primary uppercase">{project.title}</p>
+                    <h2 className="text-xl leading-tight font-bold text-slate-950">{project.category}</h2>
+                    <p className="mt-3 mb-5 text-sm leading-relaxed text-slate-600">{project.description}</p>
+                    <span className="mt-auto inline-flex items-center gap-2 border-t border-slate-200 pt-4 text-sm font-bold text-primary group-hover:underline">
+                      View Case Study <ArrowRight size={16} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
               </article>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs leading-relaxed text-slate-400">
-            Some websites may disable embedded previews for security reasons. If
-            a preview is blocked, use the Open website button to view the
-            project directly.
-          </p>
+          {pageCount > 1 && (
+            <nav className="brand-filters justify-center" aria-label="Case study pagination">
+              <button type="button" disabled={page === 1} onClick={() => updateListing(industry, page - 1)}>Previous</button>
+              {Array.from({ length: pageCount }, (_, index) => index + 1).map((item) => (
+                <button key={item} type="button" aria-current={page === item ? "page" : undefined} onClick={() => updateListing(industry, item)}>
+                  {item}
+                </button>
+              ))}
+              <button type="button" disabled={page === pageCount} onClick={() => updateListing(industry, page + 1)}>Next</button>
+            </nav>
+          )}
         </div>
       </section>
       <section className="border-t border-slate-200 bg-white py-14 sm:py-16 lg:py-20">
@@ -163,34 +113,6 @@ export default function PortfolioPage() {
           </Link>
         </div>
       </section>
-      {previewProject && (
-        <Modal
-          title={`${previewProject.title} — live preview`}
-          onClose={() => setPreviewProject(null)}
-          wide
-        >
-          <p className="mb-4 text-sm text-muted-foreground">
-            If the embedded website is unavailable,{" "}
-            <a
-              className="font-semibold text-primary underline"
-              href={previewProject.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              open {previewProject.title} in a new tab
-            </a>
-            .
-          </p>
-          <iframe
-            src={previewProject.url}
-            title={`${previewProject.title} full-screen live preview`}
-            className="portfolio-live-frame"
-            allow="fullscreen"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
-        </Modal>
-      )}
     </div>
   );
 }
