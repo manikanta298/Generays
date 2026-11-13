@@ -1,33 +1,36 @@
 import {
-  Compass,
-  PenTool,
-  Palette,
-  LayoutTemplate,
-  ShoppingCart,
-  Boxes,
-  TrendingUp,
-  Store,
-  Mail,
+  Blocks,
   Gauge,
-  MessagesSquare,
+  Layers3,
+  MailCheck,
+  MessageCircle,
+  Palette,
+  PanelsTopLeft,
+  PenTool,
+  SearchCheck,
+  ShieldCheck,
+  ShoppingBag,
   Sparkles,
-  Search,
+  Store,
+  TrendingUp,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+
 export const serviceIcons: Record<string, LucideIcon> = {
-  "brand-foundation": Compass,
+  "brand-foundation": Layers3,
   "logo-design": PenTool,
   "creative-studio": Palette,
-  "website-development": LayoutTemplate,
-  "ecommerce-development": ShoppingCart,
-  "web-applications": Boxes,
+  "website-development": PanelsTopLeft,
+  "ecommerce-development": ShoppingBag,
+  "web-applications": Blocks,
   "digital-marketing": TrendingUp,
-  "search-engine-optimization": Search,
+  "search-engine-optimization": SearchCheck,
   "marketplace-growth": Store,
-  "business-communication": Mail,
-  "website-care-amc": Gauge,
-  "whatsapp-automation": MessagesSquare,
+  "business-communication": MailCheck,
+  "website-care-amc": ShieldCheck,
+  "whatsapp-automation": MessageCircle,
 };
+
 export function getServiceIcon(slug: string) {
   return serviceIcons[slug] ?? Sparkles;
 }
