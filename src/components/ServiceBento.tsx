@@ -3,6 +3,7 @@ import { BeamCard } from "@/components/spectrumui/beam-card";
 import { Link } from "react-router-dom";
 import type { Service } from "@/content/site";
 import { getServiceIcon } from "@/content/service-icons";
+import { getServiceMedia } from "@/content/media";
 import {
   serviceCategories,
   serviceCategory,
@@ -35,7 +36,8 @@ export function ServiceBento({
       dialog.current.showModal();
     }
   }, [selected]);
-  const SelectedIcon = selected && getServiceIcon(selected.slug);
+  const selectedMedia = selected ? getServiceMedia(selected.slug) : null;
+  const SelectedIcon = selected ? getServiceIcon(selected.slug) : null;
   const [hovered, setHovered] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
   const visibleServices = services.filter(
@@ -139,8 +141,12 @@ export function ServiceBento({
             </button>
             {selected && SelectedIcon && (
               <>
-                <SelectedIcon className="service-bento__dialog-icon" size={44} aria-hidden="true" />
+                {selectedMedia && (
+                  <img className="service-bento__dialog-image" src={selectedMedia.image} alt={selectedMedia.alt} loading="lazy" />
+                )}
+                <SelectedIcon className="service-bento__dialog-icon" size={34} aria-hidden="true" />
                 <h3 id={dialogTitleId}>{selected.title}</h3>
+                <p className="service-bento__dialog-intro">{selected.tagline}</p>
                 <div className="service-bento__details">
                   <h4>What’s Included</h4>
                   <ul>
