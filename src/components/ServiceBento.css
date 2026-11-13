@@ -142,7 +142,8 @@
   box-shadow: inset 0 1px 0 #fff, 0 8px 16px -14px rgba(19, 73, 173, .55);
   color: var(--sb-blue);
 }
-.service-bento__icon-wrap > svg { width: 36px; height: 36px; }
+.service-bento__icon-wrap > svg:not(.service-bento__amazon-mark) { width: 36px; height: 36px; }
+.service-bento__icon-wrap > .service-bento__amazon-mark { width: 68px; height: 50px; }
 .service-bento__card-title {
   max-width: 100%;
   color: #101b36;
