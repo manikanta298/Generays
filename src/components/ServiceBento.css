@@ -116,6 +116,26 @@ body:has(.service-bento__dialog[open]) {
   padding: 34px clamp(18px, 5vw, 38px) 26px;
 }
 
+.service-bento__dialog-image {
+  display: block;
+  width: 100%;
+  max-height: min(34vh, 220px);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #e2eaf7;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgb(18 63 174 / 12%);
+}
+
+.service-bento__dialog-intro {
+  width: 100%;
+  margin-top: -8px;
+  color: #53627b;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .service-bento__close {
   position: absolute;
   inset: 6px 6px auto auto;
@@ -169,6 +189,20 @@ body:has(.service-bento__dialog[open]) {
 @media (max-width: 640px) {
   .service-bento__beam {
     flex-basis: calc((100% - var(--sb-gap)) / 2);
+  }
+
+  .service-bento__dialog {
+    width: min(520px, calc(100% - 20px));
+    max-height: calc(100dvh - 20px);
+  }
+
+  .service-bento__dialog-content {
+    gap: 14px;
+    padding: 54px 16px 20px;
+  }
+
+  .service-bento__dialog-image {
+    max-height: 27vh;
   }
 }
 
