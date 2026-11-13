@@ -1,5 +1,5 @@
 import {
-  Layers3,
+  Layers,
   PenTool,
   Clapperboard,
   Monitor,
@@ -16,7 +16,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 export const serviceIcons: Record<string, LucideIcon> = {
-  "brand-foundation": Layers3,
+  "brand-foundation": Layers,
   "logo-design": PenTool,
   "creative-studio": Clapperboard,
   "website-development": Monitor,
