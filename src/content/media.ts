@@ -12,6 +12,7 @@ import {
   Sparkles,
   Store,
   TrendingUp,
+  Search,
 } from "lucide-react";
 
 import brandFoundation from "@/assets/01_Brand_Foundation.png";
@@ -25,6 +26,7 @@ import marketplaceGrowth from "@/assets/08_Amazon_Marketplace_Growth.png";
 import businessCommunication from "@/assets/09_Business_Communication.png";
 import websiteCareAmc from "@/assets/10_Website_Care_AMC.png";
 import whatsappAutomation from "@/assets/11_Customer_Engagement_WhatsApp_Automation.png";
+import servicesArchitecture from "@/assets/12_Services_Architecture_Overview.png";
 
 export { default as heroBlueprint } from "@/assets/Futuristic Digital Services Hub.png";
 export { default as aboutImage } from "@/assets/about-header.png";
@@ -113,6 +115,12 @@ export const serviceMedia: Record<string, ServiceMedia> = {
     icon: MessagesSquare,
     accent: "text-neon-green",
     alt: "Neon chat bubbles connected by automation light streams",
+  },
+  "search-engine-optimization": {
+    image: servicesArchitecture,
+    icon: Search,
+    accent: "text-neon-blue",
+    alt: "GeneRays service architecture overview",
   },
 };
 
